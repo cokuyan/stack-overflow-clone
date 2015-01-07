@@ -8,11 +8,27 @@
   <%= @question.content %>
 </p>
 
-<aside id="">
+<small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
+
+<h3>Answers</h3>
+<ul class="answers">
+  <% @question.answers.each do |answer| %>
+    <li>
+      <p>
+        <%= answer.content %>
+      </p>
+      <small>answered by <%= link_to answer.author.username, user_url(answer.author) %></small>
+      <% if logged_in? && current_user == answer.author %>
+        <small><%= link_to "Edit", edit_answer_url(answer) %></small>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<aside>
   <%= link_to "Got an answer?", new_question_answer_url(@question) %>
 </aside>
 
-<small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
-<% if logged_in? && current_user.id == @question.author_id %>
+<% if logged_in? && current_user == @question.author %>
   <small><%= link_to "Edit", edit_question_url(@question) %></small>
 <% end %>
