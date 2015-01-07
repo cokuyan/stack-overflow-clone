@@ -4,9 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create
+    # TODO: figure out how to set username or email when rerendering
+    # new form
     @user = User.find_by_credentials(
-    params[:user][:name_or_email],
-    params[:user][:password]
+      params[:user][:name_or_email],
+      params[:user][:password]
     )
     if @user
       login!(@user)
