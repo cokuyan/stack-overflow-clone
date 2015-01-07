@@ -10,19 +10,22 @@
 
 <small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
 
-<form action="/votes" method="post">
-  <%= auth_token %>
-  <input type="hidden" name="vote[votable_id]" value="<%= @question.id %>">
-  <input type="hidden" name="vote[votable_type]" value="Question">
-  <input type="submit" name="vote[vote-type]" value="up">
-</form>
+<section>
+  Votes: <%= @question.vote_count %>
+  <form action="/votes" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="vote[votable_id]" value="<%= @question.id %>">
+    <input type="hidden" name="vote[votable_type]" value="Question">
+    <input type="submit" name="vote[vote-type]" value="up">
+  </form>
 
-<form action="/votes" method="post">
-  <%= auth_token %>
-  <input type="hidden" name="vote[votable_id]" value="<%= @question.id %>">
-  <input type="hidden" name="vote[votable_type]" value="Question">
-  <input type="submit" name="vote[vote_type]" value="down">
-</form>
+  <form action="/votes" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="vote[votable_id]" value="<%= @question.id %>">
+    <input type="hidden" name="vote[votable_type]" value="Question">
+    <input type="submit" name="vote[vote_type]" value="down">
+  </form>
+</section>
 
 <h3>Answers</h3>
 <ul class="answers">
@@ -35,18 +38,21 @@
       <% if logged_in? && current_user == answer.author %>
         <small><%= link_to "Edit", edit_answer_url(answer) %></small>
       <% end %>
-      <form action="/votes" method="post">
-        <%= auth_token %>
-        <input type="hidden" name="vote[votable_id]" value="<%= answer.id %>">
-        <input type="hidden" name="vote[votable_type]" value="Answer">
-        <input type="submit" name="vote[vote_type]" value="up">
-      </form>
-      <form action="/votes" method="post">
-        <%= auth_token %>
-        <input type="hidden" name="vote[votable_id]" value="<%= answer.id %>">
-        <input type="hidden" name="vote[votable_type]" value="Answer">
-        <input type="submit" name="vote[vote_type]" value="down">
-      </form>
+      <section>
+        Votes: <%= answer.vote_count %>
+        <form action="/votes" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="vote[votable_id]" value="<%= answer.id %>">
+          <input type="hidden" name="vote[votable_type]" value="Answer">
+          <input type="submit" name="vote[vote_type]" value="up">
+        </form>
+        <form action="/votes" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="vote[votable_id]" value="<%= answer.id %>">
+          <input type="hidden" name="vote[votable_type]" value="Answer">
+          <input type="submit" name="vote[vote_type]" value="down">
+        </form>
+      </section>
     </li>
   <% end %>
 </ul>
