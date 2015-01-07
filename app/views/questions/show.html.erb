@@ -5,3 +5,4 @@
 </p>
 
 <small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
+<small><%= link_to "Edit", edit_question_url(@question) %></small>
