@@ -1,8 +1,14 @@
 <h1><%= @question.title %></h1>
 
+<aside>
+  Views: <%= @question.view_count %>
+</aside>
+
 <p>
   <%= @question.content %>
 </p>
 
 <small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
-<small><%= link_to "Edit", edit_question_url(@question) %></small>
+<% if logged_in? && current_user.id == @question.author_id %>
+  <small><%= link_to "Edit", edit_question_url(@question) %></small>
+<% end %>
