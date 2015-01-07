@@ -85,6 +85,7 @@ commentable_type | string | null: false |
 ### Table: Votes
 name | type | null | other
 --- | --- | --- | ---
+vote_type | string | null: false |
 user_id | integer | null: false | unique+
 votable_id | integer | null: false | unique+
 votable_type | string | null: false |
