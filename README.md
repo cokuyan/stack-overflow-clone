@@ -47,7 +47,7 @@ admin | boolean |  | default: false
 ### Table: Questions
 name | type | null | other
 --- | --- | --- | ---
-title | string | null: false
+title | string | null: false |
 content | text | null: false |
 author_id | integer | null: false | indexed
 view_count | integer | null: false | default: 0
