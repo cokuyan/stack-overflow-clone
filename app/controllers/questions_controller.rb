@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.includes(:answers).find(params[:id])
     @question.view_count += 1
     @question.save!
   end
