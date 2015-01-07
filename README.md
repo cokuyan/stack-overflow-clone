@@ -1,28 +1,85 @@
-== README
+Stack Overflow Clone
+===
+This will be my final project for App Academy. It will be a clone of the site Stack Overflow. Below is a general list of features I will most likely implement along with the following database schema.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Feature List
+-----
+- user auth
+- email activation
+- users post question
+- users post answers to questions
+- users accept answers to their questions
+- users vote up/down questions and answers that are not their own
+___
+- users tag questions they ask
+- tag show page lists all questions associated with it
+- users comment on questions and answers
+- sort questions based on time created, number of votes, answered/unanswered
+- sort users based on username, time created, number of answers
+- add dynamic search to users
+- sort tags based on tag name, time created, number of questions
+- add dynamic search to tags
+- dynamically search for tags when tagging a question
+- questions have a view count
+- users favorite questions
+- users have reputation
+- sort users and questions by other parameters
+- users can earn badges
+- users can suggest edit to questions and answers
+- users can accept edits to own questions and answers
+- limit features based on reputation
 
-Things you may want to cover:
+Schema
+-----
 
-* Ruby version
+### Table: Users
+name | type | null | other
+--- | --- | --- | ---
+username | string | null: false | unique
+email | string | null: false | unique
+password_digest | string | null: false | unique
+session_token | string | null: false | unique
 
-* System dependencies
+### Table: Questions
+name | type | null | other
+--- | --- | --- | ---
+content | string | null: false |
+author_id | integer | null: false | indexed
+view_count | integer | null: false | default: 0
+answered | boolean | null: false | default: false
 
-* Configuration
+### Table: Answers
+name | type | null | other
+--- | --- | --- | ---
+content | string | null: false |
+author_id | integer | null: false | unique+
+question_id | integer | null: false | unique+
+accepted | boolean | null: false | default: false
 
-* Database creation
+### Table: Tags
+name | type | null | other
+--- | --- | --- | ---
+tag_name | string | null: false | unique
+desciption | text | null: true<sup>\*</sup> |
+\* unsure about this
 
-* Database initialization
+### Table: Taggings
+name | type | null | other
+--- | --- | --- | ---
+tag_id | integer | null: false | unique+
+question_id | integer | null: true | unique+
 
-* How to run the test suite
+### Table: Comments
+name | type | null | other
+--- | --- | --- | ---
+content | string | null: false |
+author_id | integer | null: false | indexed
+commentable_id | integer | null: false | indexed
+commentable_type | string | null: false |
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+### Table: Votes
+name | type | null | other
+--- | --- | --- | ---
+user_id | integer | null: false | unique+
+votable_id | integer | null: false | unique+
+votable_type | string | null: false |
