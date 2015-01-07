@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150107191747) do
   enable_extension "plpgsql"
 
   create_table "questions", force: true do |t|
+    t.string   "title",                      null: false
     t.text     "content",                    null: false
     t.integer  "author_id",                  null: false
     t.integer  "view_count", default: 0,     null: false

@@ -5,3 +5,10 @@
     <li><%= "#{attribute}: #{value}" %></li>
   <% end %>
 </ul>
+
+<h3>Questions asked by <%= @user.username %></h3>
+<ul class="user-questions">
+  <% @user.questions.each do |question| %>
+    <li><%= link_to question.title, question_url(question) %></li>
+  <% end %>
+</ul>
