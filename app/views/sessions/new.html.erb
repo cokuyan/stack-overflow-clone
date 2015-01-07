@@ -1,0 +1,18 @@
+<%= render 'layouts/errors' %>
+
+<form class="login-form" action="/session" method="post">
+  <%= auth_token %>
+
+  <label for="name-or-email">Username or Email: </label>
+  <input type="text"
+         id="name-or-email"
+         name="user[name_or_email]">
+
+  <label for="password">Password: </label>
+  <input type="password"
+         id="password"
+         name="user[password]">
+
+  <input type="submit" value="Log In">
+
+</form>
