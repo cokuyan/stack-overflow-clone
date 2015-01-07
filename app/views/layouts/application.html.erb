@@ -20,13 +20,22 @@
   </ul>
 </header>
 
-<% if flash[:notice] %>
-  <aside class="flash-notice">
-    <%= flash[:notice] %>
-  </aside>
-<% end %>
+<main>
+  <nav class="main-nav">
+    <ul class="main-nav-links">
+      <li><%= link_to "Users", users_url %></li>
+    </ul>
+  </nav>
 
-<%= yield %>
+  <% if flash[:notice] %>
+    <aside class="flash-notice">
+      <%= flash[:notice] %>
+    </aside>
+  <% end %>
+
+  <%= yield %>
+
+</main>
 
 </body>
 </html>

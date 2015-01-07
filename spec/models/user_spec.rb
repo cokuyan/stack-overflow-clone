@@ -84,7 +84,11 @@ RSpec.describe User, :type => :model do
         expect(user.is_password?('password')).to be true
       end
     end
-
   end
 
+  describe "associations" do
+    subject { create(:user) }
+
+    it { is_expected.to have_many(:questions).with_foreign_key(:author_id) }
+  end
 end
