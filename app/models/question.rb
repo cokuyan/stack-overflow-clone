@@ -9,6 +9,8 @@ class Question < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :questions
 
+  has_many :answers, inverse_of: :question
+
   private
 
   def ensure_view_count

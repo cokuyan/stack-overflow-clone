@@ -56,10 +56,10 @@ answered | boolean | null: false | default: false
 ### Table: Answers
 name | type | null | other
 --- | --- | --- | ---
-content | string | null: false |
+content | text | null: false |
 author_id | integer | null: false | unique+
 question_id | integer | null: false | unique+
-accepted | boolean | null: false | default: false
+accepted | boolean |  | default: false
 
 ### Table: Tags
 name | type | null | other
