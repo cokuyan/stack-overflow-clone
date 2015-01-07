@@ -12,6 +12,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    unless params[:user][:password] == params[:user][:password_confirmation]
+      flash.now(:errors) = ["Password and confirmation do not match"]
+      render :new
+    end
     # will implement activation later
     @user = User.new(user_params)
     if @user.save
