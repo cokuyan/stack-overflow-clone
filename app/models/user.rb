@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
     :ensure_not_activated,
     :ensure_not_admin
 
+  has_many :questions,
+    class_name: 'Question',
+    foreign_key: :author_id,
+    primary_key: :id,
+    inverse_of: :author
+
   def self.find_by_credentials(name_or_email, password)
     user = User.find_by_username(name_or_email) ||
            User.find_by_email(name_or_email)
