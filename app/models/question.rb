@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  validates :content, :author_id, :view_count, presence: true
+  validates :title, :content, :author_id, :view_count, presence: true
   validates :answered, inclusion: [true, false]
   after_initialize :ensure_view_count, :ensure_answered
 

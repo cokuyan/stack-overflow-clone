@@ -1,10 +1,6 @@
 class QuestionsController < ApplicationController
   def index
-    if @user_id = params[:user_id]
-      @questions = Question.where(user_id: @user_id)
-    else
-      @questions = Question.all
-    end
+    @questions = Question.all
   end
 
   def show
