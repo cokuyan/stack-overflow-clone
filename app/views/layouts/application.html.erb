@@ -8,6 +8,23 @@
 </head>
 <body>
 
+<header>
+  <ul class="user-nav">
+    <% if logged_in? %>
+      <li><%= link_to current_user.username, user_url(current_user) %></li>
+      <li><%= link_to "Log Out", session_url, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign Up", new_user_url %></li>
+      <li><%= link_to "Log In", login_url %></li>
+    <% end %>
+  </ul>
+</header>
+
+<% if flash[:notice] %>
+  <aside class="flash-notice">
+    <%= flash[:notice] %>
+  </aside>
+
 <%= yield %>
 
 </body>
