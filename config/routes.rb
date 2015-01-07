@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root to: 'static_pages#root'
-  resources :users do
-    resources :questions, only: [:index]
+  resources :users
+  resources :questions do
+    resources :answers, only: [:new]
   end
-  resources :questions
+  resources :answers, only: [:create, :edit, :update, :destroy]
   get '/login', to: 'sessions#new'
   resource :session, only: [:create, :destroy]
 end

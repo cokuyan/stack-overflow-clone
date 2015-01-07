@@ -1,0 +1,22 @@
+<%= render 'layouts/errors' %>
+
+<% form_action = answer.persisted? ? answer_url(answer) : answers_url %>
+
+<form class="answer-form" action="<%= form_action %>" method="post">
+  <%= auth_token %>
+
+  <!-- TODO: refactor... -->
+  <% if answer.persisted? %>
+    <input type="hidden" name="_method" value="patch">
+  <% else %>
+    <input type="hidden"
+           name="answer[question_id]"
+           value="<%= answer.question_id %>">
+  <% end %>
+
+  <label for="content"></label>
+  <textarea id="content" name="answer[content]"><%= answer.content %></textarea>
+
+  <input type="submit" value="submit">
+
+</form>
