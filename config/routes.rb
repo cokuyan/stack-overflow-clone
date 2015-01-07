@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:new]
   end
   resources :answers, only: [:create, :edit, :update, :destroy]
+  resources :votes, only: [:create]
+
   get '/login', to: 'sessions#new'
   resource :session, only: [:create, :destroy]
 end
