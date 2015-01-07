@@ -41,8 +41,8 @@ email | string | null: false | unique
 password_digest | string | null: false | unique
 session_token | string | null: false | unique
 activation_token | string | null: false | unique
-activated | boolean | null: false | default: false
-admin | boolean | null: false | default: false
+activated | boolean |  | default: false
+admin | boolean |  | default: false
 
 ### Table: Questions
 name | type | null | other
