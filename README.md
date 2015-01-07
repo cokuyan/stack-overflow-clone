@@ -39,6 +39,8 @@ username | string | null: false | unique
 email | string | null: false | unique
 password_digest | string | null: false | unique
 session_token | string | null: false | unique
+activation_token | string | null: false | unique
+activated | boolean | null: false | default: false
 
 ### Table: Questions
 name | type | null | other
