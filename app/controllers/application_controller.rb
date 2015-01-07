@@ -22,8 +22,11 @@ class ApplicationController < ActionController::Base
     session[:session_token] = nil
   end
 
-  def ensure_current_user
-    redirect_to login_url unless logged_in?
+  def require_current_user!
+    unless logged_in?
+      flash[:notice] = "You must be logged in to access that page!"
+      redirect_to login_url
+    end
   end
 
 end

@@ -1,10 +1,15 @@
 class QuestionsController < ApplicationController
+  before_action :require_current_user!, only: [:new, :create]
+  before_action :require_correct_user!, only: [:edit, :update, :destroy]
+
   def index
     @questions = Question.all
   end
 
   def show
     @question = Question.find(params[:id])
+    @question.view_count += 1
+    @question.save!
   end
 
   def new
@@ -50,5 +55,12 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :content)
+  end
+
+  def require_correct_user!
+    @question = Question.find(params[:id])
+    unless logged_in? && current_user.id == @question.author_id
+      redirect_to question_url(@question)
+    end
   end
 end
