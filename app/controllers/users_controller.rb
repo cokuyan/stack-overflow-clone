@@ -12,18 +12,21 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
+    # check password and confirmation match
     unless params[:user][:password] == params[:user][:password_confirmation]
-      flash.now(:errors) = ["Password and confirmation do not match"]
+      flash.now[:errors] = ["Password and confirmation do not match"]
+      @user.password = nil
       render :new
+      return
     end
     # will implement activation later
-    @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Welcome, #{@user.username}"
       login!(@user)
       redirect_to root_url
     else
-      flash.now(:errors) = @user.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end
@@ -38,7 +41,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Edited successfully"
       redirect_to user_url(@user)
     else
-      flash.now(:errors) = @user.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
       render :edit
     end
   end
