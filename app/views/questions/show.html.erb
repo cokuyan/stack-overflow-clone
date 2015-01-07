@@ -8,6 +8,10 @@
   <%= @question.content %>
 </p>
 
+<aside id="">
+  <%= link_to "Got an answer?", new_question_answer_url(@question) %>
+</aside>
+
 <small>asked by <%= link_to @question.author.username, user_url(@question.author) %></small>
 <% if logged_in? && current_user.id == @question.author_id %>
   <small><%= link_to "Edit", edit_question_url(@question) %></small>
