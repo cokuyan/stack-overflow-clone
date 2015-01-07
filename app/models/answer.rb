@@ -11,5 +11,9 @@ class Answer < ActiveRecord::Base
   belongs_to :question, inverse_of: :answers
 
   has_many :votes, as: :votable
-  
+
+  def vote_count
+    self.votes.where(vote_type: 'up').count - self.votes.where(vote_type: 'down').count
+  end
+
 end
