@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.author_id = current_user.id
     if @question.save
       flash[:notice] = "Question added successfully"
       redirect_to question_url(@question)
@@ -33,6 +34,7 @@ class QuestionsController < ApplicationController
       redirect_to question_url(@question)
     else
       flash.now[:errors] = @question.errors.full_messages
+      @question = Question.find(params[:id])
       render :edit
     end
   end
@@ -47,6 +49,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:content)
+    params.require(:question).permit(:title, :content)
   end
 end
