@@ -14,5 +14,6 @@ RSpec.describe Question, :type => :model do
     subject { build(:question) }
 
     it { is_expected.to belong_to(:author).class_name('User') }
+    it { is_expected.to have_many(:answers) }
   end
 end

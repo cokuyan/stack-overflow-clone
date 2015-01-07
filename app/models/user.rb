@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :author
 
+  has_many :answers,
+    class_name: 'Answer',
+    foreign_key: :author_id,
+    primary_key: :id,
+    inverse_of: :author
+
   def self.find_by_credentials(name_or_email, password)
     user = User.find_by_username(name_or_email) ||
            User.find_by_email(name_or_email)

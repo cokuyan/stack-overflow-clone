@@ -90,5 +90,6 @@ RSpec.describe User, :type => :model do
     subject { create(:user) }
 
     it { is_expected.to have_many(:questions).with_foreign_key(:author_id) }
+    it { is_expected.to have_many(:answers).with_foreign_key(:author_id) }
   end
 end
