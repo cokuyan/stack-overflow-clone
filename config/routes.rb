@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static_pages#root'
-  resources :users
+  resources :users do
+    get 'activate', on: :collection
+  end
   resources :questions do
     resources :answers, only: [:new]
   end

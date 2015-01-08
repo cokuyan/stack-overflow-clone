@@ -1,0 +1,10 @@
+Welcome to example.com, <%= @user.name %>
+===============================================
+
+Welcome to Stack Overflown, <%= @user.username %>
+You have successfully signed up to Stack Overflown,
+your username is: <%= @user.username %>.
+
+In order to access the site, please activate your account by visiting the follow link <a href="<%= activate_users_url(activation_token: @user.activation_token %>">here</a>, or by copying and pasting the following link to your browser: <%= activate_users_url(activation_token: @user.activation_token) %>
+
+Thanks for joining and have a great day!
