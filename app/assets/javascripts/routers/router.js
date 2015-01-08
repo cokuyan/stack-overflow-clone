@@ -31,7 +31,11 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   questionNew: function () {
-
+    var question = new StackOverflowClone.Models.Question();
+    var view = new StackOverflowClone.Views.QuestionForm({
+      model: question
+    });
+    this._swapView(view);
   },
 
   questionShow: function (id) {
