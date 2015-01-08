@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_action :require_current_user!
+
   def create
     vote = Vote.new(vote_params)
     vote.user_id = current_user.id
