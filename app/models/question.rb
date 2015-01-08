@@ -14,8 +14,8 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def vote_count
-    self.votes.where(vote_type: 'up').count -
-      self.votes.where(vote_type: 'down').count
+    self.votes.select{|vote| vote.vote_type == 'up'}.count -
+      self.votes.select{|vote| vote.vote_type == 'down'}.count
   end
 
   private
