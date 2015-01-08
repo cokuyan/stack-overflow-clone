@@ -1,5 +1,6 @@
 StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
-
-  model: StackOverflowClone.Models.Question
+  url: 'api/questions',
+  model: StackOverflowClone.Models.Question,
+  comparator: 'created_at'
 
 });
