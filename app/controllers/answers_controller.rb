@@ -65,14 +65,21 @@ class AnswersController < ApplicationController
     redirect_to question_url(@answer.question_id) unless correct_user?
   end
 
+  def correct_asker?
+    if params[:id]
+      @question = Answer.includes(:question).find(params[:id]).question
+    else
+      @question = Question.find(params[:question_id])
+    end
+    logged_in? && @question.author_id == current_user.id
+  end
+
   def require_correct_asker!
-    answer = Answer.includes(:question).find(params[:id])
-    redirect_to question_url(answer.question) unless answer.question.author_id == current_user.id
+    redirect_to question_url(@question) unless correct_asker?
   end
 
   def require_incorrect_asker!
-    question = Question.find(params[:question_id])
-    redirect_to question_url(question) if question.author_id == current_user.id
+    redirect_to question_url(@question) if !logged_in? || correct_asker?
   end
 
 end
