@@ -1,9 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: tj
+  username: appacademy
   host: localhost
-  password: shinjite
   pool: 5
 
 development:
