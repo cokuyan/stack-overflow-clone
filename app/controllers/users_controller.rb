@@ -8,19 +8,20 @@ class UsersController < ApplicationController
   end
 
   def new
+    flash.now[:notice] = "Since sendgrid has not been set up yet, you will get an error when signing up. Please use the following sign up instead:
+    Username: username
+    Password: password"
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
-    # check password and confirmation match
     unless params[:user][:password] == params[:user][:password_confirmation]
       flash.now[:errors] = ["Password and confirmation do not match"]
       @user.password = nil
       render :new
       return
     end
-    # will implement activation later
     if @user.save
       msg = UserMailer.welcome_email(@user)
       msg.deliver
