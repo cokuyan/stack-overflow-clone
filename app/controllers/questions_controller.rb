@@ -4,6 +4,9 @@ class QuestionsController < ApplicationController
 
   helper_method :correct_user?
 
+  # respond_to do |format|
+  # end
+
   def index
     @questions = Question.all
   end

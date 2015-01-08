@@ -16,6 +16,8 @@ gem 'bcrypt', require: 'bcrypt'
 
 gem 'backbone-on-rails'
 
+gem 'figaro'
+
 group :development do
   gem 'spring'
   gem 'pry-rails'
