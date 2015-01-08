@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = current_users.answers.new(answer_params)
+    @answer = current_user.answers.new(answer_params)
     # @answer.author_id = current_user.id
     if @answer.save
       flash[:notice] = "Question added successfully"
