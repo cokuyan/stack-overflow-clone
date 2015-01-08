@@ -3,17 +3,18 @@ class VotesController < ApplicationController
   before_action :require_not_author!
 
   def create
-    vote = current_user.votes.new(vote_params)
-    if vote.save
+    @vote = current_user.votes.new(vote_params)
+    if @vote.save
       flash[:notice] = "Voted successfully"
+      setup_vote
     else
-      flash[:notice] = vote.errors.full_messages
+      flash[:notice] = @vote.errors.full_messages
     end
 
-    if vote.votable_type == 'Question'
-      redirect_to question_url(vote.votable_id)
+    if @vote.votable_type == 'Question'
+      redirect_to question_url(@vote.votable_id)
     else
-      question_id = Answer.find(vote.votable_id).question_id
+      question_id = Answer.find(@vote.votable_id).question_id
       redirect_to question_url(question_id)
     end
   end
@@ -22,6 +23,11 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(:votable_id, :votable_type, :vote_type)
+  end
+
+  def setup_vote
+    votable = @vote.votable_type.constantize.find(@vote.votable_id)
+    votable.set_vote!(@vote.vote_type)
   end
 
   def author?

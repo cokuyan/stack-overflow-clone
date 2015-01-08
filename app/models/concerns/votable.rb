@@ -5,9 +5,8 @@ module Votable
     has_many :votes, as: :votable
   end
 
-  def vote_count
-    self.votes.select{|vote| vote.vote_type == 'up'}.count -
-      self.votes.select{|vote| vote.vote_type == 'down'}.count
+  def set_vote!(vote_type)
+    self.vote_count += vote_type == 'up' ? 1 : -1
+    self.save!
   end
-
 end
