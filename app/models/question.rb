@@ -9,7 +9,8 @@ class Question < ActiveRecord::Base
     class_name: 'User',
     foreign_key: :author_id,
     primary_key: :id,
-    inverse_of: :questions
+    inverse_of: :questions,
+    counter_cache: true
 
   has_many :answers, inverse_of: :question
 
