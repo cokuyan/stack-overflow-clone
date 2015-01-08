@@ -8,9 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    flash.now[:notice] = "Since sendgrid has not been set up yet, you will get an error when signing up. Please use the following sign up instead:
-    Username: username
-    Password: password"
+    flash.now[:notice] = "Please use a real email account"
     @user = User.new
   end
 
