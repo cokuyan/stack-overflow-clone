@@ -4,15 +4,12 @@ class QuestionsController < ApplicationController
 
   helper_method :correct_user?
 
-  # respond_to do |format|
-  # end
-
   def index
     @questions = Question.all
   end
 
   def show
-    @question = Question.includes(:votes, :author, answers: [:author, :votes]).find(params[:id])
+    @question = Question.includes(:author, answers: :author).find(params[:id])
     @question.view_count += 1
     @question.save!
   end
