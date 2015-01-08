@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107230750) do
+ActiveRecord::Schema.define(version: 20150108193404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,18 +23,21 @@ ActiveRecord::Schema.define(version: 20150107230750) do
     t.boolean  "accepted",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count",  default: 0
   end
 
   add_index "answers", ["author_id", "question_id"], name: "index_answers_on_author_id_and_question_id", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.string   "title",                      null: false
-    t.text     "content",                    null: false
-    t.integer  "author_id",                  null: false
-    t.integer  "view_count", default: 0,     null: false
-    t.boolean  "answered",   default: false
+    t.string   "title",                         null: false
+    t.text     "content",                       null: false
+    t.integer  "author_id",                     null: false
+    t.integer  "view_count",    default: 0,     null: false
+    t.boolean  "answered",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "answers_count"
+    t.integer  "vote_count",    default: 0
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -49,6 +52,8 @@ ActiveRecord::Schema.define(version: 20150107230750) do
     t.boolean  "admin",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "answers_count"
+    t.integer  "questions_count"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", unique: true, using: :btree
