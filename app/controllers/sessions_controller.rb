@@ -10,9 +10,12 @@ class SessionsController < ApplicationController
       params[:user][:name_or_email],
       params[:user][:password]
     )
-    if @user
+    if @user && @user.activated?
       login!(@user)
       flash[:notice] = "Logged in successfully"
+      redirect_to root_url
+    elsif @user && !@user.activated?
+      flash[:notice] = "Please check your email to activate your account"
       redirect_to root_url
     else
       flash.now[:errors] = ["Invalid username/email and password combination"]

@@ -22,8 +22,9 @@ class UsersController < ApplicationController
     end
     # will implement activation later
     if @user.save
-      flash[:notice] = "Welcome, #{@user.username}"
-      login!(@user)
+      msg = UserMailer.welcome_email(@user)
+      msg.deliver
+      flash[:notice] = activation_message
       redirect_to root_url
     else
       flash.now[:errors] = @user.errors.full_messages
@@ -53,10 +54,30 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
+  def activate
+    @user = User.find_by_activation_token(params[:activation_token])
+    if @user.try(:toggle, :activated).try(:save)
+      flash[:notice] = "Your account has been activated successfully. You may now log in."
+    else
+      flash[:notice] = "Something went wrong"
+    end
+    redirect_to root_url
+  end
+
   private
 
   def user_params
     # add activation_token?
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def activation_message
+    <<-HEREDOC
+    Welcome, #{@user.username}!
+    In order to start using the site, please activate your account by following the link sent to your email.
+
+    Or just click the following link for now:
+    #{activate_users_url(activation_token: @user.activation_token)}
+    HEREDOC
   end
 end

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Welcome to Stack Overflown, <%= @user.username %></h1>
+  <p>
+    You have successfully signed up to Stack Overflown,
+    your username is: <%= @user.username %>.<br/>
+  </p>
+  <p>
+    In order to access the site, please activate your account by visiting the follow link <a href="<%= activate_users_url(activation_token: @user.activation_token) %>">here</a>, or by copying and pasting the following link to your browser: <%= activate_users_url(activation_token: @user.activation_token) %>
+  </p>
+  <p>Thanks for joining and have a great day!</p>
+</body>
+</html>
