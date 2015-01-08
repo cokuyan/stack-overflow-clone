@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, only: [:new]
   end
-  resources :answers, only: [:create, :edit, :update, :destroy]
+  resources :answers, only: [:create, :edit, :update, :destroy] do
+    get 'accept', on: :member
+  end
   resources :votes, only: [:create]
 
   get '/login', to: 'sessions#new'

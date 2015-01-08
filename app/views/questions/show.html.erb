@@ -31,10 +31,14 @@
 <ul class="answers">
   <% @question.answers.each do |answer| %>
     <li>
+      <% if correct_user? && !@question.answered? %>
+        <%= link_to "Accept Answer", accept_answer_url(answer) %>
+      <% end %>
       <p>
         <%= answer.content %>
       </p>
-      <small>answered by <%= link_to answer.author.username, user_url(answer.author) %></small>
+      <small>answered by <%= link_to answer.author.username,
+                             user_url(answer.author) %></small>
       <% if logged_in? && current_user == answer.author %>
         <small><%= link_to "Edit", edit_answer_url(answer) %></small>
       <% end %>
@@ -57,10 +61,11 @@
   <% end %>
 </ul>
 
-<aside>
-  <%= link_to "Got an answer?", new_question_answer_url(@question) %>
-</aside>
 
 <% if logged_in? && current_user == @question.author %>
   <small><%= link_to "Edit", edit_question_url(@question) %></small>
+<% else %>
+  <aside>
+    <%= link_to "Got an answer?", new_question_answer_url(@question) %>
+  </aside>
 <% end %>
