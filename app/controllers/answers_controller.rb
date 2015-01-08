@@ -79,7 +79,8 @@ class AnswersController < ApplicationController
   end
 
   def require_incorrect_asker!
-    redirect_to question_url(@question) if !logged_in? || correct_asker?
+    require_current_user!
+    redirect_to question_url(@question) if correct_asker?
   end
 
 end
