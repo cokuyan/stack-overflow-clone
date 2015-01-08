@@ -13,4 +13,10 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new'
   resource :session, only: [:create, :destroy]
+
+  # backbone stuff
+  namespace :api, defaults: { format: :json } do
+    resources :questions
+  end
+
 end

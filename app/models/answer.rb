@@ -8,8 +8,9 @@ class Answer < ActiveRecord::Base
   belongs_to :author,
     class_name: 'User',
     foreign_key: :author_id,
-    inverse_of: :answers
+    inverse_of: :answers,
+    counter_cache: true
 
-  belongs_to :question, inverse_of: :answers
+  belongs_to :question, inverse_of: :answers, counter_cache: true
 
 end
