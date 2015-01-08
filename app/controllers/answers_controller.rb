@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :require_current_user!, only: [:new, :create]
+  before_action :require_incorrect_asker!, only: [:new, :create]
   before_action :require_correct_user!, only: [:edit, :update, :destroy]
   before_action :require_correct_asker!, only: :accept
 
@@ -68,6 +68,11 @@ class AnswersController < ApplicationController
   def require_correct_asker!
     answer = Answer.includes(:question).find(params[:id])
     redirect_to question_url(answer.question) unless answer.question.author_id == current_user.id
+  end
+
+  def require_incorrect_asker!
+    question = Question.find(params[:question_id])
+    redirect_to question_url(question) if question.author_id == current_user.id
   end
 
 end
