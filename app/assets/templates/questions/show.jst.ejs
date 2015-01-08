@@ -1,1 +1,11 @@
-<h1>Nothing for now</h1>
+<h1><%= question.escape('title') %></h1>
+
+<aside>
+  Views: <%= question.get('view_count') %>
+</aside>
+
+<p>
+  <%= question.escape('content') %>
+</p>
+
+<small>asked by <a href="/users/<%= question.get('author_id') %>">user</a></small>
