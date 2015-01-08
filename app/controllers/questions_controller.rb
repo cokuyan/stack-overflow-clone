@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :require_current_user!, only: [:new, :create]
   before_action :require_correct_user!, only: [:edit, :update, :destroy]
 
+  helper_method :correct_user?
+
   def index
     @questions = Question.all
   end
@@ -57,10 +59,12 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :content)
   end
 
+  def correct_user?
+    question = Question.find(params[:id])
+    logged_in? && current_user.id == question.author_id
+  end
+
   def require_correct_user!
-    @question = Question.find(params[:id])
-    unless logged_in? && current_user.id == @question.author_id
-      redirect_to question_url(@question)
-    end
+    redirect_to question_url(@question) unless correct_user?
   end
 end
