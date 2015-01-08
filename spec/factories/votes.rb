@@ -5,8 +5,13 @@ FactoryGirl.define do
     votable_id 1
     votable_type 'Question'
 
-    factory :down_vote do
-      vote_type 'down'
+    factory :question_vote do
+      user_id 2
+      votable_id 2
+      votable_type 'Question'
+    end
+
+    factory :answer_vote do
       user_id 2
       votable_id 2
       votable_type 'Answer'
