@@ -8,8 +8,8 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = Answer.new(answer_params)
-    @answer.author_id = current_user.id
+    @answer = current_users.answers.new(answer_params)
+    # @answer.author_id = current_user.id
     if @answer.save
       flash[:notice] = "Question added successfully"
       redirect_to question_url(@answer.question_id)
@@ -69,7 +69,7 @@ class AnswersController < ApplicationController
     if params[:id]
       @question = Answer.includes(:question).find(params[:id]).question
     else
-      @question = Question.find(params[:question_id])
+      @question = Question.find(answer_params[:question_id])
     end
     logged_in? && @question.author_id == current_user.id
   end

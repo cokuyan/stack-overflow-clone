@@ -16,7 +16,7 @@
     <%= auth_token %>
     <input type="hidden" name="vote[votable_id]" value="<%= @question.id %>">
     <input type="hidden" name="vote[votable_type]" value="Question">
-    <input type="submit" name="vote[vote-type]" value="up">
+    <input type="submit" name="vote[vote_type]" value="up">
   </form>
 
   <form action="/votes" method="post">

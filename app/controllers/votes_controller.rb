@@ -3,16 +3,13 @@ class VotesController < ApplicationController
   before_action :require_not_author!
 
   def create
-    vote = Vote.new(vote_params)
-    vote.user_id = current_user.id
+    vote = current_user.votes.new(vote_params)
     if vote.save
       flash[:notice] = "Voted successfully"
     else
       flash[:notice] = vote.errors.full_messages
     end
 
-    # find a better way....
-    # check if you can search history
     if vote.votable_type == 'Question'
       redirect_to question_url(vote.votable_id)
     else
