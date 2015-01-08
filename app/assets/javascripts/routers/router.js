@@ -4,11 +4,42 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'index'
+    '': 'root',
+    'questions': 'questionsIndex',
+    'questions/new': 'questionNew',
+    'questions/:id': 'questionShow'
   },
 
-  index: function () {
+  root: function () {
+    // StackOverflowClone.comparator = 'created_at';
+    StackOverflowClone.questions.fetch();
+    var view = new StackOverflowClone.Views.QuestionsIndex({
+      collection: StackOverflowClone.questions
+    });
+    this._swapView(view);
+  },
 
+  questionsIndex: function () {
+    var collection = new StackOverflowClone.Collections.Questions({
+      comparator: 'view_count'
+    })
+    collection.fetch();
+    var view = new StackOverflowClone.Views.QuestionsIndex({
+      collection: collection
+    });
+    this._swapView(view);
+  },
+
+  questionNew: function () {
+
+  },
+
+  questionShow: function (id) {
+    var question = StackOverflowClone.questions.getOrFetch(id);
+    var view = new StackOverflowClone.Views.QuestionShow({
+      model: question
+    });
+    this._swapView(view);
   },
 
   _swapView: function (view) {

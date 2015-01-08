@@ -1,0 +1,7 @@
+<h1>Questions</h1>
+
+<ul class="questions">
+  <% questions.each(function(question) { %>
+    <li><a href="#/questions/<%= question.id %>"><%= question.escape("title") %></a></li>
+  <% }) %>
+</ul>
