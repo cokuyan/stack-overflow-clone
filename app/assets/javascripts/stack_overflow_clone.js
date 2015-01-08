@@ -4,6 +4,8 @@ window.StackOverflowClone = {
   Views: {},
   Routers: {},
   initialize: function() {
+    new StackOverflowClone.Routers.Router({ $rootEl: $('#content') });
+    Backbone.history.start();
   }
 };
 
