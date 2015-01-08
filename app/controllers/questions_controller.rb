@@ -60,8 +60,8 @@ class QuestionsController < ApplicationController
   end
 
   def correct_user?
-    question = Question.find(params[:id])
-    logged_in? && current_user.id == question.author_id
+    @question = Question.find(params[:id])
+    logged_in? && current_user.id == @question.author_id
   end
 
   def require_correct_user!
