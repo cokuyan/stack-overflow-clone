@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  include Votable
+
   validates :title, :content, :author_id, :view_count, presence: true
   validates :answered, inclusion: [true, false]
   after_initialize :ensure_view_count, :ensure_answered
@@ -10,13 +12,6 @@ class Question < ActiveRecord::Base
     inverse_of: :questions
 
   has_many :answers, inverse_of: :question
-
-  has_many :votes, as: :votable
-
-  def vote_count
-    self.votes.select{|vote| vote.vote_type == 'up'}.count -
-      self.votes.select{|vote| vote.vote_type == 'down'}.count
-  end
 
   private
 

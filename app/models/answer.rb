@@ -1,4 +1,6 @@
 class Answer < ActiveRecord::Base
+  include Votable
+
   validates :content, :author_id, :question_id, presence: true
   validates :accepted, inclusion: [true, false]
   validates :author_id, uniqueness: { scope: :question_id }
@@ -9,12 +11,5 @@ class Answer < ActiveRecord::Base
     inverse_of: :answers
 
   belongs_to :question, inverse_of: :answers
-
-  has_many :votes, as: :votable
-
-  def vote_count
-    self.votes.select{|vote| vote.vote_type == 'up'}.count -
-      self.votes.select{|vote| vote.vote_type == 'down'}.count
-  end
 
 end
