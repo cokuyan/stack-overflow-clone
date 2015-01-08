@@ -69,7 +69,8 @@ class AnswersController < ApplicationController
     if params[:id]
       @question = Answer.includes(:question).find(params[:id]).question
     else
-      @question = Question.find(answer_params[:question_id])
+      question_id = params[:question_id] || answer_params[:question_id]
+      @question = Question.find(question_id)
     end
     logged_in? && @question.author_id == current_user.id
   end
