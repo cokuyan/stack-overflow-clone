@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :author
 
+  has_many :answered_questions, through: :answers, source: :question
+
   has_many :votes
 
   def self.find_by_credentials(name_or_email, password)

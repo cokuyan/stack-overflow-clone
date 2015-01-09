@@ -9,7 +9,6 @@ class AnswersController < ApplicationController
 
   def create
     @answer = current_user.answers.new(answer_params)
-    # @answer.author_id = current_user.id
     if @answer.save
       flash[:notice] = "Question added successfully"
       redirect_to question_url(@answer.question_id)

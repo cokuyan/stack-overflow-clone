@@ -6,7 +6,9 @@ StackOverflowClone.Views.QuestionShow = Backbone.View.extend({
   template: JST['questions/show'],
 
   render: function () {
-    this.$el.html(this.template({ question: this.model }))
+    if (this.model.author) {
+      this.$el.html(this.template({ question: this.model }))
+    }
     return this;
   }
 })

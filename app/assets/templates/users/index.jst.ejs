@@ -1,0 +1,11 @@
+<h1>Users</h1>
+
+<ul class="users">
+  <% users.each(function(user) { %>
+    <li>
+      <a href="#/users/<%= user.id %>">
+        <%= user.escape('username') %>
+      </a>
+    </li>
+  <% }); %>
+</ul>

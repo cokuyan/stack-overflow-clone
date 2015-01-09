@@ -8,4 +8,8 @@
   <%= question.escape('content') %>
 </p>
 
-<small>asked by <a href="/users/<%= question.get('author_id') %>">user</a></small>
+<small>asked by
+  <a href="/users/<%= question.author.id %>">
+    <%= question.author.escape('username') %>
+  </a>
+</small>

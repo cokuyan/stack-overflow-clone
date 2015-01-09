@@ -3,6 +3,12 @@ StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
   model: StackOverflowClone.Models.Question,
   comparator: 'created_at',
 
+  initialize: function (models, options) {
+    if (options) {
+      this.author = options.author;
+    }
+  },
+
   getOrFetch: function (id) {
     var question = this.get(id);
     var questions = this;

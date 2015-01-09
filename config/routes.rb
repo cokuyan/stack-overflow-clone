@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   # backbone stuff
   namespace :api, defaults: { format: :json } do
     resources :questions
+    resources :users
+    resources :answers
   end
 
 end

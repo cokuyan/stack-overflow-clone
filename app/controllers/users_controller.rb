@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:questions).find(params[:id])
+    @user = User.includes(:questions, :answered_questions).find(params[:id])
   end
 
   def new
@@ -66,7 +66,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    # add activation_token?
     params.require(:user).permit(:username, :email, :password)
   end
 
