@@ -20,9 +20,18 @@ class Api::QuestionsController < ApplicationController
     end
   end
 
+  def update
+    question = Question.find(params[:id])
+    if question.update(question_params)
+      render json: question
+    else
+      render json: question.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def question_params
-    params.require(:question).permit(:title, :content)
+    params.require(:question).permit(:title, :content, :answered)
   end
 end

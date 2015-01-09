@@ -12,9 +12,18 @@ class Api::AnswersController < ApplicationController
     end
   end
 
+  def update
+    @answer = Answer.find(params[:id])
+    if @answer.update(answer_params)
+      render json: @answer
+    else
+      render json: @answer.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def answer_params
-    params.require(:answer).permit(:content, :question_id)
+    params.require(:answer).permit(:content, :question_id, :accepted)
   end
 end
