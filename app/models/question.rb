@@ -14,6 +14,9 @@ class Question < ActiveRecord::Base
 
   has_many :answers, inverse_of: :question
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   private
 
   def ensure_view_count
