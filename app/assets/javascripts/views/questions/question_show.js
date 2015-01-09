@@ -3,7 +3,10 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     var view = this;
-    this.listenTo(this.model, 'sync change', this.render);
+    this.listenTo(this.model, 'sync change', function () {
+      view.render();
+      view.checkIfAsker();
+    });
     this.listenTo(this.model.answers(), 'sync', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
@@ -16,7 +19,8 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click a.new-answer-link': 'displayAnswerForm',
     'click button.submit': 'createAnswer',
     'click button.cancel': 'removeAnswerForm',
-    'click button.vote': 'processVote'
+    'click button.vote': 'processVote',
+    'click button.accept': 'acceptAnswer'
   },
 
   addAnswerSubviews: function () {
@@ -108,8 +112,32 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         alert(a.responseJSON);
       }
     })
+  },
+
+  checkIfAsker: function () {
+    if (StackOverflowClone.currentUser &&
+        this.model.author &&
+        StackOverflowClone.currentUser.id === this.model.author.id &&
+        !this.model.get('answered')) {
+      this.$('button.accept').removeClass('hidden');
+    }
+  },
+
+  acceptAnswer: function (event) {
+    event.preventDefault();
+
+    var answer = this.model.answers().get($(event.currentTarget).data("id"))
+
+    answer.save({ answered: true });
+    this.model.save({ answered: true }, {
+      success: function () {
+        alert("Answer accepted successfully");
+        this.$('button.accept').addClass('hidden')
+      },
+      error: function (resp) {
+        alert(resp.responseJSON)
+      }
+    })
   }
 
 })
-
-// :votable_id, :votable_type, :vote_type

@@ -11,7 +11,7 @@ class Vote < ActiveRecord::Base
 
   def cannot_vote_for_own_votable
     if self.user_id == self.votable.author_id
-      errors.add(:user, "cannot vote for own #{self.votable_type}")
+      errors.add(:user, "cannot vote for own #{self.votable_type.downcase}")
     end
   end
 
