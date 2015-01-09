@@ -6,3 +6,11 @@
     <%= answer.author.escape('username') %>
   </a>
 </small>
+
+<h4>Votes</h4>
+<button class="up-vote"
+        data-votable-type="Question"
+        data-votable-id="<%= question.id %>">up</button>
+<button class="down-vote"
+        data-votable-type="Question"
+        data-votable-id="<%= question.id %>">down</button>
