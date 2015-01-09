@@ -1,3 +1,13 @@
+<section class="vote-section">
+  <span>Votes: <%= answer.get('vote_count') %></span>
+  <button class="up vote"
+          data-votable-type="Answer"
+          data-votable-id="<%= answer.id %>">up</button>
+  <button class="down vote"
+          data-votable-type="Answer"
+          data-votable-id="<%= answer.id %>">down</button>
+</section>
+
 <p>
   <%= answer.escape('content') %>
 </p>
@@ -6,11 +16,3 @@
     <%= answer.author.escape('username') %>
   </a>
 </small>
-
-<h4>Votes</h4>
-<button class="up-vote"
-        data-votable-type="Question"
-        data-votable-id="<%= question.id %>">up</button>
-<button class="down-vote"
-        data-votable-type="Question"
-        data-votable-id="<%= question.id %>">down</button>

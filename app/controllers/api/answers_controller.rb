@@ -1,4 +1,8 @@
 class Api::AnswersController < ApplicationController
+  def show
+    @answer = Answer.find(params[:id])
+  end
+
   def create
     @answer = current_user.answers.new(answer_params)
     if @answer.save

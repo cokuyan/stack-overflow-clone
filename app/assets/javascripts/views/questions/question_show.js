@@ -3,7 +3,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     var view = this;
-    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'sync change', this.render);
     this.listenTo(this.model.answers(), 'sync', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
@@ -15,7 +15,8 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   events: {
     'click a.new-answer-link': 'displayAnswerForm',
     'click button.submit': 'createAnswer',
-    'click button.cancel': 'removeAnswerForm'
+    'click button.cancel': 'removeAnswerForm',
+    'click button.vote': 'processVote'
   },
 
   addAnswerSubviews: function () {
@@ -72,5 +73,43 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         alert("Something went wrong")
       }
     });
+  },
+
+  processVote: function (event) {
+    event.preventDefault();
+    var view = this;
+    var votable_id, votable_type, vote_type, $button, votable;
+    $button = $(event.currentTarget);
+    votable_id = $button.data('votable-id');
+    votable_type = $button.data('votable-type');
+    vote_type = $button.html();
+
+    if (votable_type === "Question") {
+      votable = this.model;
+    } else {
+      votable = this.model.answers().get(votable_id);
+    }
+
+    $.ajax({
+      url: "/api/votes",
+      type: "POST",
+      data: {
+        vote: {
+          votable_id: votable_id,
+          votable_type: votable_type,
+          vote_type: vote_type
+        }
+      },
+      success: function (votableResp) {
+        alert("Voted successfully");
+        votable.set("vote_count", votableResp.vote_count);
+      },
+      error: function (a, b, c) {
+        alert(a.responseJSON);
+      }
+    })
   }
+
 })
+
+// :votable_id, :votable_type, :vote_type
