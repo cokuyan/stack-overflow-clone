@@ -1,0 +1,8 @@
+<p>
+  <%= answer.escape('content') %>
+</p>
+<small>answered by
+  <a href="#/users/<%= answer.author.id %>">
+    <%= answer.author.escape('username') %>
+  </a>
+</small>
