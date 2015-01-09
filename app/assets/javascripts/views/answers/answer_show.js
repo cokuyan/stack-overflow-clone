@@ -1,4 +1,4 @@
-StackOverflowClone.Views.AnswerShow = Backbone.View.extend({
+StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
   template: JST['answers/show'],
   tagName: 'li',
   initialize: function () {

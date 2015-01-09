@@ -16,7 +16,6 @@ json.answers @question.answers do |answer|
   json.extract! answer,
     :id,
     :content,
-    :author_id,
     :accepted,
     :vote_count
 

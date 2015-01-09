@@ -14,5 +14,24 @@
   </a>
 </small>
 
+<h3>Votes</h3>
+<button class="up-vote"
+        data-votable-type="Question"
+        data-votable-id="<%= question.id %>">up</button>
+<button class="down-vote"
+        data-votable-type="Question"
+        data-votable-id="<%= question.id %>">down</button>
+
 <h3>Answers</h3>
 <ul class="answers"></ul>
+
+<a class="new-answer-link" href="javascript:void(0)">Got an Answer?</a>
+
+<form class="hidden new-answer-form">
+  <h3>Answer Away!</h3>
+  <label for="content"></label>
+  <textarea id="content" name="answer[content]"></textarea>
+
+  <button class="submit">submit</button>
+  <button class="cancel">cancel</button>
+</form>
