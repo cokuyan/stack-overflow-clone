@@ -1,13 +1,14 @@
 class Api::QuestionsController < ApplicationController
   def index
-    render json: Question.all
+    questions = Question.includes(:author).all
+    render json: questions
   end
 
   def show
-    question = Question.find(params[:id])
-    question.view_count += 1
-    question.save!
-    render json: question
+    @question = Question.includes(:author, answers: :author).find(params[:id])
+    @question.view_count += 1
+    @question.save!
+    render :show
   end
 
   def create

@@ -15,9 +15,15 @@
 end
 
 10.times do
-  Question.create({
+  question = Question.create({
     title: Faker::Lorem.sentence,
     content: Faker::Lorem.paragraph,
-    author_id: rand(10)
+    author_id: rand(10) + 1
   })
+  5.times do
+    question.answers.create({
+      content: Faker::Lorem.paragraph,
+      author_id: rand(10) + 1
+    })
+  end
 end

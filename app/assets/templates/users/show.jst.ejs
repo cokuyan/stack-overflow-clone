@@ -1,0 +1,29 @@
+<h1><%= user.escape('username') %></h1>
+
+<table class="attributes">
+  <tr>
+    Email: <%= user.escape('email') %>
+  </tr>
+</table>
+
+<h3>Questions asked by <%= user.escape('username') %></h3>
+<ul class="user-questions">
+  <% user.questions().each(function(question) { %>
+    <li>
+      <a href="#/questions/<%= question.id %>">
+        <%= question.escape('title') %>
+      </a>
+    </li>
+  <% }); %>
+</ul>
+
+<h3>Questions answered by <%= user.escape('username') %></h3>
+<ul class="user-answered-questions">
+  <% user.answeredQuestions().each(function(answeredQuestion) { %>
+    <li>
+      <a href="#/questions/<%= answeredQuestion.id %>">
+        <%= answeredQuestion.escape('title') %>
+      </a>
+    </li>
+  <% }); %>
+</ul>
