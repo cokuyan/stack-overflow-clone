@@ -71,6 +71,14 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
+  userNew: function () {
+    // var user = new StackOverflowClone.Models.User()
+    // var view = new StackOverFlowClone.Views.UserForm({
+    //   model: user
+    // });
+    // this._swapView(view);
+  },
+
   _swapView: function (view) {
     this.currentView && this.currentView.remove();
     this.currentView = view;

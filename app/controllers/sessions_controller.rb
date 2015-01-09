@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     )
     if @user && @user.activated?
       login!(@user)
-      flash[:notice] = "Logged in successfully"
+      # flash[:notice] = "Logged in successfully"
       redirect_to root_url
     elsif @user && !@user.activated?
       flash[:notice] = "Please check your email to activate your account"
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout!
-    flash[:notice] = "Logged out successfully"
+    # flash[:notice] = "Logged out successfully"
     redirect_to root_url
   end
 end
