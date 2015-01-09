@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :questions
     resources :users
     resources :answers
+    resources :votes, only: :create
   end
 
 end
