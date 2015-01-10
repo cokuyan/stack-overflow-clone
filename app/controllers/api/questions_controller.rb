@@ -5,7 +5,7 @@ class Api::QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:author, answers: :author, :tags)
+    @question = Question.includes(:author, :tags, answers: :author)
       .find(params[:id])
     @question.view_count += 1
     @question.save!
