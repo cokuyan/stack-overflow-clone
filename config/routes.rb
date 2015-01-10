@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :users
     resources :answers
     resources :votes, only: :create
+    resources :tags, only: [:index, :show]
   end
 
 end
