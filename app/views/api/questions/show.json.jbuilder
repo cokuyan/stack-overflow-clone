@@ -25,3 +25,7 @@ json.answers @question.answers do |answer|
   end
 
 end
+
+json.tags @question.tags do |tag|
+  json.extract! tag, :id, :tag_name
+end

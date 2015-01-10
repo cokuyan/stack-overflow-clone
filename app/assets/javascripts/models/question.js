@@ -19,6 +19,10 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
       this.answers().set(resp.answers, { parse: true })
       delete resp.answers;
     }
+    if (resp.tags) {
+      this.tags = new StackOverflowClone.Collections.Tags(resp.tags);
+      delete resp.tags;
+    }
     return resp;
   }
 });
