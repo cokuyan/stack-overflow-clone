@@ -1,8 +1,12 @@
-<h1><%= tag.escape("tag_name") %></h1>
+<section class="tag-info">
+  <h1><%= tag.escape("tag_name") %></h1>
 
-<p>
-  <%= tag.escape("description") %>
-</p>
+  <p>
+    <%= tag.escape("description") %>
+  </p>
+</section>
 
-<h3>Questions</h3>
-<ul class="tag-questions"></ul>
+<section class="questions">
+  <h3>Questions</h3>
+  <ul class="tag-questions"></ul>
+</section>

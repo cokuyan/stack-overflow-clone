@@ -14,14 +14,271 @@
  *= require_self
  */
 
- ul {
-   list-style: none;
- }
+/* resets */
+
+body, header, nav, ul, li, a, button, form, input, textarea,
+h1, h2, h4, h5, h3, p, span, small, aside, article, section,
+table, td, tr, th {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  background: transparent;
+  color: inherit;
+}
+
+ul {
+ list-style: none;
+}
+
+table {
+  border-spacing: 0;
+}
+
+main {
+  width: 1000px;
+  margin: auto;
+}
+
+body {
+  font-family: sans-serif;
+  background: #eee;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 23px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+button {
+  cursor: pointer;
+  color: #fff;
+  background: #333;
+  padding: 2px 5px;
+}
+
+/* utils */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 .hidden {
   display: none;
 }
 
-.vote {
+ul.question-tags > li {
+  float: left;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+/* header */
+
+header {
+  width: 1000px;
+  margin: auto;
+}
+
+ul.user-nav {
+  float: right;
+}
+
+ul.user-nav > li {
   float: left;
 }
+
+ul.user-nav > li a {
+  display: block;
+  padding: 10px;
+}
+
+/* main nav */
+
+nav.main-nav {
+  padding: 20px;
+}
+
+nav.main-nav ul.main-nav-links {
+  float: right;
+}
+
+ul.main-nav-links > li {
+  float: left;
+}
+
+ul.main-nav-links > li a {
+  display: block;
+  margin-left: 30px;
+  font-size: 30px;
+}
+
+/* questions index */
+
+ul.questions {
+
+}
+
+ul.questions > li {
+  margin-bottom: 5px;
+}
+
+/* question show */
+
+section.question-info {
+  margin-bottom: 50px;
+}
+
+section.question-info span.view-count {
+  display: block;
+  margin-bottom: 10px;
+}
+
+section.question-info p.question-content {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+section.question-info small.question-author {
+  display: block;
+  margin-bottom: 5px;
+}
+
+small.question-author a {
+  color: #00f;
+}
+
+section.voting {
+  margin-top: 10px;
+}
+
+  /* answers in question show */
+
+  section.question-answers {
+    padding: 20px;
+  }
+
+  ul.answers {
+  }
+
+  ul.answers > li.answer {
+    margin-bottom: 40px;
+  }
+
+  li.answer p.answer-content {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  li.answer small.answer-author {
+    font-size: 14px;
+  }
+
+  small.answer-author a {
+    color: #00f;
+  }
+
+  a.new-answer-link {
+    color: #00f;
+  }
+
+/* users index */
+
+ul.users {
+
+}
+
+ul.users > li {
+  margin-bottom: 5px;
+}
+
+/* users show */
+
+table {
+  margin: 20px 0;
+  border: 1px solid #000;
+}
+
+tr {
+
+}
+
+td {
+  padding: 10px;
+}
+
+td.attribute {
+}
+
+td.value {
+  background: #BBB;
+}
+
+  /* questions in users show */
+
+  section.questions {
+    background: #fff;
+    padding: 20px;
+  }
+
+  section.user-asked {
+    width: 50%;
+    float: left;
+  }
+
+  section.user-answered {
+    width: 50%;
+    float: left;
+  }
+
+  ul.user-questions {
+
+  }
+
+  ul.user-questions > li {
+    margin-bottom: 20px;
+  }
+
+/* tags index */
+
+ul.tags {
+
+}
+
+ul.tags > li {
+  margin-bottom: 5px;
+}
+
+/* tag show */
+
+section.tag-info {
+  margin-bottom: 50px;
+}
+
+  /* questions in tag show */
+
+  ul.tag-questions {
+
+  }
+
+  ul.tag-questions > li {
+    margin-bottom: 20px;
+  }

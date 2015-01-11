@@ -1,19 +1,21 @@
 <button class="accept hidden" data-id="<%= answer.id %>">Accept Answer</button>
-<section class="vote-section">
-  <span>Votes: <%= answer.get('vote_count') %></span>
-  <button class="up vote"
-          data-votable-type="Answer"
-          data-votable-id="<%= answer.id %>">up</button>
-  <button class="down vote"
-          data-votable-type="Answer"
-          data-votable-id="<%= answer.id %>">down</button>
-</section>
 
-<p>
+<p class="answer-content">
   <%= answer.escape('content') %>
 </p>
-<small>answered by
+
+<small class="answer-author">answered by
   <a href="#/users/<%= answer.author.id %>">
     <%= answer.author.escape('username') %>
   </a>
 </small>
+
+<section class="voting">
+  <span>Votes: <%= answer.get('vote_count') %></span>
+  <button class="vote"
+          data-votable-type="Answer"
+          data-votable-id="<%= answer.id %>">up</button>
+  <button class="vote"
+          data-votable-type="Answer"
+          data-votable-id="<%= answer.id %>">down</button>
+</section>
