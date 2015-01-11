@@ -11,7 +11,10 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
     'users': 'usersIndex',
     'users/new': 'userNew',
-    'users/:id': 'userShow'
+    'users/:id': 'userShow',
+
+    'tags': 'tagsIndex',
+    'tags/:id': 'tagShow'
   },
 
   root: function () {
@@ -77,6 +80,24 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     //   model: user
     // });
     // this._swapView(view);
+  },
+
+  // Tag routes
+
+  tagsIndex: function () {
+    StackOverflowClone.tags.fetch();
+    var view = new StackOverflowClone.Views.TagsIndex({
+      collection: StackOverflowClone.tags
+    });
+    this._swapView(view);
+  },
+
+  tagShow: function (id) {
+    var tag = StackOverflowClone.tags.getOrFetch(id);
+    var view = new StackOverflowClone.Views.TagShow({
+      model: tag
+    });
+    this._swapView(view);
   },
 
   _swapView: function (view) {

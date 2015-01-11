@@ -1,0 +1,11 @@
+<h1>Tags</h1>
+
+<ul>
+  <% tags.each(function(tag) { %>
+    <li>
+      <a href="#/tags/<%= tag.id %>">
+        <%= tag.escape("tag_name") %>
+      </a>
+    </li>
+  <% }); %>
+</ul>

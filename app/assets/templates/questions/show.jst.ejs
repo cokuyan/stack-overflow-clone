@@ -24,6 +24,16 @@
   </a>
 </small>
 
+<h5>tags</h5>
+<ul class="question-tags">
+  <% question.tags().each(function(tag) { %>
+    <li>
+      <a href="#/tags<%= tag.id %>">
+        <%= tag.escape("tag_name") %>
+      </a>
+    </li>
+  <% }) %>
+</ul>
 
 <h3>Answers</h3>
 <ul class="answers"></ul>
