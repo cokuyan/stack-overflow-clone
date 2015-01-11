@@ -10,7 +10,11 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.answers(), 'sync', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
+      view.model.answers().sort();
     });
+    this.listenTo(this.model.answers(), 'sort', function () {
+      view.sortAnswerSubviews();
+    })
 
     this.addAnswerSubviews();
   },
@@ -21,6 +25,13 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click button.cancel': 'removeAnswerForm',
     'click button.vote': 'processVote',
     'click button.accept': 'acceptAnswer'
+  },
+
+  sortAnswerSubviews: function () {
+    var view = this;
+    this.subviews('ul.answers').sort(function (subview1, subview2) {
+      return view.model.answers().comparator(subview1.model, subview2.model);
+    })
   },
 
   addAnswerSubviews: function () {
@@ -70,8 +81,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       success: function () {
         view.model.answers().add(answer);
         view.$('textarea').val('');
-        // might need to change this later
-        view.removeAnswerForm(event);
+        view.removeAnswerForm();
       },
       error: function () {
         alert("Something went wrong")
@@ -117,9 +127,12 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   checkIfAsker: function () {
     if (StackOverflowClone.currentUser &&
         this.model.author &&
-        StackOverflowClone.currentUser.id === this.model.author.id &&
-        !this.model.get('answered')) {
-      this.$('button.accept').removeClass('hidden');
+        StackOverflowClone.currentUser.id === this.model.author.id) {
+      this.$('a.new-answer-link').addClass('hidden');
+
+      if (!this.model.get('answered')) {
+        this.$('button.accept').removeClass('hidden');
+      }
     }
   },
 
@@ -127,12 +140,14 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     event.preventDefault();
 
     var answer = this.model.answers().get($(event.currentTarget).data("id"))
+    var view = this;
 
-    answer.save({ answered: true });
+    answer.save({ accepted: true });
     this.model.save({ answered: true }, {
       success: function () {
         alert("Answer accepted successfully");
-        this.$('button.accept').addClass('hidden')
+        view.$('button.accept').addClass('hidden');
+        view.model.answers().sort();
       },
       error: function (resp) {
         alert(resp.responseJSON)

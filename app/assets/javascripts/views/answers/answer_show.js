@@ -14,6 +14,9 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     if (this.model.author) {
       this.$el.html(this.template({ answer: this.model }));
     }
+    if (this.model.get("accepted")) {
+      this.$('span.accept').removeClass("hidden")
+    }
     return this;
   }
 
