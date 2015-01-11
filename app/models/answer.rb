@@ -14,6 +14,8 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question, inverse_of: :answers, counter_cache: true
 
+  after_initialize :ensure_accepted, :ensure_vote_count
+
   private
 
   def cannot_answer_own_question
@@ -22,4 +24,11 @@ class Answer < ActiveRecord::Base
     end
   end
 
+  def ensure_accepted
+    self.accepted ||= false
+  end
+
+  def ensure_vote_count
+    self.vote_count ||= 0
+  end
 end
