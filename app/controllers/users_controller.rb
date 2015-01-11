@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    flash.now[:notice] = "Please use a real email account"
     @user = User.new
   end
 

@@ -1,12 +1,16 @@
 <h1>Ask a Question!</h1>
 
-<label for="title">Title: </label>
-<input type="text"
-       name="question[title]"
-       id="title"
-       value="<%= question.escape('title') %>">
+<div class="input">
+  <label for="title">Title: </label>
+  <input type="text"
+         name="question[title]"
+         id="title"
+         value="<%= question.escape('title') %>">
+</div>
 
-<textarea name="question[content]"
-          placeholder="write here..."><%= question.escape('content') %></textarea>
+<div class="input">
+  <textarea name="question[content]"
+            placeholder="write here..."><%= question.escape('content') %></textarea>
+</div>
 
 <button class="submit">Submit</button>

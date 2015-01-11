@@ -46,6 +46,7 @@ main {
 body {
   font-family: sans-serif;
   background: #eee;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -67,6 +68,7 @@ h3 {
 }
 
 button {
+  -webkit-appearance: none;
   cursor: pointer;
   color: #fff;
   background: #333;
@@ -282,3 +284,72 @@ section.tag-info {
   ul.tag-questions > li {
     margin-bottom: 20px;
   }
+
+/* form stuff */
+
+form.form {
+  border-radius: 5px;
+  padding: 40px;
+  margin: auto;
+  width: 500px;
+  background: #fff;
+}
+
+form.form > h1 {
+  font-size: 33px;
+  text-align: center;
+}
+
+form.form .input {
+  margin-bottom: 15px;
+}
+
+.input label {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input input, textarea {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 440px;
+}
+
+.input textarea {
+  height: 150px;
+}
+
+.input input:active, input:focus, textarea:active, textarea:focus {
+  border: 1px solid #999;
+}
+
+.submit {
+  font-size: 18px;
+  display: block;
+  margin: auto;
+  background: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* answer form */
+
+form.new-answer-form {
+
+}
+
+.new-answer-form textarea {
+  height: 150px;
+  margin-bottom: 5px;
+  background: #fff;
+}
+
+.new-answer-form .submit, .cancel {
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  font-size: inherit;
+}

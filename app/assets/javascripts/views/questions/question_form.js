@@ -1,7 +1,7 @@
 StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
   template: JST['questions/form'],
   tagName: 'form',
-  className: 'question-form',
+  className: 'question-form form',
 
   events: {
     'click button.submit': 'submitForm'
