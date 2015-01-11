@@ -19,7 +19,7 @@
   <ul class="question-tags group">
     <% question.tags().each(function(tag) { %>
       <li>
-        <a href="#/tags<%= tag.id %>">
+        <a href="#/tags/<%= tag.id %>">
           <%= tag.escape("tag_name") %>
         </a>
       </li>
