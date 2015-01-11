@@ -1,9 +1,9 @@
 class Api::VotesController < ApplicationController
   def create
     vote = current_user.votes.new(vote_params)
+    # TODO: allow checking for undoing or resetting votes until a certain time
     if vote.save
       votable = vote.votable_type.constantize.find(vote.votable_id)
-      votable.set_vote!(vote.vote_type)
       render json: votable
     else
       render json: vote.errors.full_messages, status: :unprocessable_entity

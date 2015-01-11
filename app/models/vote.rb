@@ -4,8 +4,14 @@ class Vote < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: [:votable_type, :votable_id] }
   validate :cannot_vote_for_own_votable
 
+  after_commit :set_vote, on: :create
+
   belongs_to :user
   belongs_to :votable, polymorphic: true
+
+  def self.find_by_attributes(attributes)
+    self.where(attributes).first
+  end
 
   private
 
@@ -15,4 +21,7 @@ class Vote < ActiveRecord::Base
     end
   end
 
+  def set_vote
+    self.votable.set_vote!(self.vote_type)
+  end
 end

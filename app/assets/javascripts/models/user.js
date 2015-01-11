@@ -12,7 +12,7 @@ StackOverflowClone.Models.User = Backbone.Model.extend({
 
   answeredQuestions: function () {
     if (!this._answeredQuestions) {
-      this._answeredQuestions = new StackOverflowClone.Collections.Answers([], {
+      this._answeredQuestions = new StackOverflowClone.Collections.Questions([], {
         author: this
       });
     }

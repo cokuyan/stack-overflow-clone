@@ -6,7 +6,6 @@ class VotesController < ApplicationController
     @vote = current_user.votes.new(vote_params)
     if @vote.save
       flash[:notice] = "Voted successfully"
-      setup_vote
     else
       flash[:notice] = @vote.errors.full_messages
     end

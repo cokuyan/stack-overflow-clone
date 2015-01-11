@@ -1,0 +1,15 @@
+<li>
+  <a href="#/questions/<%= question.id %>">
+    <%= question.escape('title') %>
+  </a>
+  <h5>tags</h5>
+  <ul class="tags">
+    <% question.tags().each(function(tag) { %>
+      <li>
+        <a href="#/tags/<%= tag.id %>">
+          <%= tag.escape("tag_name") %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</li>

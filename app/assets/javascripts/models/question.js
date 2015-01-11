@@ -10,6 +10,13 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
     return this._answers;
   },
 
+  tags: function () {
+    if (!this._tags) {
+      this._tags = new StackOverflowClone.Collections.Tags();
+    }
+    return this._tags
+  },
+
   parse: function (resp) {
     if (resp.author) {
       this.author = new StackOverflowClone.Models.User(resp.author);
@@ -20,7 +27,7 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
       delete resp.answers;
     }
     if (resp.tags) {
-      this.tags = new StackOverflowClone.Collections.Tags(resp.tags);
+      this.tags().set(resp.tags, { parse: true })
       delete resp.tags;
     }
     return resp;
