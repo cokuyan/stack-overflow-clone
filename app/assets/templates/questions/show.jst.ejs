@@ -10,6 +10,12 @@
     <%= question.escape('content') %>
   </p>
 
+  <form class="form edit-question answer-form hidden">
+    <textarea><%= question.escape('content') %></textarea>
+    <button class="submit">Edit</button>
+    <button class="cancel">Cancel</button>
+  </form>
+
   <small class="question-author">asked by
     <a href="#/users/<%= question.author.id %>">
       <%= question.author.escape('username') %>
@@ -45,7 +51,7 @@
 
   <a class="new-answer-link" href="javascript:void(0)">Got an Answer?</a>
 
-  <form class="hidden new-answer-form group">
+  <form class="hidden new-answer answer-form group">
     <h3>Answer Away!</h3>
 
     <textarea id="content"

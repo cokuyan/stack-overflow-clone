@@ -8,7 +8,9 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
 
   events: {
     'click button.accept': 'acceptAnswer',
-    'click span.edit': 'editAnswer'
+    'click span.edit': 'displayEditForm',
+    'click button.submit': 'editAnswer',
+    'click button.cancel': 'hideEditForm'
   },
 
   render: function () {
@@ -25,8 +27,27 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     return this;
   },
 
+  displayEditForm: function (event) {
+    this.$('p.answer-content').addClass("hidden");
+    this.$('form.edit-answer').removeClass("hidden");
+  },
+
+  hideEditForm: function (event) {
+    this.$('form.edit-answer').addClass("hidden");
+    this.$('p.answer-content').removeClass("hidden");
+  },
+
   editAnswer: function (event) {
-    alert("stuff")
+    event.preventDefault();
+    var content = this.$('textarea').val();
+    this.model.save({ content: content }, {
+      success: function () {
+        alert("Edited successfully");
+      },
+      error: function () {
+        alert("Something went wrong")
+      }
+    });
   }
 
 });

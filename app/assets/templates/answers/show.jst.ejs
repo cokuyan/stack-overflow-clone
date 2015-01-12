@@ -5,6 +5,12 @@
   <%= answer.escape('content') %>
 </p>
 
+<form class="answer-form edit-answer hidden">
+  <textarea><%= answer.escape('content') %></textarea>
+  <button class="submit">Edit</button>
+  <button class="cancel">Cancel</button>
+</form>
+
 <small class="answer-author">answered by
   <a href="#/users/<%= answer.author.id %>">
     <%= answer.author.escape('username') %>

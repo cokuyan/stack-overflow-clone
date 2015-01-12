@@ -21,11 +21,13 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   events: {
     'click a.new-answer-link': 'displayAnswerForm',
-    'click button.submit': 'createAnswer',
-    'click button.cancel': 'removeAnswerForm',
+    'click .new-answer button.submit': 'createAnswer',
+    'click .new-answer button.cancel': 'removeAnswerForm',
     'click button.vote': 'processVote',
     'click button.accept': 'acceptAnswer',
-    'click .question-info span.edit': 'editQuestion'
+    'click .question-info span.edit': 'displayQuestionEdit',
+    'click .edit-question .submit': 'editQuestion',
+    'click .edit-question .cancel': 'hideQuestionEdit'
   },
 
   sortAnswerSubviews: function () {
@@ -157,8 +159,27 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     })
   },
 
+  displayQuestionEdit: function (event) {
+    this.$('p.question-content').addClass('hidden');
+    this.$('form.edit-question').removeClass('hidden');
+  },
+
+  hideQuestionEdit: function (event) {
+    this.$('form.edit-question').addClass('hidden');
+    this.$('p.question-content').removeClass('hidden');
+  },
+
   editQuestion: function (event) {
-    alert("stuff")
+    event.preventDefault();
+    var content = this.$('.edit-question textarea').val();
+    this.model.save({ content: content }, {
+      success: function () {
+        alert("Edited successfully");
+      },
+      error: function () {
+        alert("Something went wrong")
+      }
+    });
   }
 
 })

@@ -346,13 +346,13 @@ form.new-answer-form {
 
 }
 
-.new-answer-form textarea {
+.answer-form textarea {
   height: 150px;
   margin-bottom: 5px;
   background: #fff;
 }
 
-.new-answer-form .submit, .cancel {
+.answer-form .submit, .cancel {
   float: left;
   margin: 10px;
   padding: 10px;
