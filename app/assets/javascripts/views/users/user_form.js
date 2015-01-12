@@ -1,10 +1,8 @@
 StackOverflowClone.Views.UserForm = Backbone.View.extend({
   template: JST['users/form'],
-  tagName: 'form',
-  className: 'new-user-form',
 
   events: {
-    'click button.submit': 'createUser'
+    'submit form': 'createUser'
   },
 
   render: function () {
@@ -15,7 +13,16 @@ StackOverflowClone.Views.UserForm = Backbone.View.extend({
   createUser: function (event) {
     event.preventDefault();
 
-    var formData = this.$el.serializeJSON();
-    this.model.save(formData)
+    var formData = this.$(event.currentTarget).serializeJSON();
+    console.log(formData)
+    this.model.save(formData, {
+      success: function () {
+        Backbone.history.navigate("", { trigger: true });
+        alert("Please check your email to activate your account");
+      },
+      error: function (model, resp, c) {
+        alert(resp.responseText);
+      }
+    })
   }
 });

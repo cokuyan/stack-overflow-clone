@@ -1,0 +1,13 @@
+<ul class="user-nav group">
+  <% if (currentUser.isLoggedIn()) { %>
+    <li>
+      <a href="#/users/<%= currentUser.id %>">
+        <%= currentUser.escape("username") %>
+      </a>
+    </li>
+    <li><a id="logout-link" href="javascript:void(0)">Log Out</a></li>
+  <% } else { %>
+    <li><a href="#/users/new">Sign Up</a></li>
+    <li><a href="#/login">Log In</a></li>
+  <% } %>
+</ul>
