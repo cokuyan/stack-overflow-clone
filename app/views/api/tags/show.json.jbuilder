@@ -1,7 +1,7 @@
 json.extract! @tag, :id, :tag_name, :description
 
 json.questions @tag.questions do |question|
-  json.extract! question, :id, :title, :content, :view_count, :answered
+  json.partial! "api/questions/question", question: question
 
   json.author do
     json.id question.author.id

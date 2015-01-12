@@ -1,0 +1,10 @@
+json.(
+  question,
+  :id,
+  :title,
+  :content,
+  :view_count,
+  :answered,
+  :answers_count,
+  :vote_count
+)
