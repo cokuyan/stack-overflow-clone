@@ -18,7 +18,8 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     if (this.model.get("accepted")) {
       this.$('span.accept').removeClass("hidden")
     }
-    if (this.model.author.id === StackOverflowClone.currentUser.id) {
+    if (StackOverflowClone.currentUser &&
+        this.model.author.id === StackOverflowClone.currentUser.id) {
       this.$('span.edit').removeClass("hidden");
     }
     return this;
