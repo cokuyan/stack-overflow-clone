@@ -24,7 +24,8 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click button.submit': 'createAnswer',
     'click button.cancel': 'removeAnswerForm',
     'click button.vote': 'processVote',
-    'click button.accept': 'acceptAnswer'
+    'click button.accept': 'acceptAnswer',
+    'click .question-info span.edit': 'editQuestion'
   },
 
   sortAnswerSubviews: function () {
@@ -129,6 +130,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         this.model.author &&
         StackOverflowClone.currentUser.id === this.model.author.id) {
       this.$('a.new-answer-link').addClass('hidden');
+      this.$('.question-info span.edit').removeClass('hidden');
 
       if (!this.model.get('answered')) {
         this.$('button.accept').removeClass('hidden');
@@ -153,6 +155,10 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         alert(resp.responseJSON)
       }
     })
+  },
+
+  editQuestion: function (event) {
+    alert("stuff")
   }
 
 })

@@ -7,7 +7,8 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click button.accept': 'acceptAnswer'
+    'click button.accept': 'acceptAnswer',
+    'click span.edit': 'editAnswer'
   },
 
   render: function () {
@@ -17,7 +18,14 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     if (this.model.get("accepted")) {
       this.$('span.accept').removeClass("hidden")
     }
+    if (this.model.author.id === StackOverflowClone.currentUser.id) {
+      this.$('span.edit').removeClass("hidden");
+    }
     return this;
+  },
+
+  editAnswer: function (event) {
+    alert("stuff")
   }
 
 });

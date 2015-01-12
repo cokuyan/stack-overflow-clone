@@ -93,6 +93,11 @@ ul.question-tags > li {
   margin-right: 5px;
 }
 
+span.edit {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* header */
 
 header {
