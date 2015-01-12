@@ -1,7 +1,6 @@
 things to do
 ----
-- allow users to update stuff
-- add tags in question form page
+- disable button after submit to prevent double requests
 - create subviews for
   - tags in other show views
 - look at: api/votes_controller

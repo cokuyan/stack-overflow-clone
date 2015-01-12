@@ -18,7 +18,6 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   root: function () {
-    // StackOverflowClone.comparator = 'created_at';
     StackOverflowClone.questions.fetch();
     var view = new StackOverflowClone.Views.QuestionsIndex({
       collection: StackOverflowClone.questions
@@ -40,9 +39,12 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   questionNew: function () {
+    StackOverflowClone.tags.fetch();
+
     var question = new StackOverflowClone.Models.Question();
     var view = new StackOverflowClone.Views.QuestionForm({
-      model: question
+      model: question,
+      collection: StackOverflowClone.tags
     });
     this._swapView(view);
   },

@@ -3,5 +3,5 @@ class Tagging < ActiveRecord::Base
   validates :tag_id, uniqueness: { scope: :question_id }
 
   belongs_to :tag
-  belongs_to :question
+  belongs_to :question, inverse_of: :taggings
 end

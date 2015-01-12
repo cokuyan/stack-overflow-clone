@@ -358,3 +358,34 @@ form.new-answer-form {
   padding: 10px;
   font-size: inherit;
 }
+
+/* search widget */
+
+input.search {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input.search:active, input.search:focus {
+  border: 1px solid #999;
+}
+
+.tag-widget .question-tags li.tag {
+  cursor: pointer;
+}
+
+.selected-tags {
+  margin-bottom: 5px;
+}
+
+.selected-tags span {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #00f;
+}
+
+.selected-tags span:hover {
+  color: red;
+}
