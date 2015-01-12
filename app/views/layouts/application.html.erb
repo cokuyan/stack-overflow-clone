@@ -31,16 +31,5 @@
 
 </main>
 
-<script type='text/javascript'>
-  if (<%= current_user.try(:id).nil? %>) {
-    StackOverflowClone.currentUser = null;
-  } else {
-    StackOverflowClone.currentUser = new StackOverflowClone.Models.User({
-      id: <%= current_user.try(:id) || "null" %>
-    });
-    StackOverflowClone.currentUser.fetch();
-  }
-</script>
-
 </body>
 </html>
