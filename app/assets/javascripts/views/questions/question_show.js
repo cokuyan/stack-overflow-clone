@@ -61,12 +61,12 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     event.preventDefault();
     $(event.currentTarget).addClass('hidden');
 
-    this.$('form.new-answer-form').removeClass('hidden');
+    this.$('form.new-answer').removeClass('hidden');
   },
 
   removeAnswerForm: function (event) {
     event.preventDefault();
-    this.$('form.new-answer-form').addClass('hidden');
+    this.$('form.new-answer').addClass('hidden');
 
     this.$('a.new-answer-link').removeClass('hidden');
   },
@@ -84,7 +84,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       success: function () {
         view.model.answers().add(answer);
         view.$('textarea').val('');
-        view.removeAnswerForm();
+        view.removeAnswerForm(event);
       },
       error: function () {
         alert("Something went wrong")
