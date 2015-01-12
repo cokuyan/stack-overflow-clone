@@ -73,9 +73,9 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   createAnswer: function (event) {
     event.preventDefault();
-    var content = this.$('textarea').val();
+    var content = this.$('.new-answer textarea').val();
     var view = this;
-
+    debugger;
     var answer = new StackOverflowClone.Models.Answer({
       content: content,
       question_id: this.model.id
