@@ -4,11 +4,7 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
   className: 'question-form form',
 
   initialize: function () {
-    var view = this;
     this.setupTagSearch();
-    // this.listenTo(this.tagSearch.tags, 'add', function () {
-    //   // view.tagSearch.render();
-    // })
   },
 
   events: {

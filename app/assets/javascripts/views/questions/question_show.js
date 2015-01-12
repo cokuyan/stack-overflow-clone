@@ -165,6 +165,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   },
 
   hideQuestionEdit: function (event) {
+    event.preventDefault();
     this.$('form.edit-question').addClass('hidden');
     this.$('p.question-content').removeClass('hidden');
   },

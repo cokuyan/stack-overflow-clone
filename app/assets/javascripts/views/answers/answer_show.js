@@ -33,6 +33,7 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
   },
 
   hideEditForm: function (event) {
+    event.preventDefault();
     this.$('form.edit-answer').addClass("hidden");
     this.$('p.answer-content').removeClass("hidden");
   },

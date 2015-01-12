@@ -1,6 +1,6 @@
 things to do
 ----
-- disable button after submit to prevent double requests
+- move user stuff to backbone
 - create subviews for
   - tags in other show views
 - look at: api/votes_controller

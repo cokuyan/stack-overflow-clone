@@ -13,7 +13,6 @@ class Api::QuestionsController < ApplicationController
   end
 
   def create
-    # add in an option if a list of tags are given
     question = current_user.questions.new(question_params)
     if question.save
       question.tag_ids = params[:tag_ids]
@@ -24,7 +23,6 @@ class Api::QuestionsController < ApplicationController
   end
 
   def update
-    # use setter question.tag_ids to reset tags/taggings
     question = current_user.questions.find(params[:id])
     if question.update(question_params)
       render json: question
