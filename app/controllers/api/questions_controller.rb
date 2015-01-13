@@ -1,7 +1,7 @@
 class Api::QuestionsController < ApplicationController
   def index
-    questions = Question.includes(:author).all
-    render json: questions
+    @questions = Question.includes(:author).all
+    render :index
   end
 
   def show

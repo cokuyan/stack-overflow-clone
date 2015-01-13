@@ -5,15 +5,15 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
 
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
-    $('.modal').on('click', '.close-modal', this.closeImageModal);
-    $('.modal').on('change', '#input-user-image', this.fileInputChange.bind(this));
-    $('.modal').on('submit', this.submitImage.bind(this));
   },
 
   events: {
     'click span.user-attr': 'showEditInput',
     'blur .user-edit-input': 'editAttribute',
-    'click .new-image-link': 'renderImageModal'
+    'click .new-image-link': 'renderImageModal',
+    'click .close-modal': 'closeImageModal',
+    'change #input-user-image': 'fileInputChange',
+    'submit .modal-form': 'submitImage'
   },
 
   showEditInput: function (event) {
@@ -35,13 +35,13 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
   },
 
   renderImageModal: function (event) {
-    $(".modal").removeClass("hidden");
-    $(".modal-form").append(this.imageTemplate());
+    this.$(".modal").removeClass("hidden");
+    this.$(".modal-form").append(this.imageTemplate());
   },
 
   closeImageModal: function (event) {
-    $(".modal").addClass("hidden");
-    $(".modal-form").empty();
+    this.$(".modal").addClass("hidden");
+    this.$(".modal-form").empty();
   },
 
   fileInputChange: function (event) {
@@ -50,33 +50,28 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
     var reader = new FileReader();
 
     reader.onloadend = function () {
-      $("#preview-user-image").attr("src", reader.result);
+      view.$("#preview-user-image").attr("src", reader.result);
       view.model._image = reader.result;
-
-      console.log(view.model);
     }
 
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      $("#preview-user-image").attr("src", "");
+      view.$("#preview-user-image").attr("src", "");
       delete this.model._image;
-
-      console.log(this.model);
     }
   },
 
   submitImage: function (event) {
     event.preventDefault();
     var view = this;
-    var formData = $(event.currentTarget).find("form").serializeJSON();
+    var formData = $(event.currentTarget).serializeJSON();
 
     this.model.save(formData.user, {
       success: function () {
         delete view.model._image;
         view.closeImageModal();
         view.render();
-        console.log(view.model)
       }
     })
 
