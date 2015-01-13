@@ -1,14 +1,7 @@
 json.extract! @user, :id, :username, :email
 
 json.questions @user.questions do |question|
-  json.extract! question,
-    :id,
-    :title,
-    :content,
-    :view_count,
-    :answered,
-    :answers_count,
-    :vote_count
+  json.partial! "api/questions/question", question: question
 
   json.author do
     json.id @user.id
@@ -21,14 +14,9 @@ json.questions @user.questions do |question|
 end
 
 json.answered_questions @user.answered_questions do |answered_question|
-  json.extract! answered_question,
-    :id,
-    :title,
-    :content,
-    :view_count,
-    :answered,
-    :answers_count,
-    :vote_count
+  json.partial! "api/questions/question",
+    question: answered_question,
+    as: :answered_question
 
   json.author do
     json.id answered_question.author.id

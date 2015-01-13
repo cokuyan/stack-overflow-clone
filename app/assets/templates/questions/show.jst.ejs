@@ -1,50 +1,64 @@
-<h1><%= question.escape('title') %></h1>
+<section class="question-info">
+  <h1><%= question.escape('title') %></h1>
 
-<aside>
-  Views: <%= question.get('view_count') %>
-</aside>
+  <span class="view-count">
+    Views: <%= question.get('view_count') %>
+  </span>
 
-<section class="vote-section">
-  <span>Votes: <%= question.get('vote_count') %></span>
-  <button class="up vote"
-          data-votable-type="Question"
-          data-votable-id="<%= question.id %>">up</button>
-  <button class="down vote"
-          data-votable-type="Question"
-          data-votable-id="<%= question.id %>">down</button>
+
+  <p class="question-content">
+    <%= question.escape('content') %>
+  </p>
+
+  <form class="form edit-question answer-form hidden">
+    <textarea><%= question.escape('content') %></textarea>
+    <button class="submit">Edit</button>
+    <button class="cancel">Cancel</button>
+  </form>
+
+  <small class="question-author">asked by
+    <a href="#/users/<%= question.author.id %>">
+      <%= question.author.escape('username') %>
+    </a>
+  </small>
+
+  <ul class="question-tags group">
+    <% question.tags().each(function(tag) { %>
+      <li>
+        <a href="#/tags/<%= tag.id %>">
+          <%= tag.escape("tag_name") %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+
+  <section class="voting">
+    <span>Votes: <%= question.get('vote_count') %></span>
+    <button class="up vote"
+            data-votable-type="Question"
+            data-votable-id="<%= question.id %>">up</button>
+    <button class="down vote"
+            data-votable-type="Question"
+            data-votable-id="<%= question.id %>">down</button>
+  </section>
+
+  <span class="edit hidden">edit</span>
 </section>
 
-<p>
-  <%= question.escape('content') %>
-</p>
+<h2>Answers</h2>
+<section class="question-answers">
+  <ul class="answers"></ul>
 
-<small>asked by
-  <a href="#/users/<%= question.author.id %>">
-    <%= question.author.escape('username') %>
-  </a>
-</small>
+  <a class="new-answer-link" href="javascript:void(0)">Got an Answer?</a>
 
-<h5>tags</h5>
-<ul class="question-tags">
-  <% question.tags().each(function(tag) { %>
-    <li>
-      <a href="#/tags<%= tag.id %>">
-        <%= tag.escape("tag_name") %>
-      </a>
-    </li>
-  <% }) %>
-</ul>
+  <form class="hidden new-answer answer-form group">
+    <h3>Answer Away!</h3>
 
-<h3>Answers</h3>
-<ul class="answers"></ul>
+    <textarea id="content"
+              name="answer[content]"
+              placeholder="write here..."></textarea>
 
-<a class="new-answer-link" href="javascript:void(0)">Got an Answer?</a>
-
-<form class="hidden new-answer-form">
-  <h3>Answer Away!</h3>
-  <label for="content"></label>
-  <textarea id="content" name="answer[content]"></textarea>
-
-  <button class="submit">submit</button>
-  <button class="cancel">cancel</button>
-</form>
+    <button class="submit">submit</button>
+    <button class="cancel">cancel</button>
+  </form>
+</section>

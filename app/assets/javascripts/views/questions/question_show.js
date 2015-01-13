@@ -10,17 +10,31 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.answers(), 'sync', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
+      view.model.answers().sort();
     });
+    this.listenTo(this.model.answers(), 'sort', function () {
+      view.sortAnswerSubviews();
+    })
 
     this.addAnswerSubviews();
   },
 
   events: {
     'click a.new-answer-link': 'displayAnswerForm',
-    'click button.submit': 'createAnswer',
-    'click button.cancel': 'removeAnswerForm',
+    'click .new-answer button.submit': 'createAnswer',
+    'click .new-answer button.cancel': 'removeAnswerForm',
     'click button.vote': 'processVote',
-    'click button.accept': 'acceptAnswer'
+    'click button.accept': 'acceptAnswer',
+    'click .question-info span.edit': 'displayQuestionEdit',
+    'click .edit-question .submit': 'editQuestion',
+    'click .edit-question .cancel': 'hideQuestionEdit'
+  },
+
+  sortAnswerSubviews: function () {
+    var view = this;
+    this.subviews('ul.answers').sort(function (subview1, subview2) {
+      return view.model.answers().comparator(subview1.model, subview2.model);
+    })
   },
 
   addAnswerSubviews: function () {
@@ -47,21 +61,21 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     event.preventDefault();
     $(event.currentTarget).addClass('hidden');
 
-    this.$('form.new-answer-form').removeClass('hidden');
+    this.$('form.new-answer').removeClass('hidden');
   },
 
   removeAnswerForm: function (event) {
     event.preventDefault();
-    this.$('form.new-answer-form').addClass('hidden');
+    this.$('form.new-answer').addClass('hidden');
 
     this.$('a.new-answer-link').removeClass('hidden');
   },
 
   createAnswer: function (event) {
     event.preventDefault();
-    var content = this.$('textarea').val();
-    var view = this;
 
+    var content = this.$('.new-answer textarea').val();
+    var view = this;
     var answer = new StackOverflowClone.Models.Answer({
       content: content,
       question_id: this.model.id
@@ -70,7 +84,6 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       success: function () {
         view.model.answers().add(answer);
         view.$('textarea').val('');
-        // might need to change this later
         view.removeAnswerForm(event);
       },
       error: function () {
@@ -117,9 +130,13 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   checkIfAsker: function () {
     if (StackOverflowClone.currentUser &&
         this.model.author &&
-        StackOverflowClone.currentUser.id === this.model.author.id &&
-        !this.model.get('answered')) {
-      this.$('button.accept').removeClass('hidden');
+        StackOverflowClone.currentUser.id === this.model.author.id) {
+      this.$('a.new-answer-link').addClass('hidden');
+      this.$('.question-info span.edit').removeClass('hidden');
+
+      if (!this.model.get('answered')) {
+        this.$('button.accept').removeClass('hidden');
+      }
     }
   },
 
@@ -127,17 +144,43 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     event.preventDefault();
 
     var answer = this.model.answers().get($(event.currentTarget).data("id"))
+    var view = this;
 
-    answer.save({ answered: true });
+    answer.save({ accepted: true });
     this.model.save({ answered: true }, {
       success: function () {
         alert("Answer accepted successfully");
-        this.$('button.accept').addClass('hidden')
+        view.$('button.accept').addClass('hidden');
+        view.model.answers().sort();
       },
       error: function (resp) {
         alert(resp.responseJSON)
       }
     })
+  },
+
+  displayQuestionEdit: function (event) {
+    this.$('p.question-content').addClass('hidden');
+    this.$('form.edit-question').removeClass('hidden');
+  },
+
+  hideQuestionEdit: function (event) {
+    event.preventDefault();
+    this.$('form.edit-question').addClass('hidden');
+    this.$('p.question-content').removeClass('hidden');
+  },
+
+  editQuestion: function (event) {
+    event.preventDefault();
+    var content = this.$('.edit-question textarea').val();
+    this.model.save({ content: content }, {
+      success: function () {
+        alert("Edited successfully");
+      },
+      error: function () {
+        alert("Something went wrong")
+      }
+    });
   }
 
 })

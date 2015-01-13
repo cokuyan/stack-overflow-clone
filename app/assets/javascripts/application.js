@@ -15,8 +15,8 @@
 //= require jquery.serializejson
 //= require underscore
 //= require backbone
-//= require_tree ./utils
 //= require stack_overflow_clone
+//= require_tree ./utils
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

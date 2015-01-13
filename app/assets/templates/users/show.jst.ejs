@@ -2,12 +2,23 @@
 
 <table class="attributes">
   <tr>
-    Email: <%= user.escape('email') %>
+    <td class="attribute">
+      Email
+    </td>
+    <td class="value">
+      <%= user.escape('email') %>
+    </td>
   </tr>
 </table>
 
-<h3>Questions asked by <%= user.escape('username') %></h3>
-<ul class="user-questions"></ul>
+<section class="questions group">
+  <section class="user-asked">
+    <h3>Questions asked by <%= user.escape('username') %></h3>
+    <ul class="user-questions"></ul>
+  </section>
 
-<h3>Questions answered by <%= user.escape('username') %></h3>
-<ul class="user-answered-questions"></ul>
+  <section class="user-answered">
+    <h3>Questions answered by <%= user.escape('username') %></h3>
+    <ul class="user-questions"></ul>
+  </section>
+</section>

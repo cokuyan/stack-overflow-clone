@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    flash.now[:notice] = "Please use a real email account"
     @user = User.new
   end
 
@@ -55,7 +54,7 @@ class UsersController < ApplicationController
 
   def activate
     @user = User.find_by_activation_token(params[:activation_token])
-    if @user.try(:toggle, :activated).try(:save)
+    if !@user.try(:activated?) && @user.try(:toggle, :activated).try(:save)
       flash[:notice] = "Your account has been activated successfully. You may now log in."
     else
       flash[:notice] = "Something went wrong"

@@ -8,25 +8,11 @@
 </head>
 <body>
 
-<header>
-  <ul class="user-nav">
-    <% if logged_in? %>
-      <li>
-        <a href="#/users/<%= current_user.id %>">
-          <%= current_user.username %>
-        </a>
-      </li>
-      <li><%= link_to "Log Out", session_url, method: :delete %></li>
-    <% else %>
-      <li><%= link_to "Sign Up", new_user_url %></li>
-      <li><%= link_to "Log In", login_url %></li>
-    <% end %>
-  </ul>
-</header>
+<header class="group"></header>
 
 <main>
-  <nav class="main-nav">
-    <ul class="main-nav-links">
+  <nav class="main-nav group">
+    <ul class="main-nav-links group">
       <li><a href="#">Home</a></li>
       <li><a href="#/users">Users</a></li>
       <li><a href="#/tags">Tags</a></li>
@@ -44,6 +30,7 @@
   <%= yield %>
 
 </main>
+<<<<<<< HEAD
 
 <script type='text/javascript'>
   if (<%= current_user.try(:id).nil? %>) {
@@ -55,6 +42,8 @@
     StackOverflowClone.currentUser.fetch();
   }
 </script>
+=======
+>>>>>>> 4206c195bb21278dc7bf1f41a0b54c79a739ab0f
 
 </body>
 </html>

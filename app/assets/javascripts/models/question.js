@@ -6,6 +6,15 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
       this._answers = new StackOverflowClone.Collections.Answers([], {
         question: this
       });
+      this._answers.comparator = function (answer1, answer2) {
+        if (answer1.get("accepted")) {
+          return -1;
+        } else if (answer2.get("accepted")) {
+          return 1;
+        } else {
+          return 0;
+        }
+      };
     }
     return this._answers;
   },

@@ -11,9 +11,9 @@ class Question < ActiveRecord::Base
     inverse_of: :questions,
     counter_cache: true
 
-  has_many :answers, inverse_of: :question
+  has_many :answers, inverse_of: :question, dependent: :destroy
 
-  has_many :taggings, dependent: :destroy
+  has_many :taggings, dependent: :destroy, inverse_of: :question
   has_many :tags, through: :taggings
 
   private

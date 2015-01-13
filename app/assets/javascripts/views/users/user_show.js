@@ -17,11 +17,11 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
   attachQuestions: function () {
     this.attachQuestion(
       this.model.questions(),
-      'ul.user-questions'
+      '.user-asked ul.user-questions'
     );
     this.attachQuestion(
       this.model.answeredQuestions(),
-      'ul.user-answered-questions'
+      '.user-answered ul.user-questions'
     );
   },
 

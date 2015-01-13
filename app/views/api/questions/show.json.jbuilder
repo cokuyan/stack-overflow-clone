@@ -1,11 +1,4 @@
-json.extract! @question,
-  :id,
-  :title,
-  :content,
-  :view_count,
-  :answered,
-  :answers_count,
-  :vote_count
+json.partial! "api/questions/question", question: @question
 
 json.author do
   json.id @question.author.id
@@ -13,11 +6,7 @@ json.author do
 end
 
 json.answers @question.answers do |answer|
-  json.extract! answer,
-    :id,
-    :content,
-    :accepted,
-    :vote_count
+  json.partial! "api/answers/answer", answer: answer
 
   json.author do
     json.id answer.author.id

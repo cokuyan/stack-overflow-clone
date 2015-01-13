@@ -14,11 +14,12 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     'users/:id': 'userShow',
 
     'tags': 'tagsIndex',
-    'tags/:id': 'tagShow'
+    'tags/:id': 'tagShow',
+
+    'login': 'logIn'
   },
 
   root: function () {
-    // StackOverflowClone.comparator = 'created_at';
     StackOverflowClone.questions.fetch();
     var view = new StackOverflowClone.Views.QuestionsIndex({
       collection: StackOverflowClone.questions
@@ -40,9 +41,12 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   questionNew: function () {
+    StackOverflowClone.tags.fetch();
+
     var question = new StackOverflowClone.Models.Question();
     var view = new StackOverflowClone.Views.QuestionForm({
-      model: question
+      model: question,
+      collection: StackOverflowClone.tags
     });
     this._swapView(view);
   },
@@ -75,11 +79,11 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   userNew: function () {
-    // var user = new StackOverflowClone.Models.User()
-    // var view = new StackOverFlowClone.Views.UserForm({
-    //   model: user
-    // });
-    // this._swapView(view);
+    var user = new StackOverflowClone.Models.User()
+    var view = new StackOverflowClone.Views.UserForm({
+      model: user
+    });
+    this._swapView(view);
   },
 
   // Tag routes
@@ -96,6 +100,15 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     var tag = StackOverflowClone.tags.getOrFetch(id);
     var view = new StackOverflowClone.Views.TagShow({
       model: tag
+    });
+    this._swapView(view);
+  },
+
+  // Session routes
+
+  logIn: function (callback) {
+    var view = new StackOverflowClone.Views.LogIn({
+      callback: callback
     });
     this._swapView(view);
   },

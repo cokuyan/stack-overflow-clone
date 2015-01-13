@@ -15,6 +15,7 @@ class Api::QuestionsController < ApplicationController
   def create
     question = current_user.questions.new(question_params)
     if question.save
+      question.tag_ids = params[:tag_ids]
       render json: question
     else
       render json: question.errors.full_messages, status: :unprocessable_entity

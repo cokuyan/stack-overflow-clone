@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :answers
     resources :votes, only: :create
     resources :tags, only: [:index, :show]
+    resource :session
   end
 
 end

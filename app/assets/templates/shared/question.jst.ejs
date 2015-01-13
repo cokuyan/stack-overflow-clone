@@ -2,8 +2,8 @@
   <a href="#/questions/<%= question.id %>">
     <%= question.escape('title') %>
   </a>
-  <h5>tags</h5>
-  <ul class="tags">
+
+  <ul class="question-tags group">
     <% question.tags().each(function(tag) { %>
       <li>
         <a href="#/tags/<%= tag.id %>">

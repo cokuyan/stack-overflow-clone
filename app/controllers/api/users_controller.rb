@@ -10,22 +10,21 @@ class Api::UsersController < ApplicationController
     render :show
   end
 
-  # def create
-  #   @user = User.new(user_params)
-  #   unless params[:user][:password] == params[:user][:password_confirmation]
-  #     render json: "Password and confirmation do not match",
-  #            status: :unprocessable_entity
-  #     return
-  #   end
-  #   if @user.save
-  #     msg = UserMailer.welcome_email(@user)
-  #     msg.deliver
-  #     flash.now[:notice] = activation_message
-  #     render json: @user
-  #   else
-  #     render json: @user.errors.full_messages, status: :unprocessable_entity
-  #   end
-  # end
+  def create
+    @user = User.new(user_params)
+    unless params[:user][:password] == params[:user][:password_confirmation]
+      render json: "Password and confirmation do not match",
+             status: :unprocessable_entity
+      return
+    end
+    if @user.save
+      msg = UserMailer.welcome_email(@user)
+      msg.deliver
+      render json: @user
+    else
+      render json: @user.errors.full_messages, status: :unprocessable_entity
+    end
+  end
 
   def update
     user = User.find(params[:id])
@@ -42,6 +41,7 @@ class Api::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
+<<<<<<< HEAD
 
   def activation_message
     <<-HEREDOC
@@ -52,4 +52,6 @@ class Api::UsersController < ApplicationController
     #{activate_users_url(activation_token: @user.activation_token)}
     HEREDOC
   end
+=======
+>>>>>>> 4206c195bb21278dc7bf1f41a0b54c79a739ab0f
 end

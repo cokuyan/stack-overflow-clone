@@ -16,6 +16,18 @@ StackOverflowClone.Collections.Tags = Backbone.Collection.extend({
       tag.fetch();
     }
     return tag;
+  },
+
+  search: function (query) {
+    query = query.toLowerCase();
+
+    var searchTags = new StackOverflowClone.Collections.Tags();
+    this.each(function (tag) {
+      if (tag.get('tag_name').match(query)) {
+        searchTags.add(tag);
+      }
+    })
+    return searchTags;
   }
 
 });
