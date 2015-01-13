@@ -41,6 +41,10 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   questionNew: function () {
+    if (!StackOverflowClone.currentUser.isLoggedIn()) {
+      Backbone.history.navigate("#/login", { trigger: true });
+      return;
+    }
     StackOverflowClone.tags.fetch();
 
     var question = new StackOverflowClone.Models.Question();
@@ -79,6 +83,10 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   userNew: function () {
+    if (StackOverflowClone.currentUser.isLoggedIn()) {
+      Backbone.history.navigate("", { trigger: true });
+      return;
+    }
     var user = new StackOverflowClone.Models.User()
     var view = new StackOverflowClone.Views.UserForm({
       model: user
@@ -107,6 +115,10 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   // Session routes
 
   logIn: function (callback) {
+    if (StackOverflowClone.currentUser.isLoggedIn()) {
+      Backbone.history.navigate("", { trigger: true });
+      return;
+    }
     var view = new StackOverflowClone.Views.LogIn({
       callback: callback
     });
