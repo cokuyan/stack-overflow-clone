@@ -1,4 +1,5 @@
 json.extract! @user, :id, :username, :email
+json.image_url asset_path(post.image.url)
 
 json.questions @user.questions do |question|
   json.partial! "api/questions/question", question: question

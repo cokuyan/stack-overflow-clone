@@ -18,7 +18,7 @@ gem 'backbone-on-rails'
 
 gem 'figaro'
 
-gem 'faker'
+gem 'paperclip'
 
 group :development do
   gem 'spring'
@@ -30,6 +30,7 @@ group :development do
   gem "letter_opener"
 end
 
+gem 'faker'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'

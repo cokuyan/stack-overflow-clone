@@ -2,6 +2,7 @@ things to do
 ----
 - add messaging in backbone
 - add error messaging in backbone
+- add redirects
 - create subviews for
   - tags in other show views
 - look at: api/votes_controller
