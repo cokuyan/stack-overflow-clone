@@ -41,17 +41,4 @@ class Api::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
-<<<<<<< HEAD
-
-  def activation_message
-    <<-HEREDOC
-    Welcome, #{@user.username}!
-    In order to start using the site, please activate your account by following the link sent to your email.
-
-    Or just click the following link for now:
-    #{activate_users_url(activation_token: @user.activation_token)}
-    HEREDOC
-  end
-=======
->>>>>>> 4206c195bb21278dc7bf1f41a0b54c79a739ab0f
 end
