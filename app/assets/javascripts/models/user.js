@@ -69,8 +69,8 @@ StackOverflowClone.Models.CurrentUser = StackOverflowClone.Models.User.extend({
         user.set(data);
         options.success && options.success();
       },
-      error: function () {
-        options.error && options.error();
+      error: function (resp) {
+        options.error && options.error(resp);
       }
     })
   },

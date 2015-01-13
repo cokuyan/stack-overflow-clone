@@ -120,7 +120,11 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         votable.set("vote_count", votableResp.vote_count);
       },
       error: function (a, b, c) {
-        alert(a.responseJSON);
+        if (a.responseText) {
+          alert(a.responseText);
+        } else {
+          alert(a.responseJSON[0]);
+        }
       }
     })
   },

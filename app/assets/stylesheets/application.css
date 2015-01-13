@@ -93,6 +93,10 @@ button {
   display: none;
 }
 
+.error {
+  border: 1px solid #f00 !important;
+}
+
 ul.question-tags > li {
   float: left;
   font-size: 12px;

@@ -21,11 +21,12 @@ StackOverflowClone.Views.LogIn = Backbone.View.extend({
     StackOverflowClone.currentUser.logIn({
       nameOrEmail: formData.name_or_email,
       password: formData.password,
-      error: function (model, resp) {
+      error: function (resp) {
         if (resp.responseText == "Not activated") {
-          alert("Please check your email to activate your account.")
+          alert("Please check your email to activate your account.");
+          Backbone.history.navigate("", { trigger: true });
         } else {
-          alert("Invalid username/email/password combination")
+          alert("Invalid username/email/password combination");
         }
       }
     });

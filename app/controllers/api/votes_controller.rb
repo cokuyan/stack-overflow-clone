@@ -1,5 +1,9 @@
 class Api::VotesController < ApplicationController
   def create
+    unless logged_in?
+      render json: "must be logged in to vote", status: :unprocessable_entity
+      return
+    end
     vote = current_user.votes.new(vote_params)
     # TODO: allow checking for undoing or resetting votes until a certain time
     if vote.save
