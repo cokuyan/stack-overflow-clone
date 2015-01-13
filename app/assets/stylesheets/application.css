@@ -179,12 +179,54 @@ ul.main-nav-links > li a {
 
 /* questions index */
 
+section.sort {
+  border-bottom: 2px solid #ccc;
+  margin: 10px 0 40px 0;
+}
+
+h1.header {
+  float: left;
+  margin: 0;
+}
+
+ul.sort-options {
+  float: right;
+  margin-top: 10px;
+}
+
+ul.sort-options > li {
+  float: left;
+  margin-left: 10px;
+  color: #00f;
+}
+
+ul.sort-options > li:hover {
+  color: #f00;
+  cursor: pointer;
+}
+
 ul.questions {
 
 }
 
 ul.questions > li {
   margin-bottom: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+li.question .question-data {
+  float: left;
+  margin-right: 20px;
+  padding: 3px 0;
+}
+
+li.question .question-info {
+  float: left;
+}
+
+.question-info > a {
+  display: block;
+  font-size: 20px;
 }
 
 /* question show */

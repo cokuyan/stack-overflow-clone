@@ -73,8 +73,7 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
         view.closeImageModal();
         view.render();
       }
-    })
-
+    });
   },
 
   render: function () {

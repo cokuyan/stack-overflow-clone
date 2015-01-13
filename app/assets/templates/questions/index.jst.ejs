@@ -1,7 +1,12 @@
-<h1>Questions</h1>
+<section class="sort group">
+  <h1 class="header"></h1>
 
-<ul class="questions">
-  <% questions.each(function(question) { %>
-    <li><a href="#/questions/<%= question.id %>"><%= question.escape("title") %></a></li>
-  <% }) %>
-</ul>
+  <ul class="sort-options group">
+    <li class="option">Newest</li>
+    <li class="option">Votes</li>
+    <li class="option">Views</li>
+    <li class="option">Answers</li>
+  </ul>
+</section>
+
+<ul class="questions"></ul>

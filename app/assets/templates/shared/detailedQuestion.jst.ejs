@@ -1,0 +1,29 @@
+<li class="question group">
+  <ul class="question-data">
+    <li><%= question.get("vote_count") %> votes</li>
+    <li><%= question.get("answers_count") %> answers</li>
+    <li><%= question.get("view_count") %> views</li>
+  </ul>
+
+  <section class="question-info">
+    <a href="#/questions/<%= question.id %>">
+      <%= question.escape('title') %>
+    </a>
+
+    <ul class="question-tags group">
+      <% question.tags().each(function(tag) { %>
+        <li>
+          <a href="#/tags/<%= tag.id %>">
+            <%= tag.escape("tag_name") %>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+    <span>asked <%= question.get("created_at") %></span>
+    <small class="question-author">by
+      <a href="#/users/<%= question.author.id %>">
+        <%= question.author.escape("username") %>
+      </a>
+    </small>
+  </section>
+</li>
