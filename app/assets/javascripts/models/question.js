@@ -1,6 +1,10 @@
 StackOverflowClone.Models.Question = Backbone.Model.extend({
   urlRoot: 'api/questions',
 
+  toJSON: function () {
+    return { question: _.clone(this.attributes) };
+  },
+
   answers: function () {
     if (!this._answers) {
       this._answers = new StackOverflowClone.Collections.Answers([], {

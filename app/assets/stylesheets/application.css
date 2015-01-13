@@ -34,6 +34,12 @@ ul {
  list-style: none;
 }
 
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 table {
   border-spacing: 0;
 }
@@ -96,6 +102,35 @@ ul.question-tags > li {
 span.edit {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.modal-screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-form {
+  position: absolute;
+  z-index: 3;
+  top: 200px;
+  right: 500px;
+}
+
+.modal-form span.close-modal {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #00f;
+}
+
+.modal-form span.close-modal:hover {
+  cursor: pointer;
+  color: #f00;
 }
 
 /* header */
@@ -219,8 +254,30 @@ ul.users > li {
 
 /* users show */
 
-table {
+h1.username {
+  border-bottom: 1px solid #ccc;
+}
+
+.profile-info {
   margin: 20px 0;
+}
+
+.profile-pic {
+  float: left;
+  width: 150px;
+  margin-right: 20px;
+  border: 3px solid #ccc;
+  position: relative;
+}
+
+.new-image-link {
+  position: absolute;
+  font-size: 14px;
+  left: 6px;
+}
+
+table {
+  float: left;
   border: 1px solid #000;
 }
 
@@ -237,6 +294,15 @@ td.attribute {
 
 td.value {
   background: #BBB;
+}
+
+span.user-attr {
+  margin-left: 10px;
+}
+
+.user-edit-input {
+  width: 440px;
+  padding: 5px 10px;
 }
 
   /* questions in users show */
@@ -370,6 +436,10 @@ input.search {
 
 input.search:active, input.search:focus {
   border: 1px solid #999;
+}
+
+.tag-widget .question-tags {
+  margin-bottom: 20px;
 }
 
 .tag-widget .question-tags li.tag {

@@ -1,6 +1,10 @@
 StackOverflowClone.Models.Tag = Backbone.Model.extend({
   urlRoot: 'api/tags',
 
+  toJSON: function () {
+    return { tag: _.clone(this.attributes) };
+  },
+
   questions: function () {
     if (!this._questions) {
       this._questions = new StackOverflowClone.Collections.Questions();

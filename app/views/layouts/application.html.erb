@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StackOverflowClone</title>
+  <title>Stack Flood</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -30,6 +30,11 @@
   <%= yield %>
 
 </main>
+
+<div class="modal hidden">
+  <section class="modal-screen close-modal"></section>
+  <form class="modal-form form"></form>
+</div>
 
 </body>
 </html>

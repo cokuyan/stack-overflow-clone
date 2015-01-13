@@ -46,7 +46,7 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
     $li.remove();
     $("ul.selected-tags").append($li);
     $li.data("id", tag.id);
-    $li.append($("<span>x</span>"));
+    $li.append($("<span>&times;</span>"));
 
     this.tagSearch.tags.remove(tag);
   },

@@ -33,6 +33,11 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    aws-sdk (1.60.2)
+      aws-sdk-v1 (= 1.60.2)
+    aws-sdk-v1 (1.60.2)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     backbone-on-rails (1.1.2.0)
       actionmailer
       actionpack
@@ -254,6 +259,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk
   backbone-on-rails
   bcrypt
   better_errors

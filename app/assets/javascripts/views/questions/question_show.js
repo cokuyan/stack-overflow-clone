@@ -12,9 +12,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       view.addAnswerSubview(model);
       view.model.answers().sort();
     });
-    this.listenTo(this.model.answers(), 'sort', function () {
-      view.sortAnswerSubviews();
-    })
+    this.listenTo(this.model.answers(), 'sort', this.sortAnswerSubviews)
 
     this.addAnswerSubviews();
   },

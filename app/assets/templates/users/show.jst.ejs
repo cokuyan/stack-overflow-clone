@@ -1,15 +1,30 @@
-<h1><%= user.escape('username') %></h1>
+<h1 class="username"><%= user.escape('username') %></h1>
 
-<table class="attributes">
-  <tr>
-    <td class="attribute">
-      Email
-    </td>
-    <td class="value">
-      <%= user.escape('email') %>
-    </td>
-  </tr>
-</table>
+<section class="profile-info group">
+
+  <div class="profile-pic">
+    <img src="<%= user.get("image_url") %>" alt="" />
+    <span class="new-image-link edit hidden">change profile picture</span>
+  </div>
+
+  <table class="attributes">
+    <tr>
+      <td class="attribute">
+        Email
+      </td>
+      <td class="value">
+        <div class="value" data-attr="email">
+          <span class="value"><%= user.escape('email') %></span>
+          <span class="edit hidden user-attr">edit</span>
+        </div>
+        <input class="user-edit-input hidden"
+               value="<%= user.escape('email') %>"
+               data-attr="email">
+      </td>
+    </tr>
+  </table>
+
+</section>
 
 <section class="questions group">
   <section class="user-asked">

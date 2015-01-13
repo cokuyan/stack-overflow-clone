@@ -1,6 +1,15 @@
 StackOverflowClone.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users',
 
+  toJSON: function () {
+    var json = { user: _.clone(this.attributes) };
+
+    if (this._image) {
+      json.user.image = this._image;
+    }
+    return json;
+  },
+
   questions: function () {
     if (!this._questions) {
       this._questions = new StackOverflowClone.Collections.Questions([], {
