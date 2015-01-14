@@ -8,7 +8,6 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     });
     this.collection.comparator = this.collection.comparator ||
                                  options.comparator;
-    this.setupPagination();
   },
 
   template: JST['questions/index'],
@@ -63,6 +62,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
       data: { sort: this.sortBy },
       success: function () {
         view.collection.sort();
+        view.paginator = null;
         Backbone.history.navigate("questions");
       }
     });
@@ -70,6 +70,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
 
   setupPagination: function () {
     if (!this.collection.total_pages) return;
+
     this.paginator = new StackOverflowClone.Widgets.Pagination({
       selector: 'section.pagination',
       totalPages: this.collection.total_pages,
@@ -78,8 +79,10 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   },
 
   handlePagination: function (event) {
-    if ($(event.target).hasClass("pagination")) return;
     var $target = $(event.target);
+    var view = this;
+
+    if ($target.hasClass("pagination")) return;
     if ($target.data("page")) {
       this.paginator.goToPage($target.data("page"));
     } else if ($target.hasClass("first")) {
@@ -91,6 +94,13 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     } else if ($target.hasClass("last")) {
       this.paginator.goToLastPage();
     }
+    Backbone.history.navigate("questions/page/" + this.paginator.currentPage)
+    this.collection.page = this.paginator.currentPage
+    this.paginator = null;
+    this.collection.fetch({
+      data: { sort: this.sortBy }
+    });
+
   }
 
 });

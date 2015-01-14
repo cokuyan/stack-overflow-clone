@@ -1,4 +1,4 @@
-10.times do
+20.times do
   User.create({
     email: Faker::Internet.email,
     username: Faker::Internet.user_name,
@@ -7,7 +7,7 @@
   })
 end
 
-10.times do
+100.times do
   question = Question.create({
     title: Faker::Lorem.sentence,
     content: Faker::Lorem.paragraph,
@@ -21,16 +21,16 @@ end
   end
 end
 
-10.times do
+20.times do
   Tag.create({
     tag_name: Faker::Hacker.noun,
     description: Faker::Lorem.paragraph
   })
 end
 
-20.times do
+500.times do
   Tagging.create({
-    tag_id: rand(10) + 1,
-    question_id: rand(10) + 1
+    tag_id: rand(20) + 1,
+    question_id: rand(100) + 1
   })
 end

@@ -5,11 +5,11 @@
     this.$el = $(options.selector);
     this.totalPages = options.totalPages;
     this.currentPage = options.currentPage || 1;
-    this.setup();
     this.render();
   };
 
   Pagination.prototype.setup = function () {
+    debugger;
     this.$first = $("<span class='first'>").html("first").appendTo(this.$el);
     this.$prev = $("<span class='prev'>").html("prev").appendTo(this.$el);
     this.$ul = $("<ul class='pages'>").appendTo(this.$el);
@@ -18,15 +18,20 @@
   };
 
   Pagination.prototype.render = function () {
+    this.$el.empty();
+    this.setup();
     this.setupUl();
   };
 
   Pagination.prototype.setupUl = function () {
     this.$ul.empty();
-
+    var endPage;
     var startPage = (this.currentPage < 3) ? 1 : this.currentPage - 2;
-    var endPage = (this.currentPage > this.totalPages - 2) ?
-                    this.totalPages : this.currentPage + 2;
+    if (this.currentPage > (this.totalPages - 2)) {
+      endPage = this.totalPages;
+    } else {
+      endPage = this.currentPage + 2;
+    }
 
     for (var i = startPage; i <= endPage; i++) {
       var $li = $("<li class='page'>").data("page", i).html(i);
@@ -40,11 +45,13 @@
   };
 
   Pagination.prototype.goToNextPage = function () {
+    if (this.currentPage === this.totalPages) return;
     this.currentPage += 1;
     this.render();
   };
 
-  Pagination.prototype.gotoPrevPage = function () {
+  Pagination.prototype.goToPrevPage = function () {
+    if (this.currentPage === 1) return;
     this.currentPage -= 1;
     this.render();
   };

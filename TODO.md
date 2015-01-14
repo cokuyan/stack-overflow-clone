@@ -1,6 +1,5 @@
 things to do
 ----
-- add pagination to index views
 - commenting
 - change index views
 - create subviews for
@@ -12,3 +11,4 @@ things to do
 - markdown previews for questions
 - notifications via node
 - delayed job for sendgrid emails
+- question index pagination removes widget and rerenders it each time.... need to find a better way to do this

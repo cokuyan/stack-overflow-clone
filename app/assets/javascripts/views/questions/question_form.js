@@ -68,7 +68,7 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
 
   submitForm: function (event) {
     event.preventDefault();
-    var formData = this.$el.serializeJSON();
+    var formData = this.$el.serializeJSON().question;
     // add tag_ids to formData object
     formData.tag_ids = this.getTagIds();
     var view = this;

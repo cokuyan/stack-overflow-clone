@@ -77,11 +77,9 @@ StackOverflowClone.Views.UserShow = Backbone.View.extend({
   },
 
   render: function () {
-    if (this.model.questions) {
-      this.$el.html(this.template({ user: this.model }));
-      this.attachQuestions();
-      this.checkIfUser();
-    }
+    this.$el.html(this.template({ user: this.model }));
+    this.attachQuestions();
+    this.checkIfUser();
     return this;
   },
 
