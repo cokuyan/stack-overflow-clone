@@ -21,6 +21,9 @@ gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk'
 
+# pagination!
+gem 'kaminari'
+
 group :development do
   gem 'spring'
   gem 'pry-rails'

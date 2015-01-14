@@ -5,7 +5,7 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '': 'root',
-    'questions': 'questionsIndex',
+    'questions(/page/:page)': 'questionsIndex',
     'questions/new': 'questionNew',
     'questions/:id': 'questionShow',
 
@@ -29,7 +29,7 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
 
   // Question routes
-  questionsIndex: function () {
+  questionsIndex: function (page) {
     var collection = new StackOverflowClone.Collections.Questions();
     collection.comparator = function (model) {
       return -1 * model.get("view_count");

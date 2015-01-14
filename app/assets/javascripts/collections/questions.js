@@ -1,5 +1,7 @@
 StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
-  url: 'api/questions',
+  url: function () {
+    return 'api/questions/page/' + (this.page || 1);
+  },
   model: StackOverflowClone.Models.Question,
   comparator: function (model) {
     return -1 * model.get("vote_count");

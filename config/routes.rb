@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  concern :paginatable do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
+
   root to: 'static_pages#root'
   resources :users do
     get 'activate', on: :collection
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
 
   # backbone stuff
   namespace :api, defaults: { format: :json } do
-    resources :questions
+    resources :questions, concerns: :paginatable
     resources :users
     resources :answers
     resources :votes, only: :create
