@@ -23,11 +23,18 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
     return this._answers;
   },
 
+  comments: function () {
+    if (!this._comments) {
+      this._comments = new StackOverflowClone.Collections.Comments();
+    }
+    return this._comments;
+  },
+
   tags: function () {
     if (!this._tags) {
       this._tags = new StackOverflowClone.Collections.Tags();
     }
-    return this._tags
+    return this._tags;
   },
 
   parse: function (resp) {
@@ -42,6 +49,10 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
     if (resp.tags) {
       this.tags().set(resp.tags, { parse: true })
       delete resp.tags;
+    }
+    if (resp.comments) {
+      this.comments().set(resp.comments, { parse: true })
+      delete resp.comments;
     }
     return resp;
   }

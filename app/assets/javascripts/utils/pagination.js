@@ -9,7 +9,6 @@
   };
 
   Pagination.prototype.setup = function () {
-    debugger;
     this.$first = $("<span class='first'>").html("first").appendTo(this.$el);
     this.$prev = $("<span class='prev'>").html("prev").appendTo(this.$el);
     this.$ul = $("<ul class='pages'>").appendTo(this.$el);

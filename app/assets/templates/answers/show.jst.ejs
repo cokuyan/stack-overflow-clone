@@ -11,20 +11,40 @@
   <button class="cancel">Cancel</button>
 </form>
 
-<small class="answer-author">answered by
-  <a href="#/users/<%= answer.author.id %>">
-    <%= answer.author.escape('username') %>
-  </a>
-</small>
+<section class="answer-meta">
+  <small class="answer-author">answered by
+    <a href="#/users/<%= answer.author.id %>">
+      <%= answer.author.escape('username') %>
+    </a>
+  </small>
 
-<section class="voting">
-  <span>Votes: <%= answer.get('vote_count') %></span>
-  <button class="vote"
-          data-votable-type="Answer"
-          data-votable-id="<%= answer.id %>">up</button>
-  <button class="vote"
-          data-votable-type="Answer"
-          data-votable-id="<%= answer.id %>">down</button>
+  <section class="voting">
+    <span>Votes: <%= answer.get('vote_count') %></span>
+    <button class="vote"
+            data-votable-type="Answer"
+            data-votable-id="<%= answer.id %>">up</button>
+    <button class="vote"
+            data-votable-type="Answer"
+            data-votable-id="<%= answer.id %>">down</button>
+  </section>
+
+  <span class="edit hidden">edit</span>
 </section>
 
-<span class="edit hidden">edit</span>
+<section class="commenting">
+
+  <h4>Comments</h4>
+  <ul class="answer-comments"></ul>
+  <span class="new-answer-comment">add comment</span>
+  <form class="hidden answer-form new-answer-comment group">
+    <h5>Comment Away!</h5>
+
+    <textarea id="content"
+              name="comment[content]"
+              placeholder="write here..."></textarea>
+
+    <button class="submit">submit</button>
+    <button class="cancel">cancel</button>
+
+  </form>
+</section>

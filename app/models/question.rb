@@ -16,6 +16,8 @@ class Question < ActiveRecord::Base
   has_many :taggings, dependent: :destroy, inverse_of: :question
   has_many :tags, through: :taggings
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   private
 
   def ensure_view_count

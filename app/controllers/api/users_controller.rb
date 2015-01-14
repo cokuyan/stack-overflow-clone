@@ -28,7 +28,7 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.includes(questions: :tags, answered_questions: [:author, :tags])
-      .find(params[:id])
+      .find(current_user.id)
     if @user.update(user_params)
       render :show
     else

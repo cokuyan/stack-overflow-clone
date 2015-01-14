@@ -245,7 +245,11 @@ section.question-info p.question-content {
   margin: 10px 0;
 }
 
-section.question-info small.question-author {
+section.question-meta {
+  float: left;
+}
+
+section.question-meta small.question-author {
   display: block;
   margin-bottom: 5px;
 }
@@ -258,6 +262,25 @@ section.voting {
   margin-top: 10px;
 }
 
+section.commenting {
+  float: right;
+}
+
+.commenting h4 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.commenting span.new-question-comment, span.new-answer-comment {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.commenting span.new-question-comment:hover, span.new-answer-comment:hover {
+  color: #f00;
+}
+
+
   /* answers in question show */
 
   section.question-answers {
@@ -269,6 +292,10 @@ section.voting {
 
   ul.answers > li.answer {
     margin-bottom: 40px;
+  }
+
+  li.answer section.answer-meta {
+    float: left;
   }
 
   li.answer p.answer-content {
@@ -454,7 +481,7 @@ form.form .input {
 
 /* answer form */
 
-form.new-answer-form {
+form.answer-form {
 
 }
 

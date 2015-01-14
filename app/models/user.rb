@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
 
   has_many :votes
 
+  has_many :comments,
+    class_name: 'Comment',
+    foreign_key: :author_id,
+    inverse_of: :author
+
   def self.find_by_credentials(name_or_email, password)
     user = User.find_by_username(name_or_email) ||
            User.find_by_email(name_or_email)

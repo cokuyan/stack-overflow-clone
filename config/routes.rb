@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :questions, concerns: :paginatable
     resources :users
     resources :answers
+    resources :comments
     resources :votes, only: :create
     resources :tags, only: [:index, :show]
     resource :session

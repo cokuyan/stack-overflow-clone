@@ -3,10 +3,14 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     var view = this;
+
+    // model listener
     this.listenTo(this.model, 'sync change', function () {
       view.render();
       view.checkIfAsker();
     });
+
+    // answers collection listener
     this.listenTo(this.model.answers(), 'sync', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
@@ -14,7 +18,13 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     });
     this.listenTo(this.model.answers(), 'sort', this.sortAnswerSubviews)
 
+    // comments collection listener
+    this.listenTo(this.model.comments(), 'sync', this.render);
+    this.listenTo(this.model.comments(), 'add', this.addCommentSubview.bind(this));
+
+    // add subviews
     this.addAnswerSubviews();
+    this.addCommentSubviews();
   },
 
   events: {
@@ -25,7 +35,10 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click button.accept': 'acceptAnswer',
     'click .question-info span.edit': 'displayQuestionEdit',
     'click .edit-question .submit': 'editQuestion',
-    'click .edit-question .cancel': 'hideQuestionEdit'
+    'click .edit-question .cancel': 'hideQuestionEdit',
+    'click span.new-question-comment': 'displayCommentForm',
+    'click .new-comment .submit': 'createComment',
+    'click .new-comment .cancel': 'removeCommentForm'
   },
 
   sortAnswerSubviews: function () {
@@ -45,6 +58,18 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   addAnswerSubview: function (answer) {
     var subview = new StackOverflowClone.Views.AnswerShow({ model: answer });
     this.addSubview('ul.answers', subview);
+  },
+
+  addCommentSubviews: function () {
+    var view = this;
+    this.model.comments().each(function (comment) {
+      view.addCommentSubview(comment);
+    });
+  },
+
+  addCommentSubview: function (comment) {
+    var subview = new StackOverflowClone.Views.CommentShow({ model: comment });
+    this.addSubview('ul.question-comments', subview);
   },
 
   render: function () {
@@ -84,8 +109,8 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         view.$('textarea').val('');
         view.removeAnswerForm(event);
       },
-      error: function () {
-        alert("Something went wrong")
+      error: function (model, resp) {
+        alert(resp.responseText)
       }
     });
   },
@@ -119,11 +144,11 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         alert("Voted successfully");
         votable.set("vote_count", votableResp.vote_count);
       },
-      error: function (a, b, c) {
-        if (a.responseText) {
-          alert(a.responseText);
+      error: function (resp) {
+        if (resp.responseText) {
+          alert(resp.responseText);
         } else {
-          alert(a.responseJSON[0]);
+          alert(resp.responseJSON[0]);
         }
       }
     })
@@ -181,6 +206,39 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       },
       error: function () {
         alert("Something went wrong")
+      }
+    });
+  },
+
+  displayCommentForm: function (event) {
+    $(event.currentTarget).addClass("hidden");
+    this.$("form.new-comment").removeClass("hidden");
+  },
+
+  removeCommentForm: function (event) {
+    event.preventDefault();
+    this.$("form.new-comment").addClass("hidden");
+    this.$(".new-question-comment").removeClass("hidden");
+  },
+
+  createComment: function (event) {
+    event.preventDefault();
+
+    var content = this.$('.new-comment textarea').val();
+    var view = this;
+    var comment = new StackOverflowClone.Models.Comment({
+      content: content,
+      commentable_id: this.model.id,
+      commentable_type: "Question"
+    });
+    comment.save({}, {
+      success: function () {
+        view.model.comments().add(comment);
+        view.$('textarea').val('');
+        view.removeCommentForm(event);
+      },
+      error: function (model, resp) {
+        alert(resp.responseText)
       }
     });
   }

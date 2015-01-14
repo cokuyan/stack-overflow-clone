@@ -11,33 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113134123) do
+ActiveRecord::Schema.define(version: 20150114194306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.text     "content",                     null: false
-    t.integer  "author_id",                   null: false
-    t.integer  "question_id",                 null: false
-    t.boolean  "accepted",    default: false
+    t.text     "content",                        null: false
+    t.integer  "author_id",                      null: false
+    t.integer  "question_id",                    null: false
+    t.boolean  "accepted",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vote_count",  default: 0
+    t.integer  "vote_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "answers", ["author_id", "question_id"], name: "index_answers_on_author_id_and_question_id", unique: true, using: :btree
 
-  create_table "questions", force: true do |t|
-    t.string   "title",                         null: false
-    t.text     "content",                       null: false
-    t.integer  "author_id",                     null: false
-    t.integer  "view_count",    default: 0,     null: false
-    t.boolean  "answered",      default: false
+  create_table "comments", force: true do |t|
+    t.text     "content",          null: false
+    t.integer  "author_id",        null: false
+    t.integer  "commentable_id",   null: false
+    t.string   "commentable_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "answers_count", default: 0
-    t.integer  "vote_count",    default: 0
+  end
+
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+
+  create_table "questions", force: true do |t|
+    t.string   "title",                          null: false
+    t.text     "content",                        null: false
+    t.integer  "author_id",                      null: false
+    t.integer  "view_count",     default: 0,     null: false
+    t.boolean  "answered",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "answers_count",  default: 0
+    t.integer  "vote_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -76,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150113134123) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "comments_count",     default: 0
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", unique: true, using: :btree

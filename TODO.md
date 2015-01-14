@@ -1,6 +1,6 @@
 things to do
 ----
-- commenting
+- editing and styling comments
 - change index views
 - create subviews for
   - tags in other show views

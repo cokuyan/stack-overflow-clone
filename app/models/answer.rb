@@ -14,6 +14,8 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question, inverse_of: :answers, counter_cache: true
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   after_initialize :ensure_accepted, :ensure_vote_count
 
   private
