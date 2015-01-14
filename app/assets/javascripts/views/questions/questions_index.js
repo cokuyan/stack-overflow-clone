@@ -1,16 +1,22 @@
 StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   initialize: function (options) {
+    var view = this;
     this.header = options.header;
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', function () {
+      view.render();
+      if (!view.paginator) view.setupPagination();
+    });
     this.collection.comparator = this.collection.comparator ||
                                  options.comparator;
+    this.setupPagination();
   },
 
   template: JST['questions/index'],
   questionTemplate: JST['shared/detailedQuestion'],
 
   events: {
-    'click li.option': 'resortQuestions'
+    'click li.option': 'resortQuestions',
+    'click .pagination': 'handlePagination'
   },
 
   render: function () {
@@ -57,9 +63,34 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
       data: { sort: this.sortBy },
       success: function () {
         view.collection.sort();
-        Backbone.history.navigate("questions")
+        Backbone.history.navigate("questions");
       }
     });
+  },
+
+  setupPagination: function () {
+    if (!this.collection.total_pages) return;
+    this.paginator = new StackOverflowClone.Widgets.Pagination({
+      selector: 'section.pagination',
+      totalPages: this.collection.total_pages,
+      currentPage: this.collection.page || 1
+    });
+  },
+
+  handlePagination: function (event) {
+    if ($(event.target).hasClass("pagination")) return;
+    var $target = $(event.target);
+    if ($target.data("page")) {
+      this.paginator.goToPage($target.data("page"));
+    } else if ($target.hasClass("first")) {
+      this.paginator.goToFirstPage();
+    } else if ($target.hasClass("prev")) {
+      this.paginator.goToPrevPage();
+    } else if ($target.hasClass("next")) {
+      this.paginator.goToNextPage();
+    } else if ($target.hasClass("last")) {
+      this.paginator.goToLastPage();
+    }
   }
 
 });
