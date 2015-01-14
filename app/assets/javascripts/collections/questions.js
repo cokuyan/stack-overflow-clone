@@ -3,14 +3,23 @@ StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
     return 'api/questions/page/' + (this.page || 1);
   },
   model: StackOverflowClone.Models.Question,
-  comparator: function (model) {
-    return -1 * model.get("vote_count");
-  },
+  // comparator: function (model) {
+  //   return -1 * model.get("vote_count");
+  // },
 
   initialize: function (models, options) {
     if (options) {
       this.author = options.author;
+      this.page = options.page || 1;
     }
+  },
+
+  parse: function (resp) {
+    if (resp.page) {
+      this.page = resp.page;
+      this.total_pages = resp.total_pages;
+    }
+    return resp.questions;
   },
 
   getOrFetch: function (id) {
@@ -30,6 +39,3 @@ StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
   }
 
 });
-
-// may need to do this differently
-StackOverflowClone.questions = new StackOverflowClone.Collections.Questions();

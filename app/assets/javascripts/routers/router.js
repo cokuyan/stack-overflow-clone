@@ -20,9 +20,12 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   },
 
   root: function () {
-    StackOverflowClone.questions.fetch();
+    var collection = new StackOverflowClone.Collections.Questions();
+    // TODO: figure out how to do dates in js
+    collection.comparator = "created_at";
+    collection.fetch();
     var view = new StackOverflowClone.Views.QuestionsIndex({
-      collection: StackOverflowClone.questions
+      collection: collection
     });
     this._swapView(view);
   },
@@ -30,11 +33,15 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
   // Question routes
   questionsIndex: function (page) {
-    var collection = new StackOverflowClone.Collections.Questions();
+    var collection = new StackOverflowClone.Collections.Questions([], {
+      page: page
+    });
     collection.comparator = function (model) {
       return -1 * model.get("view_count");
     };
-    collection.fetch();
+    collection.fetch({
+      data: { sort: "view_count"}
+    });
     var view = new StackOverflowClone.Views.QuestionsIndex({
       collection: collection,
       header: "Most Viewed Questions"

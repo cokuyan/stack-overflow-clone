@@ -1,7 +1,7 @@
 StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   initialize: function (options) {
     this.header = options.header;
-    this.listenTo(this.collection, 'sync add', this.render);
+    this.listenTo(this.collection, 'sync', this.render);
     this.collection.comparator = this.collection.comparator ||
                                  options.comparator;
   },
@@ -14,6 +14,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   },
 
   render: function () {
+    // debugger;
     this.$el.html(this.template({ questions: this.collection }));
     this.setHeader();
     this.attachQuestions();
@@ -30,32 +31,34 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   },
 
   setHeader: function () {
-    this.$("h1.header").html(this.header || "Most Recent Questions")
+    if (!this.sortBy || this.sortBy === "created_at") {
+      header = "Most Recent Questions";
+    } else if (this.sortBy === "vote_count") {
+      header = "Most Voted Questions";
+    } else if (this.sortBy === "view_count") {
+      header = "Most Viewed Questions";
+    } else if (this.sortBy === "answers_count") {
+      header = "Most Answered Questions";
+    }
+    this.$("h1.header").html(header);
   },
 
   resortQuestions: function (event) {
-    sortBy = $(event.currentTarget).html();
-    if (sortBy === "Newest") {
+    var view = this;
+    this.sortBy = $(event.currentTarget).data("sort");
+    if (this.sortBy === "created_at") {
       this.collection.comparator = "created_at";
-      this.header = "Most Recent Questions";
-    } else if (sortBy === "Votes") {
+    } else {
       this.collection.comparator = function (model) {
-        return -1 * model.get("vote_count");
+        return -1 * model.get(view.sortBy);
       };
-      this.header = "Most Voted Questions";
-    } else if (sortBy === "Views") {
-      this.collection.comparator = function (model) {
-        return -1 * model.get("view_count");
-      }
-      this.header = "Most Viewed Questions";
-    } else if (sortBy === "Answers") {
-      this.collection.comparator = function (model) {
-        return -1 * model.get("answers_count");
-      }
-      this.header = "Most Answered Questions";
     }
-    this.collection.sort();
-    this.render();
+    this.collection.fetch({
+      data: { sort: this.sortBy },
+      success: function () {
+        view.collection.sort();
+      }
+    });
   }
 
 });

@@ -1,6 +1,9 @@
 class Api::QuestionsController < ApplicationController
   def index
-    @questions = Question.includes(:author, :tags).all
+    @questions = Question
+                  .includes(:author, :tags)
+                  .order((params[:sort] || "created_at") => :desc)
+                  .page(params[:page])
     render :index
   end
 
