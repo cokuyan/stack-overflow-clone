@@ -39,3 +39,6 @@ StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
   }
 
 });
+
+StackOverflowClone.questions = new StackOverflowClone.Collections.Questions();
+StackOverflowClone.questions.fetch();

@@ -36,16 +36,20 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     var collection = new StackOverflowClone.Collections.Questions([], {
       page: page
     });
+
     collection.comparator = function (model) {
       return -1 * model.get("view_count");
     };
+
     collection.fetch({
       data: { sort: "view_count"}
     });
+
     var view = new StackOverflowClone.Views.QuestionsIndex({
       collection: collection,
       header: "Most Viewed Questions"
     });
+
     this._swapView(view);
   },
 

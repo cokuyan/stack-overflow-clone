@@ -14,7 +14,6 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   },
 
   render: function () {
-    // debugger;
     this.$el.html(this.template({ questions: this.collection }));
     this.setHeader();
     this.attachQuestions();
@@ -53,10 +52,12 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
         return -1 * model.get(view.sortBy);
       };
     }
+    this.collection.page = 1;
     this.collection.fetch({
       data: { sort: this.sortBy },
       success: function () {
         view.collection.sort();
+        Backbone.history.navigate("questions")
       }
     });
   }
