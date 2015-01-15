@@ -18,6 +18,9 @@ class Question < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
 
+  has_many :favorites
+  has_many :favoriters, through: :favorites, source: :user
+
   def self.unanswered
     Question
       .joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id")

@@ -44,6 +44,11 @@ class Api::QuestionsController < ApplicationController
     render :index
   end
 
+  def favorite
+    Favorite.create!(user_id: current_user.id, question_id: params[:id])
+    render json: Question.find(params[:id])
+  end
+
   private
 
   def question_params

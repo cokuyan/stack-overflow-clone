@@ -4,12 +4,12 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_credentials(
+    @user = User.find_by_credentials(
       params[:user][:name_or_email],
       params[:user][:password]
     )
-    if user && user.activated?
-      login!(user)
+    if @user && @user.activated?
+      login!(@user)
       render :show
     elsif user && !user.activated?
       render json: "Not activated", status: :unprocessable_entity

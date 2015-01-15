@@ -48,9 +48,12 @@ class User < ActiveRecord::Base
     foreign_key: :author_id,
     inverse_of: :author
 
+  has_many :favorites
+  has_many :favorite_questions, through: :favorites, source: :question
+
   def self.find_by_credentials(name_or_email, password)
-    user = User.find_by_username(name_or_email) ||
-           User.find_by_email(name_or_email)
+    user = User.includes(:favorite_questions).find_by_username(name_or_email) ||
+           User.includes(:favorite_questions).find_by_email(name_or_email)
     user.try(:is_password?, password) ? user : nil
   end
 

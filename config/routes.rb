@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :questions, concerns: :paginatable do
       get 'unanswered(/page/:page)', on: :collection, to: 'questions#unanswered'
+      get 'favorite', on: :member
     end
     resources :users, concerns: :paginatable
     resources :answers
