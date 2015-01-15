@@ -1,4 +1,4 @@
-json.(comment, :content, :commentable_id, :commentable_type, :created_at, :updated_at)
+json.(comment, :id, :content, :commentable_id, :commentable_type, :created_at, :updated_at)
 
 json.author do
   json.id comment.author.id
