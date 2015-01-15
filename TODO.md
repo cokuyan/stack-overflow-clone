@@ -1,6 +1,10 @@
 things to do
 ----
-- editing and styling comments
+- pagination to index views
+- dynamic search with pagination
+- search with pagination
+
+- styling comments
 - change index views
 - create subviews for
   - tags in other show views

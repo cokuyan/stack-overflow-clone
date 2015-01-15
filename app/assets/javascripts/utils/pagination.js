@@ -9,11 +9,15 @@
   };
 
   Pagination.prototype.setup = function () {
-    this.$first = $("<span class='first'>").html("first").appendTo(this.$el);
-    this.$prev = $("<span class='prev'>").html("prev").appendTo(this.$el);
+    if (this.currentPage !== 1) {
+      this.$first = $("<span class='first'>").html("first").appendTo(this.$el);
+      this.$prev = $("<span class='prev'>").html("prev").appendTo(this.$el);
+    }
     this.$ul = $("<ul class='pages'>").appendTo(this.$el);
-    this.$next = $("<span class='next'>").html("next").appendTo(this.$el);
-    this.$last = $("<span class='last'>").html("last").appendTo(this.$el);
+    if (this.currentPage !== this.totalPages) {
+      this.$next = $("<span class='next'>").html("next").appendTo(this.$el);
+      this.$last = $("<span class='last'>").html("last").appendTo(this.$el);
+    }
   };
 
   Pagination.prototype.render = function () {
@@ -39,6 +43,7 @@
   };
 
   Pagination.prototype.goToPage = function (page) {
+    if (this.currentPage === page) return;
     this.currentPage = page;
     this.render();
   };

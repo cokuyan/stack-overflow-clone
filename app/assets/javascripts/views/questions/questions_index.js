@@ -82,7 +82,10 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     var $target = $(event.target);
     var view = this;
 
-    if ($target.hasClass("pagination")) return;
+    if ($target.hasClass("pagination") ||
+        $target.data('page') === this.collection.page) {
+      return;
+    }
     if ($target.data("page")) {
       this.paginator.goToPage($target.data("page"));
     } else if ($target.hasClass("first")) {

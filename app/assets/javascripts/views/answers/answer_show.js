@@ -4,6 +4,8 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
   className: 'answer group',
   initialize: function () {
     this.listenTo(this.model, 'sync change', this.render);
+    this.listenTo(StackOverflowClone.currentUser, 'sync', this.render);
+
 
     // comments collection listener
     this.listenTo(this.model.comments(), 'sync', this.render);

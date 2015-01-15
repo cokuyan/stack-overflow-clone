@@ -4,6 +4,7 @@ StackOverflowClone.Views.CommentShow = Backbone.View.extend({
   className: 'comment',
   initialize: function () {
     this.listenTo(this.model, 'sync change', this.render);
+    this.listenTo(StackOverflowClone.currentUser, 'sync', this.render);
   },
 
   events: {
