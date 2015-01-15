@@ -228,6 +228,10 @@ li.question .question-data {
   padding: 3px 0;
 }
 
+li.question > ul.answered {
+  font-weight: bold;
+}
+
 li.question .question-info {
   float: left;
 }
@@ -322,6 +326,25 @@ section.commenting {
   a.new-answer-link {
     color: #00f;
   }
+
+/* comments */
+
+ul.comments {
+  margin-bottom: 10px;
+}
+
+ul.comments > li {
+  margin-top: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+p.comment-content {
+  margin-bottom: 5px;
+}
+
+small.comment-author > a {
+  color: #00f;
+}
 
 /* users index */
 
@@ -485,6 +508,17 @@ form.form .input {
   background: #333;
   color: #fff;
   padding: 10px;
+}
+
+/* markdown preview */
+
+p.markdown-preview {
+  border: 1px inset #ccc;
+  min-height: 70px;
+  background: #eee;
+  width: 440px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 /* answer form */

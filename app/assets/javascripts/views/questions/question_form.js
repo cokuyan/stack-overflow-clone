@@ -10,7 +10,14 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
   events: {
     'click button.submit': 'submitForm',
     'click .searchables li': 'addTag',
-    'click li.tag span': 'removeTag'
+    'click li.tag span': 'removeTag',
+    'input .input textarea': 'markdown'
+  },
+
+  markdown: function (event) {
+    var text = $(event.currentTarget).val();
+    var $p = $("p.markdown-preview");
+    $p.html(markdown.toHTML(text));
   },
 
   setupDynamicSearch: function () {

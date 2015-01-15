@@ -31,6 +31,10 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
       view.$("ul.questions").append(view.questionTemplate({
         question: question
       }));
+      if (question.get("answered")) {
+        view.$("li[data-id='"+ question.id +"']").find('ul.question-data').addClass("answered");
+      }
+
     });
   },
 
@@ -47,7 +51,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   resortQuestions: function (event) {
     var view = this;
     if (this.sortBy === $(event.currentTarget).data("sort")) return;
-    
+
     this.sortBy = $(event.currentTarget).data("sort");
     if (this.sortBy === "created_at") {
       this.collection.comparator = "created_at";
