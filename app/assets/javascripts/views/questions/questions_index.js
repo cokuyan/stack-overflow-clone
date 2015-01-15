@@ -4,7 +4,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     this.header = options.header;
     this.listenTo(this.collection, 'sync', function () {
       view.render();
-      if (!view.paginator) view.setupPagination();
+      view.setupPagination();
     });
     this.collection.comparator = this.collection.comparator ||
                                  options.comparator;
@@ -35,6 +35,7 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   },
 
   setHeader: function () {
+    var header;
     if (!this.sortBy || this.sortBy === "created_at") {
       header = "Most Recent Questions";
     } else if (this.sortBy === "vote_count") {
@@ -103,7 +104,6 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     this.collection.fetch({
       data: { sort: this.sortBy }
     });
-
   }
 
 });

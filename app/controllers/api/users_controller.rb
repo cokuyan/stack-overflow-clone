@@ -1,12 +1,15 @@
 class Api::UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User
+               .order((params[:sort] || "created_at") => :desc)
+               .page(params[:page])
     render :index
   end
 
   def show
-    @user = User.includes(questions: :tags, answered_questions: [:author, :tags])
-      .find(params[:id])
+    @user = User
+              .includes(questions: :tags, answered_questions: [:author, :tags])
+              .find(params[:id])
     render :show
   end
 
@@ -27,8 +30,9 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.includes(questions: :tags, answered_questions: [:author, :tags])
-      .find(current_user.id)
+    @user = User
+              .includes(questions: :tags, answered_questions: [:author, :tags])
+              .find(current_user.id)
     if @user.update(user_params)
       render :show
     else

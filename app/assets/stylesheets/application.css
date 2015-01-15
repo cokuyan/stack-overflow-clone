@@ -523,7 +523,7 @@ input.search:active, input.search:focus {
   margin-bottom: 20px;
 }
 
-.tag-widget .question-tags li.tag {
+.tag-widget .question-tags > li {
   cursor: pointer;
 }
 

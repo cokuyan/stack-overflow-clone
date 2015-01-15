@@ -4,28 +4,29 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
   className: 'question-form form',
 
   initialize: function () {
-    this.setupTagSearch();
+    this.setupDynamicSearch();
   },
 
   events: {
     'click button.submit': 'submitForm',
-    'click .question-tags li.tag': 'addTag',
-    'click .selected-tags li.tag span': 'removeTag'
+    'click .searchables li': 'addTag',
+    'click li.tag span': 'removeTag'
   },
 
-  setupTagSearch: function () {
+  setupDynamicSearch: function () {
     var view = this;
     var tags = new StackOverflowClone.Collections.Tags();
     tags.fetch({
       success: function () {
         // setup widget after collection is fetched
-        view.tagSearch = new StackOverflowClone.Widgets.TagSearch({
+        view.dynamicSearch = new StackOverflowClone.Widgets.DynamicSearch({
           selector: view.$('.tag-widget'),
-          tags: tags
+          collection: tags,
+          name: "tag_name"
         });
         // setup listener
-        view.listenTo(view.tagSearch.tags, 'add', function () {
-          view.tagSearch.render();
+        view.listenTo(view.dynamicSearch.collection, 'add', function () {
+          view.dynamicSearch.render();
         })
       }
     });
@@ -44,18 +45,19 @@ StackOverflowClone.Views.QuestionForm = Backbone.View.extend({
     var $li = $(event.currentTarget);
 
     $li.remove();
+    $li.removeClass("searchable").addClass("tag");
     $("ul.selected-tags").append($li);
     $li.data("id", tag.id);
     $li.append($("<span>&times;</span>"));
 
-    this.tagSearch.tags.remove(tag);
+    this.dynamicSearch.collection.remove(tag);
   },
 
   removeTag: function (event) {
     var $li = $(event.currentTarget).parent()
     $(event.currentTarget).remove();
     var tag = new StackOverflowClone.Models.Tag({ id: $li.data("id") });
-    var tags = this.tagSearch.tags;
+    var tags = this.dynamicSearch.collection;
 
     tag.fetch({
       success: function () {

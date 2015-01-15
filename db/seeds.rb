@@ -1,4 +1,4 @@
-20.times do
+50.times do
   User.create({
     email: Faker::Internet.email,
     username: Faker::Internet.user_name,

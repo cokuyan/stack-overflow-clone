@@ -5,11 +5,12 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '': 'root',
+
     'questions(/page/:page)': 'questionsIndex',
     'questions/new': 'questionNew',
     'questions/:id': 'questionShow',
 
-    'users': 'usersIndex',
+    'users(/page/:page)': 'usersIndex',
     'users/new': 'userNew',
     'users/:id': 'userShow',
 

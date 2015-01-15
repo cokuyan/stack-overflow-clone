@@ -21,11 +21,11 @@ Rails.application.routes.draw do
   # backbone stuff
   namespace :api, defaults: { format: :json } do
     resources :questions, concerns: :paginatable
-    resources :users
+    resources :users, concerns: :paginatable
     resources :answers
     resources :comments
     resources :votes, only: :create
-    resources :tags, only: [:index, :show]
+    resources :tags, only: [:index, :show], concerns: :paginatable
     resource :session
   end
 

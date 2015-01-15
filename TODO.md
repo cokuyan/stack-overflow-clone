@@ -3,6 +3,7 @@ things to do
 - pagination to index views
 - dynamic search with pagination
 - search with pagination
+- add dates into js
 
 - styling comments
 - change index views

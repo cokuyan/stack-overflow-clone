@@ -1,4 +1,12 @@
-<h1>Users</h1>
+<section class="sort group">
+  <h1 class="header"></h1>
+
+  <ul class="sort-options group">
+    <li class="option" data-sort="created_at">Newest</li>
+    <li class="option" data-sort="questions_count">Questions</li>
+    <li class="option" data-sort="answers_count">Answers</li>
+  </ul>
+</section>
 
 <ul class="users">
   <% users.each(function(user) { %>
@@ -9,3 +17,5 @@
     </li>
   <% }); %>
 </ul>
+
+<section class="pagination group"></section>
