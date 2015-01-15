@@ -137,6 +137,25 @@ span.edit {
   color: #f00;
 }
 
+/* pagination */
+
+section.pagination {
+  margin: auto;
+  width: 500px;
+}
+
+.pagination > span, ul {
+  padding: 5px 10px;
+  float: left;
+}
+
+ul.pages > li {
+  padding: 0 5px;
+  float: left;
+}
+
+
+
 /* header */
 
 header {
