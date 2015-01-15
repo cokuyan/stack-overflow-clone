@@ -3,6 +3,7 @@
     email: Faker::Internet.email,
     username: Faker::Internet.user_name,
     password: 'password',
+    password_confirmation: 'password',
     activated: true
   })
 end

@@ -18,11 +18,6 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    unless params[:user][:password] == params[:user][:password_confirmation]
-      render json: "Password and confirmation do not match",
-             status: :unprocessable_entity
-      return
-    end
     if @user.save
       msg = UserMailer.welcome_email(@user)
       msg.deliver
@@ -47,6 +42,6 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :image)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :image)
   end
 end

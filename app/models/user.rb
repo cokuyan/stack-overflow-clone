@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
     :activation_token,
     uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password, confirmation: true
+  validate :password_confirmation_not_blank
   # email pattern validation?
   # username format validation?
   after_initialize :ensure_session_token,
@@ -89,5 +91,11 @@ class User < ActiveRecord::Base
 
   def ensure_not_admin
     self.activated ||= false
+  end
+
+  def password_confirmation_not_blank
+    if !self.persisted? && self.password_confirmation.blank?
+      errors[:password_confirmation] = "can't be blank"
+    end
   end
 end

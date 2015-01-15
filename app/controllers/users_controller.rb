@@ -13,12 +13,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    unless params[:user][:password] == params[:user][:password_confirmation]
-      flash.now[:errors] = ["Password and confirmation do not match"]
-      @user.password = nil
-      render :new
-      return
-    end
     if @user.save
       msg = UserMailer.welcome_email(@user)
       msg.deliver

@@ -11,7 +11,8 @@ things to do
 - delete questions if no upvoted answers
 - delete answers if not upvoted/accepted
 - check specs for answer: some fail because of new validations
-- markdown previews for questions
 - notifications via node and following...
 - delayed job for sendgrid emails
 - question index pagination removes widget and rerenders it each time.... need to find a better way to do this
+- change password validation
+- add change password field
