@@ -35,6 +35,15 @@ class Api::QuestionsController < ApplicationController
     end
   end
 
+  def unanswered
+    @questions = Question
+      .unanswered
+      .includes(:author, :tags)
+      .order((params[:sort] || "created_at") => :desc)
+      .page(params[:page])
+    render :index
+  end
+
   private
 
   def question_params

@@ -1,8 +1,7 @@
 things to do
 ----
-- pagination to index views
+- unanswered and indicate if answered
 - search with pagination
-- add dates into js
 
 - dynamic search with pagination
 - styling comments

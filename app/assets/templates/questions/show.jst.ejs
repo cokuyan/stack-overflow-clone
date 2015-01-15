@@ -21,6 +21,7 @@
       <a href="#/users/<%= question.author.id %>">
         <%= question.author.escape('username') %>
       </a>
+      on <%= question.created_at %>
     </small>
 
     <ul class="question-tags group">

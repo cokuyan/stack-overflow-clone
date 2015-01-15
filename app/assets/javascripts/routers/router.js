@@ -8,6 +8,7 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
     'questions(/page/:page)': 'questionsIndex',
     'questions/new': 'questionNew',
+    'questions/unanswered': 'unansweredQuestions',
     'questions/:id': 'questionShow',
 
     'users(/page/:page)': 'usersIndex',
@@ -47,8 +48,7 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     });
 
     var view = new StackOverflowClone.Views.QuestionsIndex({
-      collection: collection,
-      header: "Most Viewed Questions"
+      collection: collection
     });
 
     this._swapView(view);
@@ -77,6 +77,20 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
+  unansweredQuestions: function () {
+    var questions = new StackOverflowClone.Collections.Questions([], {
+      page: 1
+    });
+    questions.url = function () {
+      return 'api/questions/unanswered/page/' + this.page
+    };
+    questions.fetch();
+    var view = new StackOverflowClone.Views.QuestionsIndex({
+      collection: questions,
+      unanswered: true
+    });
+    this._swapView(view);
+  },
 
   // User routes
 

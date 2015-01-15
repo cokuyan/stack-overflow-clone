@@ -19,7 +19,7 @@
         </li>
       <% }); %>
     </ul>
-    <span>asked <%= question.get("created_at") %></span>
+    <span>asked <%= question.created_at %></span>
     <small class="question-author">by
       <a href="#/users/<%= question.author.id %>">
         <%= question.author.escape("username") %>

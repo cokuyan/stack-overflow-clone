@@ -15,7 +15,6 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click button.accept': 'acceptAnswer',
     'click .answer-meta span.edit': 'displayEditForm',
     'click .edit-answer button.submit': 'editAnswer',
     'click .edit-answer button.cancel': 'hideEditForm',

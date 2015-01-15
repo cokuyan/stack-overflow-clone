@@ -1,7 +1,7 @@
 StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   initialize: function (options) {
     var view = this;
-    this.header = options.header;
+    this.unanswered = options.unanswered;
     this.listenTo(this.collection, 'sync', function () {
       view.render();
       view.setupPagination();
@@ -36,20 +36,18 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
 
   setHeader: function () {
     var header;
-    if (!this.sortBy || this.sortBy === "created_at") {
-      header = "Most Recent Questions";
-    } else if (this.sortBy === "vote_count") {
-      header = "Most Voted Questions";
-    } else if (this.sortBy === "view_count") {
-      header = "Most Viewed Questions";
-    } else if (this.sortBy === "answers_count") {
-      header = "Most Answered Questions";
+    if (this.unanswered) {
+      header = "Unanswered Questions";
+    } else {
+      header = "All Questions";
     }
     this.$("h1.header").html(header);
   },
 
   resortQuestions: function (event) {
     var view = this;
+    if (this.sortBy === $(event.currentTarget).data("sort")) return;
+    
     this.sortBy = $(event.currentTarget).data("sort");
     if (this.sortBy === "created_at") {
       this.collection.comparator = "created_at";
@@ -58,13 +56,19 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
         return -1 * model.get(view.sortBy);
       };
     }
+    var url;
+    if (this.unanswered) {
+      url = "questions/unanswered"
+    } else {
+      url = "questions"
+    }
     this.collection.page = 1;
     this.collection.fetch({
       data: { sort: this.sortBy },
       success: function () {
         view.collection.sort();
         view.paginator = null;
-        Backbone.history.navigate("questions");
+        Backbone.history.navigate(url);
       }
     });
   },
@@ -98,7 +102,15 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     } else if ($target.hasClass("last")) {
       this.paginator.goToLastPage();
     }
-    Backbone.history.navigate("questions/page/" + this.paginator.currentPage)
+
+    var url;
+    if (this.unanswered) {
+      url = "questions/unanswered"
+    } else {
+      url = "questions"
+    }
+
+    Backbone.history.navigate(url + "/page/" + this.paginator.currentPage)
     this.collection.page = this.paginator.currentPage
     this.paginator = null;
     this.collection.fetch({

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
   # backbone stuff
   namespace :api, defaults: { format: :json } do
-    resources :questions, concerns: :paginatable
+    resources :questions, concerns: :paginatable do
+      get 'unanswered(/page/:page)', on: :collection, to: 'questions#unanswered'
+    end
     resources :users, concerns: :paginatable
     resources :answers
     resources :comments

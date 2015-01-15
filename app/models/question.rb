@@ -18,6 +18,14 @@ class Question < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
 
+  def self.unanswered
+    Question
+      .joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id")
+      .where(answered: false)
+      .where("questions.answers_count = 0 OR answers.vote_count <= 0")
+      .distinct
+  end
+
   private
 
   def ensure_view_count

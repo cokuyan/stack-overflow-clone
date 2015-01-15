@@ -37,6 +37,10 @@ StackOverflowClone.Models.User = Backbone.Model.extend({
       this.answeredQuestions().set(resp.answered_questions, { parse: true });
       delete resp.answered_questions;
     }
+    if (resp.created_at) {
+      this.created_at = new Date(resp.created_at);
+      delete resp.created_at;
+    }
     return resp;
   }
 
