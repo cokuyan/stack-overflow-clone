@@ -14,7 +14,7 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
 
   events: {
     'click button.accept': 'acceptAnswer',
-    'click span.edit': 'displayEditForm',
+    'click .answer-meta span.edit': 'displayEditForm',
     'click .edit-answer button.submit': 'editAnswer',
     'click .edit-answer button.cancel': 'hideEditForm',
     'click span.new-answer-comment': 'displayCommentForm',
@@ -44,7 +44,7 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     }
     if (StackOverflowClone.currentUser &&
         this.model.author.id === StackOverflowClone.currentUser.id) {
-      this.$('span.edit').removeClass("hidden");
+      this.$('.answer-meta span.edit').removeClass("hidden");
     }
     return this;
   },
@@ -62,7 +62,7 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
 
   editAnswer: function (event) {
     event.preventDefault();
-    var content = this.$('textarea').val();
+    var content = this.$('.edit-answer textarea').val();
     this.model.save({ content: content }, {
       success: function () {
         alert("Edited successfully");

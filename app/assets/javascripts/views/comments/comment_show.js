@@ -7,15 +7,44 @@ StackOverflowClone.Views.CommentShow = Backbone.View.extend({
   },
 
   events: {
-    // some edit events
+    'click span.edit': 'displayEditForm',
+    'click .edit-comment .cancel': 'hideEditForm',
+    'click .edit-comment .submit': 'editComment'
   },
 
   render: function () {
     if (this.model.author) {
       this.$el.html(this.template({ comment: this.model }));
     }
+    if (StackOverflowClone.currentUser &&
+        this.model.author.id === StackOverflowClone.currentUser.id) {
+      this.$('span.edit').removeClass("hidden");
+    }
     return this;
-  }
+  },
 
+  displayEditForm: function (event) {
+    this.$('p.comment-content').addClass("hidden");
+    this.$('form.edit-comment').removeClass("hidden");
+  },
+
+  hideEditForm: function (event) {
+    this.preventDefault();
+    this.$('form.edit-comment').addClass("hidden");
+    this.$('p.comment-content').removeClass("hidden");
+  },
+
+  editComment: function (event) {
+    event.preventDefault();
+    var content = this.$('textarea').val();
+    this.model.save({ content: content }, {
+      success: function () {
+        alert("Edited successfully");
+      },
+      error: function () {
+        alert("Somethine went wrong");
+      }
+    });
+  }
 
 });

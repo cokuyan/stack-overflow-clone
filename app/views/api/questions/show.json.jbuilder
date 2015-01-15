@@ -14,12 +14,7 @@ json.answers @question.answers do |answer|
   end
 
   json.comments answer.comments do |comment|
-    json.(comment, :content, :created_at, :updated_at)
-
-    json.author do
-      json.id comment.author.id
-      json.username comment.author.username
-    end
+    json.partial! "api/comments/comment", comment: comment
   end
 
 end
@@ -29,10 +24,5 @@ json.tags @question.tags do |tag|
 end
 
 json.comments @question.comments do |comment|
-  json.(comment, :content, :created_at, :updated_at)
-
-  json.author do
-    json.id comment.author.id
-    json.username comment.author.username
-  end
+  json.partial! "api/comments/comment", comment: comment
 end
