@@ -144,7 +144,7 @@ section.pagination {
   width: 500px;
 }
 
-.pagination > span, ul {
+.pagination > span, .pagination > ul {
   padding: 5px 10px;
   float: left;
 }
