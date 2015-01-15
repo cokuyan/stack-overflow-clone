@@ -1,8 +1,11 @@
 class Api::UsersController < ApplicationController
   def index
-    @users = User
-               .order((params[:sort] || "created_at") => :desc)
-               .page(params[:page])
+    if params[:sort] && params[:sort] != "username"
+      sort = { params[:sort] => :desc }
+    else
+      sort = "username"
+    end
+    @users = User.order(sort).page(params[:page])
     render :index
   end
 

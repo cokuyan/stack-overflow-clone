@@ -1,4 +1,4 @@
-json.extract! @tag, :id, :tag_name, :description
+json.extract! @tag, :id, :tag_name, :description, :questions_count
 
 json.questions @tag.questions do |question|
   json.partial! "api/questions/question", question: question

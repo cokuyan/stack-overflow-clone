@@ -1,4 +1,11 @@
-<h1>Tags</h1>
+<section class="sort group">
+  <h1 class="header"></h1>
+
+  <ul class="sort-options group">
+    <li class="option" data-sort="tag_name">Name</li>
+    <li class="option" data-sort="questions_count">Questions</li>
+  </ul>
+</section>
 
 <ul class="tags">
   <% tags.each(function(tag) { %>
@@ -9,3 +16,5 @@
     </li>
   <% }); %>
 </ul>
+
+<section class="pagination group"></section>

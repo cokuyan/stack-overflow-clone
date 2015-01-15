@@ -1,13 +1,13 @@
 StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
   template: JST['users/index'],
 
-  initialize: function (options) {
+  initialize: function () {
     var view = this;
-    this.header = options.header
     this.listenTo(this.collection, 'sync', function () {
       view.render();
       view.setupPagination();
     });
+    this.collection.comparator = "username";
   },
 
   events: {
@@ -23,12 +23,14 @@ StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
 
   setHeader: function () {
     var header;
-    if (!this.sortBy || this.sortBy === "created_at") {
-      header = "New Users";
+    if (!this.sortBy || this.sortBy === "username") {
+      header = "All Users";
     } else if (this.sortBy === "questions_count") {
       header = "Asked Most Questions";
     } else if (this.sortBy === "answers_count") {
       header = "Answered Most Questions";
+    } else if (this.sortBy === "created_at") {
+      header = "New Users";
     }
     this.$("h1.header").html(header);
   },
@@ -38,6 +40,8 @@ StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
     this.sortBy = $(event.currentTarget).data("sort");
     if (this.sortBy === "created_at") {
       this.collection.comparator = "created_at";
+    } else if (this.sortBy === "username") {
+      this.collection.comparator = "username"
     } else {
       this.collection.comparator = function (model) {
         return -1 * model.get(view.sortBy);
@@ -56,7 +60,6 @@ StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
 
   setupPagination: function () {
     if (!this.collection.total_pages) return;
-    debugger;
     this.paginator = new StackOverflowClone.Widgets.Pagination({
       selector: 'section.pagination',
       totalPages: this.collection.total_pages,

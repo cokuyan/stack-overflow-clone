@@ -1,6 +1,24 @@
 StackOverflowClone.Collections.Tags = Backbone.Collection.extend({
-  url: 'api/tags',
+  url: function () {
+    return 'api/tags/page/' + (this.page || 1);
+  },
   model: StackOverflowClone.Models.Tag,
+
+  initialize: function (models, options) {
+    if (options) {
+      this.page = options.page || 1
+    }
+  },
+
+  parse: function (resp) {
+    if (resp.page) {
+      this.page = resp.page;
+      this.total_pages = resp.total_pages;
+      return resp.tags;
+    } else {
+      return resp;
+    }
+  },
 
   getOrFetch: function (id) {
     var tag = this.get(id);
@@ -33,3 +51,4 @@ StackOverflowClone.Collections.Tags = Backbone.Collection.extend({
 });
 
 StackOverflowClone.tags = new StackOverflowClone.Collections.Tags();
+StackOverflowClone.tags.fetch();
