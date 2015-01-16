@@ -1,5 +1,6 @@
 class Api::SessionsController < ApplicationController
   def show
+    @user = current_user
     logged_in? ? render(:show) : render(json: {})
   end
 
