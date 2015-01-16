@@ -107,7 +107,8 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   usersIndex: function () {
     StackOverflowClone.users.fetch();
     var view = new StackOverflowClone.Views.UsersIndex({
-      collection: StackOverflowClone.users
+      collection: StackOverflowClone.users,
+      sortBy: "username"
     });
     this._swapView(view);
   },
@@ -137,7 +138,8 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
   tagsIndex: function () {
     StackOverflowClone.tags.fetch();
     var view = new StackOverflowClone.Views.TagsIndex({
-      collection: StackOverflowClone.tags
+      collection: StackOverflowClone.tags,
+      sortBy: "tag_name"
     });
     this._swapView(view);
   },

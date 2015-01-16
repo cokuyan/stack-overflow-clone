@@ -24,6 +24,22 @@ puts "Users initialized"
   end
 end
 
+answer_count = Answer.all.count
+
+100.times do
+  question = Question.create({
+    title: Faker::Lorem.sentence,
+    content: Faker::Lorem.paragraph,
+    author_id: rand(50) + 1
+  })
+  2.times do
+    question.answers.create({
+      content: Faker::Hacker.say_something_smart,
+      author_id: rand(50) + 1
+    })
+  end
+end
+
 puts "Questions and answers initialized"
 
 50.times do
@@ -33,10 +49,10 @@ puts "Questions and answers initialized"
   })
 end
 
-500.times do
+1000.times do
   Tagging.create({
     tag_id: rand(50) + 1,
-    question_id: rand(200) + 1
+    question_id: rand(300) + 1
   })
 end
 
@@ -45,7 +61,7 @@ puts "Tags initialized"
 2000.times do
   Vote.create({
     user_id: rand(50) + 1,
-    votable_id: rand(200) + 1,
+    votable_id: rand(300) + 1,
     votable_type: "Question",
     vote_type: "up"
   })
@@ -54,13 +70,11 @@ end
 100.times do
   Vote.create({
     user_id: rand(50) + 1,
-    votable_id: rand(200) + 1,
+    votable_id: rand(300) + 1,
     votable_type: "Question",
     vote_type: 'down'
   })
 end
-
-answer_count = Answer.all.count
 
 4000.times do
   Vote.create({
