@@ -1,6 +1,7 @@
 StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
   initialize: function (options) {
     var view = this;
+    this.sortBy = options.sortBy;
     this.unanswered = options.unanswered;
     this.listenTo(this.collection, 'sync', function () {
       view.render();
@@ -22,6 +23,10 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     this.$el.html(this.template({ questions: this.collection }));
     this.setHeader();
     this.attachQuestions();
+    if (this.sortBy) {
+      this.$("li.option").removeClass("inactive");
+      this.$("li[data-sort='" + this.sortBy +"']").addClass("inactive");
+    }
     return this;
   },
 

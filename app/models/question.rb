@@ -22,10 +22,19 @@ class Question < ActiveRecord::Base
   has_many :favoriters, through: :favorites, source: :user
 
   def self.unanswered
+    subquery = <<-SQL
+      SELECT
+      answers.question_id
+      FROM
+      answers
+      WHERE
+      answers.vote_count > 0
+    SQL
     Question
-      .joins("LEFT OUTER JOIN answers ON answers.question_id = questions.id")
+      .joins("JOIN questions AS not_answered_questions ON questions.id = not_answered_questions.id")
+      .joins("JOIN questions AS bad_answered_questions ON questions.id = bad_answered_questions.id")
       .where(answered: false)
-      .where("questions.answers_count = 0 OR answers.vote_count <= 0")
+      .where("not_answered_questions.answers_count = 0 OR bad_answered_questions.id NOT IN (#{subquery})")
       .distinct
   end
 

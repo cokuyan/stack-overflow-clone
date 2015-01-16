@@ -1,8 +1,9 @@
 StackOverflowClone.Views.TagsIndex = Backbone.View.extend({
   template: JST['tags/index'],
 
-  initialize: function () {
+  initialize: function (options) {
     var view = this;
+    this.sortBy = options.sortBy;
     this.listenTo(this.collection, 'sync', function () {
       view.render();
       view.setupPagination();
@@ -18,6 +19,10 @@ StackOverflowClone.Views.TagsIndex = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template({ tags: this.collection }));
     this.setHeader();
+    if (this.sortBy) {
+      this.$("li.option").removeClass("inactive");
+      this.$("li[data-sort='" + this.sortBy +"']").addClass("inactive");
+    }
     return this;
   },
 

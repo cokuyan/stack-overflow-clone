@@ -126,16 +126,46 @@ span.edit {
   color: #f00;
 }
 
+li.inactive {
+  color: #000 !important;
+}
+
+li.inactive:hover {
+  cursor: default !important;
+}
+
 /* pagination */
 
 section.pagination {
   margin: auto;
-  width: 500px;
+  padding: 50px 0;
+  width: 260px;
+  position: relative;
 }
 
 .pagination > span, .pagination > ul {
-  padding: 5px 10px;
-  float: left;
+  color: #00f;
+  position: absolute;
+}
+
+.pagination > span:hover {
+  cursor: pointer;
+}
+
+.pagination > span.prev {
+  left: 40px;
+}
+
+.pagination > ul {
+  left: 80px;
+}
+
+.pagination > span.next {
+  right: 40px;
+}
+
+.pagination > span.last {
+  right: 0;
 }
 
 ul.pages > li {
@@ -143,7 +173,9 @@ ul.pages > li {
   float: left;
 }
 
-
+ul.pages > li:hover {
+  cursor: pointer;
+}
 
 /* header */
 
@@ -338,6 +370,7 @@ section.commenting {
 
 ul.comments {
   margin-bottom: 10px;
+  width: 300px;
 }
 
 ul.comments > li {

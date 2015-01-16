@@ -27,7 +27,8 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     collection.comparator = "created_at";
     collection.fetch();
     var view = new StackOverflowClone.Views.QuestionsIndex({
-      collection: collection
+      collection: collection,
+      sortBy: "created_at"
     });
     this._swapView(view);
   },
@@ -48,7 +49,8 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     });
 
     var view = new StackOverflowClone.Views.QuestionsIndex({
-      collection: collection
+      collection: collection,
+      sortBy: "view_count"
     });
 
     this._swapView(view);
@@ -94,7 +96,8 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
     questions.fetch();
     var view = new StackOverflowClone.Views.QuestionsIndex({
       collection: questions,
-      unanswered: true
+      unanswered: true,
+      sortBy: "created_at"
     });
     this._swapView(view);
   },

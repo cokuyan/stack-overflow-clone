@@ -38,6 +38,9 @@
 
     for (var i = startPage; i <= endPage; i++) {
       var $li = $("<li class='page'>").data("page", i).html(i);
+      if (this.currentPage === i) {
+        $li.addClass("inactive");
+      }
       this.$ul.append($li);
     }
   };

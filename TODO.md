@@ -2,10 +2,6 @@ things to do
 ----
 - search with pagination
 
-- add favoriting functionality (model, etc already set up)
-- show which page on index search person is on
-- have feedback with pagination (show which page on, some colors, pointer, etc)
-
 - dynamic search with pagination
 - change index views
 - create subviews for
@@ -18,3 +14,4 @@ things to do
 - delayed job for sendgrid emails
 - question index pagination removes widget and rerenders it each time.... need to find a better way to do this
 - add change password field
+- github/fb login
