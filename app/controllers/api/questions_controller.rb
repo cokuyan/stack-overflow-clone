@@ -25,7 +25,7 @@ class Api::QuestionsController < ApplicationController
   end
 
   def update
-    question = current_user.questions.where(id: params[:id]).first
+    question = current_user.try(:questions).try(:where, { id: params[:id] }).try(:first)
     if question.nil?
       question = Question.find(params[:id])
       question.view_count = params[:question][:view_count]
@@ -50,6 +50,10 @@ class Api::QuestionsController < ApplicationController
   end
 
   def favorite
+    unless logged_in?
+      render json: "must be logged in to favorite", status: :unprocessable_entity
+      return
+    end
     Favorite.create!(user_id: current_user.id, question_id: params[:id])
     render json: Question.find(params[:id])
   end

@@ -34,8 +34,8 @@ StackOverflowClone.Views.TagsIndex = Backbone.View.extend({
   resortTags: function (event) {
     var view = this;
     this.sortBy = $(event.currentTarget).data("sort");
-    if (this.sortBy === "username") {
-      this.collection.comparator = "username"
+    if (this.sortBy === "tag_name") {
+      this.collection.comparator = "tag_name"
     } else {
       this.collection.comparator = function (model) {
         return -1 * model.get(view.sortBy);

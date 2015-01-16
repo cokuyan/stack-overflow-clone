@@ -1,6 +1,6 @@
 class Api::TagsController < ApplicationController
   def index
-    if params[:sort] && params[:sort] != "username"
+    if params[:sort] && params[:sort] != "tag_name"
       sort = { params[:sort] => :desc }
     else
       sort = "tag_name"
