@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :questions, concerns: :paginatable do
       get 'unanswered(/page/:page)', on: :collection, to: 'questions#unanswered'
       get 'favorite', on: :member
+      delete 'unfavorite', on: :member
     end
     resources :users, concerns: :paginatable
     resources :answers

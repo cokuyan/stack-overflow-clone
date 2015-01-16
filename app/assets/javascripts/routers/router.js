@@ -71,6 +71,13 @@ StackOverflowClone.Routers.Router = Backbone.Router.extend({
 
   questionShow: function (id) {
     var question = StackOverflowClone.questions.getOrFetch(id);
+    question.fetch({
+      success: function () {
+        var view_count = question.get("view_count");
+        question.set("view_count", ++view_count);
+        question.save();
+      }
+    })
     var view = new StackOverflowClone.Views.QuestionShow({
       model: question
     });

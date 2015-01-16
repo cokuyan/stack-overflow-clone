@@ -31,8 +31,6 @@ StackOverflowClone.Collections.Questions = Backbone.Collection.extend({
           questions.add(question);
         }
       });
-    } else {
-      question.fetch();
     }
     return question;
   }

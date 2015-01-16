@@ -18,7 +18,7 @@ class Question < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favoriters, through: :favorites, source: :user
 
   def self.unanswered

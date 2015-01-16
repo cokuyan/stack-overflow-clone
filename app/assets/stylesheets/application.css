@@ -272,6 +272,13 @@ small.question-author a {
 
 section.voting {
   margin-top: 10px;
+  display: inline-block;
+}
+
+section.favoriting {
+  clear: both;
+  display: inline-block;
+  margin-left: 20px;
 }
 
 section.commenting {

@@ -1,5 +1,7 @@
 json.partial! "api/questions/question", question: @question
 
+json.favorited (logged_in? && current_user.favorite_question_ids.include?(@question.id))
+
 json.author do
   json.id @question.author.id
   json.username @question.author.username

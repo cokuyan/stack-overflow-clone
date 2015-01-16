@@ -3,12 +3,14 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     var view = this;
+    // StackOverflowClone.currentUser.fetch();
     this.listenTo(StackOverflowClone.currentUser, 'sync', this.render);
 
     // model listener
     this.listenTo(this.model, 'sync change', function () {
       view.render();
       view.checkIfAsker();
+      view.checkFavorites();
     });
 
     // answers collection listener
@@ -29,17 +31,69 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click a.new-answer-link': 'displayAnswerForm',
-    'click .new-answer button.submit': 'createAnswer',
-    'click .new-answer button.cancel': 'removeAnswerForm',
+    // voting
     'click button.vote': 'processVote',
-    'click button.accept': 'acceptAnswer',
+    // favoriting
+    'click .favorite': 'favoriteQuestion',
+    'click .unfavorite': 'unfavoriteQuestion',
+    // edit question
     'click .question-info span.edit': 'displayQuestionEdit',
     'click .edit-question .submit': 'editQuestion',
     'click .edit-question .cancel': 'hideQuestionEdit',
+    // answering
+    'click a.new-answer-link': 'displayAnswerForm',
+    'click .new-answer button.submit': 'createAnswer',
+    'click .new-answer button.cancel': 'removeAnswerForm',
+    'click button.accept': 'acceptAnswer',
+    // commenting
     'click span.new-question-comment': 'displayCommentForm',
     'click .new-comment .submit': 'createComment',
     'click .new-comment .cancel': 'removeCommentForm'
+  },
+
+  favoriteQuestion: function (event) {
+    var view = this;
+    $.ajax({
+      url: "/api/questions/" + this.model.id + "/favorite",
+      type: "GET",
+      success: function () {
+        view.model.fetch();
+        alert("Favorited successfully");
+      },
+      error: function (resp) {
+        if (resp.responseText) {
+          alert(resp.responseText);
+        } else {
+          alert(resp.responseJSON[0]);
+        }
+      }
+    });
+  },
+
+  unfavoriteQuestion: function (event) {
+    var view = this;
+    $.ajax({
+      url: "/api/questions/" + this.model.id + "/unfavorite",
+      type: "DELETE",
+      success: function () {
+        view.model.fetch();
+        alert("Unfavorited successfully");
+      },
+      error: function (resp) {
+        if (resp.responseText) {
+          alert(resp.responseText);
+        } else {
+          alert(resp.responseJSON[0]);
+        }
+      }
+    });
+  },
+
+  checkFavorites: function () {
+    if (this.model.get("favorited")) {
+      this.$('.favorite').addClass("hidden");
+      this.$('.unfavorite').removeClass("hidden");
+    }
   },
 
   sortAnswerSubviews: function () {

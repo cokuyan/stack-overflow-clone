@@ -11,8 +11,6 @@ class Api::QuestionsController < ApplicationController
     @question = Question
       .includes(:author, :tags, answers: [:author, comments: :author], comments: :author)
       .find(params[:id])
-    @question.view_count += 1
-    @question.save!
     render :show
   end
 
@@ -27,7 +25,14 @@ class Api::QuestionsController < ApplicationController
   end
 
   def update
-    question = current_user.questions.find(params[:id])
+    question = current_user.questions.where(id: params[:id]).first
+    if question.nil?
+      question = Question.find(params[:id])
+      question.view_count = params[:question][:view_count]
+      question.save!
+      render json: question
+      return
+    end
     if question.update(question_params)
       render json: question
     else
@@ -49,9 +54,15 @@ class Api::QuestionsController < ApplicationController
     render json: Question.find(params[:id])
   end
 
+  def unfavorite
+    favorite = Favorite.find_by(user_id: current_user.id, question_id: params[:id])
+    favorite.destroy()
+    render json: Question.find(params[:id])
+  end
+
   private
 
   def question_params
-    params.require(:question).permit(:title, :content, :answered)
+    params.require(:question).permit(:title, :content, :answered, :view_count)
   end
 end
