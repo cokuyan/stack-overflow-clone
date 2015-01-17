@@ -76,7 +76,7 @@ end
   })
 end
 
-4000.times do
+2000.times do
   Vote.create({
     user_id: rand(50) + 1,
     votable_id: rand(answer_count) + 1,
@@ -96,7 +96,7 @@ end
 
 puts "Votes initialized"
 
-1000.times do
+500.times do
   Comment.create({
     author_id: rand(50) + 1,
     commentable_id: rand(200) + 1,
@@ -105,7 +105,7 @@ puts "Votes initialized"
   })
 end
 
-2000.times do
+1000.times do
   Comment.create({
     author_id: rand(50) + 1,
     commentable_id: rand(answer_count) + 1,
@@ -116,7 +116,7 @@ end
 
 puts "Comments initialized"
 
-1000.times do
+500.times do
   Favorite.create({
     user_id: rand(50) + 1,
     question_id: rand(200) + 1
