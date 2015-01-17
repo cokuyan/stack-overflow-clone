@@ -1,6 +1,10 @@
 things to do
 ----
 - search with pagination
+- put created at for answers and comments
+- make sure comments sort based on recency
+- make sure answers sort based on vote count
+- add markdown parser for questions
 
 - dynamic search with pagination
 - change index views

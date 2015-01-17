@@ -96,6 +96,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     }
   },
 
+  // see if you can sort differently
   sortAnswerSubviews: function () {
     var view = this;
     this.subviews('ul.answers').sort(function (subview1, subview2) {
@@ -197,6 +198,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       },
       success: function (votableResp) {
         alert("Voted successfully");
+        // may not be necessary
         votable.set("vote_count", votableResp.vote_count);
       },
       error: function (resp) {
