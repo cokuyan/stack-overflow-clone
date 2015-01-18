@@ -4,7 +4,7 @@ things to do
 - put created at for answers and comments
 - make sure comments sort based on recency
 - make sure answers sort based on vote count
-- add markdown parser for questions
+- add markdown parser for questions (sort of fixed)
 
 - dynamic search with pagination
 - change index views

@@ -7,7 +7,7 @@
 
 
   <p class="question-content">
-    <%= question.escape('content') %>
+    <%= markdown.toHTML(question.get('content')) %>
   </p>
 
   <form class="form edit-question answer-form hidden group">
@@ -45,7 +45,7 @@
     </section>
 
     <span class="edit hidden">edit</span>
-    
+
     <section class="favoriting">
       <button class="favorite">Favorite</button>
       <button class="unfavorite hidden">Favorited</button>

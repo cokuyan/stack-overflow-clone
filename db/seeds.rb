@@ -1,3 +1,11 @@
+User.create({
+  email: "demo@mail.com",
+  username: "demo",
+  password: "password",
+  password_confirmation: "password",
+  activated: true
+})
+
 50.times do
   User.create({
     email: Faker::Internet.email,

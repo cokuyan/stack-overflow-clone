@@ -12,7 +12,7 @@ class Api::SessionsController < ApplicationController
     if @user && @user.activated?
       login!(@user)
       render :show
-    elsif user && !user.activated?
+    elsif @user && !user.activated?
       render json: "Not activated", status: :unprocessable_entity
     else
       render json: "Invalid login", status: :unprocessable_entity
