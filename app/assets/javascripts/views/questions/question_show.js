@@ -95,12 +95,9 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     }
   },
 
-  // see if you can sort differently
   sortAnswerSubviews: function () {
-    var view = this;
-    this.subviews('ul.answers').sort(function (subview1, subview2) {
-      return view.model.answers().comparator(subview1.model, subview2.model);
-    })
+    this.removeSubviews('ul.answers');
+    this.addAnswerSubviews();
   },
 
   addAnswerSubviews: function () {

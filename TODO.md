@@ -2,8 +2,7 @@ things to do
 ----
 - search with pagination
 - put created at for answers and comments
-- make sure comments sort based on recency
-- make sure answers sort based on vote count
+- make sure comments sort based on recency (might already be resolved)
 - add markdown parser for questions (sort of fixed)
 
 - dynamic search with pagination
