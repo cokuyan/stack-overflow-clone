@@ -3,7 +3,6 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     var view = this;
-    // StackOverflowClone.currentUser.fetch();
     this.listenTo(StackOverflowClone.currentUser, 'sync', this.render);
 
     // model listener
