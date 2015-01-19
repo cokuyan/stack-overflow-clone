@@ -356,6 +356,7 @@ section.commenting {
 
   li.answer small.answer-author {
     font-size: 14px;
+    display: block;
   }
 
   small.answer-author a {
@@ -380,6 +381,11 @@ ul.comments > li {
 
 p.comment-content {
   margin-bottom: 5px;
+}
+
+small.comment-author {
+  font-size: 12px;
+  display: block;
 }
 
 small.comment-author > a {

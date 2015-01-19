@@ -5,9 +5,8 @@
     Views: <%= question.get('view_count') %>
   </span>
 
-
   <p class="question-content">
-    <%= markdown.toHTML(question.get('content')) %>
+    <%= question.get('content') %>
   </p>
 
   <form class="form edit-question answer-form hidden group">

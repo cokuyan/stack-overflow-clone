@@ -1,6 +1,9 @@
 StackOverflowClone.Collections.Comments = Backbone.Collection.extend({
   url: 'api/comments',
   model: StackOverflowClone.Models.Comment,
+  comparator: function (model) {
+    return model.created_at;
+  },
 
   getOrFetch: function (id) {
     var comment = this.get(id);

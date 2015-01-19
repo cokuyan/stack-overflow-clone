@@ -18,11 +18,15 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
       view.addAnswerSubview(model);
       view.model.answers().sort();
     });
-    this.listenTo(this.model.answers(), 'sort', this.sortAnswerSubviews)
+    this.listenTo(this.model.answers(), 'sort', this.sortAnswerSubviews);
 
     // comments collection listener
     this.listenTo(this.model.comments(), 'sync', this.render);
-    this.listenTo(this.model.comments(), 'add', this.addCommentSubview.bind(this));
+    this.listenTo(this.model.comments(), 'add', function (model) {
+      view.addCommentSubview(model);
+      view.model.answers().sort();
+    });
+    this.listenTo(this.model.comments(), 'sort', this.sortCommentSubviews);
 
     // add subviews
     this.addAnswerSubviews();
@@ -110,6 +114,11 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
   addAnswerSubview: function (answer) {
     var subview = new StackOverflowClone.Views.AnswerShow({ model: answer });
     this.addSubview('ul.answers', subview);
+  },
+
+  sortCommentSubviews: function () {
+    this.removeSubviews('ul.question-comments');
+    this.addCommentSubviews();
   },
 
   addCommentSubviews: function () {

@@ -1,9 +1,7 @@
 things to do
 ----
 - search with pagination
-- put created at for answers and comments
-- make sure comments sort based on recency (might already be resolved)
-- add markdown parser for questions (sort of fixed)
+- add markdown parser for questions (solution broke formatting, so need to figure something else out)
 
 - dynamic search with pagination
 - change index views
