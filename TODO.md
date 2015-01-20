@@ -3,6 +3,7 @@ things to do
 - search with pagination
 - add markdown parser for questions (solution broke formatting, so need to figure something else out)
 
+- fix pagination for double digits...
 - dynamic search with pagination
 - change index views
 - create subviews for

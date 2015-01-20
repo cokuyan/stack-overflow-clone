@@ -199,11 +199,19 @@ ul.user-nav > li a {
 
 /* main nav */
 
+a.logo {
+  background: #fff;
+  border-radius: 5px;
+  float: left;
+  width: 225px;
+}
+
 nav.main-nav {
   padding: 20px;
 }
 
 nav.main-nav ul.main-nav-links {
+  padding-top: 72px;
   float: right;
 }
 
