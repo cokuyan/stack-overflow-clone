@@ -6,7 +6,6 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync change', this.render);
     this.listenTo(StackOverflowClone.currentUser, 'sync', this.render);
 
-
     // comments collection listener
     this.listenTo(this.model.comments(), 'sync', this.render);
     this.listenTo(this.model.comments(), 'add', this.addCommentSubview.bind(this));
@@ -41,11 +40,12 @@ StackOverflowClone.Views.AnswerShow = Backbone.CompositeView.extend({
       this.attachSubviews();
     }
     if (this.model.get("accepted")) {
-      this.$('span.accept').removeClass("hidden")
+      this.$('span.accept').removeClass("hidden");
     }
     if (StackOverflowClone.currentUser &&
         this.model.author.id === StackOverflowClone.currentUser.id) {
       this.$('.answer-meta span.edit').removeClass("hidden");
+      this.$('span.delete-answer').removeClass('hidden');
     }
     return this;
   },

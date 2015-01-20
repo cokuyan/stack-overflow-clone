@@ -13,7 +13,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     });
 
     // answers collection listener
-    this.listenTo(this.model.answers(), 'sync', this.render);
+    this.listenTo(this.model.answers(), 'sync remove', this.render);
     this.listenTo(this.model.answers(), 'add', function (model) {
       view.addAnswerSubview(model);
       view.model.answers().sort();
@@ -43,6 +43,9 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click .question-info span.edit': 'displayQuestionEdit',
     'click .edit-question .submit': 'editQuestion',
     'click .edit-question .cancel': 'hideQuestionEdit',
+    // deleting stuff
+    'click .delete-question': 'deleteQuestion',
+    'click .delete-answer': 'deleteAnswer',
     // answering
     'click a.new-answer-link': 'displayAnswerForm',
     'click .new-answer button.submit': 'createAnswer',
@@ -53,6 +56,35 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
     'click .new-comment .submit': 'createComment',
     'click .new-comment .cancel': 'removeCommentForm'
   },
+
+  deleteQuestion: function (event) {
+    if (this.model.vote_count > 0 ) return;
+    this.model.destroy();
+    Backbone.history.navigate("", { trigger: true });
+    alert("Question deleted successfully");
+  },
+
+  deleteAnswer: function (event) {
+    var id = $(event.currentTarget).data("id");
+    var answer = this.model.answers().get(id);
+    if (answer.vote_count > 0) return;
+
+    var subview = _.find(this.subviews('ul.answers'), function (subview) {
+      if (subview.model === answer) return subview;
+    });
+    this.removeSubview('ul.answers', subview);
+    answer.destroy();
+    this.model.answers().remove(answer);
+
+    // this.render();
+    alert("Answer deleted successfully");
+  },
+  //
+  // findAnswerSubview: function (answer) {
+  //   this.subviews('ul.answers').forEach(function (subview) {
+  //
+  //   });
+  // },
 
   favoriteQuestion: function (event) {
     var view = this;
@@ -222,6 +254,7 @@ StackOverflowClone.Views.QuestionShow = Backbone.CompositeView.extend({
         StackOverflowClone.currentUser.id === this.model.author.id) {
       this.$('a.new-answer-link').addClass('hidden');
       this.$('.question-info span.edit').removeClass('hidden');
+      this.$('.delete-question').removeClass('hidden');
 
       if (!this.model.get('answered')) {
         this.$('button.accept').removeClass('hidden');

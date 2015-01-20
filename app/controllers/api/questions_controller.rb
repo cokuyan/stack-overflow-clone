@@ -40,6 +40,16 @@ class Api::QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    question = current_user.questions.find(params[:id])
+    if question.vote_count < 1
+      question.destroy
+      render json: question
+    else
+      render json: "Cannot delete question", status: :unprocessable_entity
+    end
+  end
+
   def unanswered
     @questions = Question
       .unanswered

@@ -25,6 +25,16 @@ class Api::AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    answer = current_user.answers.find(params[:id])
+    if answer.vote_count < 1
+      answer.destroy
+      render json: answer
+    else
+      render json: "Cannot delete answer", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def answer_params

@@ -92,7 +92,7 @@ ul.question-tags > li {
   margin-right: 5px;
 }
 
-span.edit {
+span.edit, span.delete-question, span.delete-answer {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -139,7 +139,7 @@ li.inactive:hover {
 section.pagination {
   margin: auto;
   padding: 50px 0;
-  width: 260px;
+  width: 320px;
   position: relative;
 }
 

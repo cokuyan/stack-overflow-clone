@@ -2,8 +2,8 @@ things to do
 ----
 - search with pagination
 - add markdown parser for questions (solution broke formatting, so need to figure something else out)
+- figure out logo thing in heroku
 
-- fix pagination for double digits...
 - dynamic search with pagination
 - change index views
 - create subviews for
@@ -17,3 +17,5 @@ things to do
 - question index pagination removes widget and rerenders it each time.... need to find a better way to do this
 - add change password field
 - github/fb login
+
+- fix pagination for double digits... (did a quick fix)
