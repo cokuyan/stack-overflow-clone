@@ -31,22 +31,25 @@ class User < ActiveRecord::Base
     class_name: 'Question',
     foreign_key: :author_id,
     primary_key: :id,
-    inverse_of: :author
+    inverse_of: :author,
+    dependent: :destroy
 
   has_many :answers,
     class_name: 'Answer',
     foreign_key: :author_id,
     primary_key: :id,
-    inverse_of: :author
+    inverse_of: :author,
+    dependent: :destroy
 
   has_many :answered_questions, through: :answers, source: :question
 
-  has_many :votes
+  has_many :votes, dependent: :destroy
 
   has_many :comments,
     class_name: 'Comment',
     foreign_key: :author_id,
-    inverse_of: :author
+    inverse_of: :author,
+    dependent: :destroy
 
   has_many :favorites, dependent: :destroy
   has_many :favorite_questions, through: :favorites, source: :question
@@ -59,6 +62,38 @@ class User < ActiveRecord::Base
 
   def self.generate_token
     SecureRandom.urlsafe_base64(16)
+  end
+
+  def self.create_demo
+    user = self.create({
+      email: "demo@mail.com",
+      username: "demo",
+      password: "password",
+      password_confirmation: "password",
+      activated: true
+    })
+
+    5.times do
+      question = Question.create({
+        title: Faker::Lorem.sentence,
+        content: Faker::Lorem.paragraph,
+        author_id: user.id
+      })
+      question.tag_ids = [4, 2, 9]
+      5.times do
+        question.answers.create({
+          content: Faker::Hacker.say_something_smart,
+          author_id: rand(50) + 1
+        })
+      end
+    end
+    5.times do
+      Answer.create({
+        content: Faker::Hacker.say_something_smart,
+        author_id: user.id,
+        question_id: rand(300) + 1
+      })
+    end
   end
 
   def reset_session_token!
