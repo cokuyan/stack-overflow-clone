@@ -10,7 +10,7 @@ class Api::TagsController < ApplicationController
                    tags: tags,
                    page: params[:page].to_i,
                    total_pages: tags.total_pages
-    }
+                 }
   end
 
   def show

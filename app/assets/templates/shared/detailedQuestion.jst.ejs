@@ -10,20 +10,21 @@
       <%= question.escape('title') %>
     </a>
 
-    <ul class="question-tags group">
-      <% question.tags().each(function(tag) { %>
-        <li>
-          <a href="#/tags/<%= tag.id %>">
-            <%= tag.escape("tag_name") %>
-          </a>
-        </li>
-      <% }); %>
-    </ul>
     <span>asked <%= question.created_at %></span>
     <small class="question-author">by
       <a href="#/users/<%= question.author.id %>">
         <%= question.author.escape("username") %>
       </a>
     </small>
+
+    <ul class="question-tags group">
+      <% question.tags().each(function(tag) { %>
+        <li>
+          <a class="tag-link" href="#/tags/<%= tag.id %>">
+            <%= tag.escape("tag_name") %>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
   </section>
 </li>

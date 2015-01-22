@@ -194,7 +194,7 @@ ul.user-nav > li {
 
 ul.user-nav > li a {
   display: block;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 /* main nav */
@@ -207,7 +207,7 @@ a.logo {
 }
 
 nav.main-nav {
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 nav.main-nav ul.main-nav-links {
@@ -408,6 +408,30 @@ ul.users {
 
 ul.users > li {
   margin-bottom: 5px;
+  float: left;
+  width: 23%;
+  padding: 20px 4px;
+}
+
+li.user > * {
+  float: left;
+}
+
+.user-thumb {
+  width: 50px;
+  display: inline-block;
+}
+
+.user-info {
+  margin-left: 10px;
+}
+
+.user-info .user-link {
+  display: block;
+}
+
+.user-info span {
+  display: block;
 }
 
 /* users show */
@@ -491,11 +515,24 @@ span.user-attr {
 /* tags index */
 
 ul.tags {
-
+  color: #333;
 }
 
 ul.tags > li {
   margin-bottom: 5px;
+  float: left;
+  width: 24%;
+  padding: 20px 4px;
+  height: 100px;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+
+a.tag-link {
+  padding: 2px 4px;
+  background: #555;
+  color: #ccc;
+  display: inline-block;
 }
 
 /* tag show */

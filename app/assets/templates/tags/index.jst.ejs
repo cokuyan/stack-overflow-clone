@@ -7,12 +7,16 @@
   </ul>
 </section>
 
-<ul class="tags">
+<ul class="tags group">
   <% tags.each(function(tag) { %>
     <li>
-      <a href="#/tags/<%= tag.id %>">
+      <a class="tag-link" href="#/tags/<%= tag.id %>">
         <%= tag.escape("tag_name") %>
       </a>
+      <span>&times; <%= tag.get("questions_count") %></span>
+      <p>
+        <%= tag.escape("description") %>
+      </p>
     </li>
   <% }); %>
 </ul>

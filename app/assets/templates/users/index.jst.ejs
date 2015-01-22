@@ -9,12 +9,19 @@
   </ul>
 </section>
 
-<ul class="users">
+<ul class="users group">
   <% users.each(function(user) { %>
-    <li>
-      <a href="#/users/<%= user.id %>">
-        <%= user.escape('username') %>
+    <li class="user group">
+      <a class="user-thumb" href="#/users/<%= user.id %>">
+        <img src="<%= user.get("image_url") %>" alt="" />
       </a>
+      <section class="user-info">
+        <a class="user-link" href="#/users/<%= user.id %>">
+          <%= user.escape('username') %>
+        </a>
+        <span><%= user.get("answers_count") %></span>
+        <span>joined <%= user.created_at.toDateString().match(/\s(.*)/)[1] %></span>
+      </section>
     </li>
   <% }); %>
 </ul>
