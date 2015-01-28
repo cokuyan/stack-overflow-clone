@@ -17,9 +17,16 @@ StackOverflowClone.Views.LogIn = Backbone.View.extend({
 
   loginAsGuest: function (event) {
     event.preventDefault();
-    this.$("#name-or-email").val("demo");
-    this.$("#password").val("password");
-    this.$("form").trigger("submit");
+
+    $.ajax({
+      url: "/api/users/demo",
+      method: "POST",
+      success: function (user) {
+        this.$("#name-or-email").val(user.username);
+        this.$("#password").val("password");
+        this.$("form").trigger("submit");
+      }.bind(this),
+    });
   },
 
   submit: function (event) {

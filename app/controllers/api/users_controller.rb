@@ -38,6 +38,12 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def demo
+    user = User.create_demo
+    render user
+    session[:demo] = true
+  end
+
 
   private
 

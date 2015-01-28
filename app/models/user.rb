@@ -65,13 +65,18 @@ class User < ActiveRecord::Base
   end
 
   def self.create_demo
-    user = self.create({
-      email: "demo@mail.com",
-      username: "demo",
+    begin
+    user = self.create!({
+      email: Faker::Internet.email,
+      username: Faker::Internet.user_name,
       password: "password",
       password_confirmation: "password",
       activated: true
     })
+
+  rescue ActiveRecord::RecordInvalid => e
+    retry
+  end
 
     5.times do
       question = Question.create({
@@ -94,6 +99,8 @@ class User < ActiveRecord::Base
         question_id: rand(300) + 1
       })
     end
+
+    user
   end
 
   def reset_session_token!

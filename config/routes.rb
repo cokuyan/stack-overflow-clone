@@ -25,7 +25,9 @@ Rails.application.routes.draw do
       get 'favorite', on: :member
       delete 'unfavorite', on: :member
     end
-    resources :users, concerns: :paginatable
+    resources :users, concerns: :paginatable do
+      post 'demo', on: :collection
+    end
     resources :answers
     resources :comments
     resources :votes, only: :create

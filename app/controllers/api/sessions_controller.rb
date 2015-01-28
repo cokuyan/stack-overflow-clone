@@ -20,10 +20,10 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    @user = current_user
+    user = current_user
     logout!
     render json: {}
-    @user.destroy if @user.username == "demo"
-    User.create_demo
+    user.destroy if session[:demo]
+    session[:demo] = false
   end
 end
