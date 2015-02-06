@@ -16,7 +16,7 @@
     <a href="#/users/<%= answer.author.id %>">
       <%= answer.author.escape('username') %>
     </a>
-    on <%= answer.created_at %>
+    on <%= answer.get('created_at').toDateString().match(/\s(.*)/)[1] %>
   </small>
 
   <section class="voting">

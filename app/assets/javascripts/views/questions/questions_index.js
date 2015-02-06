@@ -58,13 +58,10 @@ StackOverflowClone.Views.QuestionsIndex = Backbone.View.extend({
     if (this.sortBy === $(event.currentTarget).data("sort")) return;
 
     this.sortBy = $(event.currentTarget).data("sort");
-    if (this.sortBy === "created_at") {
-      this.collection.comparator = "created_at";
-    } else {
-      this.collection.comparator = function (model) {
-        return -1 * model.get(view.sortBy);
-      };
-    }
+    this.collection.comparator = function (model) {
+      return -1 * model.get(view.sortBy);
+    };
+    
     var url;
     if (this.unanswered) {
       url = "questions/unanswered"

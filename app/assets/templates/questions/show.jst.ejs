@@ -20,7 +20,7 @@
       <a href="#/users/<%= question.author.id %>">
         <%= question.author.escape('username') %>
       </a>
-      on <%= question.created_at %>
+      on <%= question.get('created_at').toDateString().match(/\s(.*)/)[1] %>
     </small>
 
     <ul class="question-tags group">

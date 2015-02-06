@@ -20,7 +20,7 @@
           <%= user.escape('username') %>
         </a>
         <span><%= user.get("answers_count") %></span>
-        <span>joined <%= user.created_at.toDateString().match(/\s(.*)/)[1] %></span>
+        <span>joined <%= user.get('created_at').toDateString().match(/\s(.*)/)[1] %></span>
       </section>
     </li>
   <% }); %>

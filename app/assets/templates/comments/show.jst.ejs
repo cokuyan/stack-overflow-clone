@@ -12,7 +12,7 @@
   <a href="#/users/<%= comment.author.id %>">
     <%= comment.author.escape('username') %>
   </a>
-  on <%= comment.created_at %>
+  on <%= comment.get('created_at').toDateString().match(/\s(.*)/)[1] %>
 </small>
 
 <span class="edit hidden">edit</span>

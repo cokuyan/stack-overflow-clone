@@ -4,7 +4,7 @@ StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
   initialize: function (options) {
     var view = this;
     this.sortBy = options.sortBy;
-    this.listenTo(this.collection, 'sync', function () {
+    this.listenTo(this.collection, 'sync sort', function () {
       view.render();
       view.setupPagination();
     });
@@ -43,9 +43,7 @@ StackOverflowClone.Views.UsersIndex = Backbone.View.extend({
   resortUsers: function (event) {
     var view = this;
     this.sortBy = $(event.currentTarget).data("sort");
-    if (this.sortBy === "created_at") {
-      this.collection.comparator = "created_at";
-    } else if (this.sortBy === "username") {
+    if (this.sortBy === "username") {
       this.collection.comparator = "username"
     } else {
       this.collection.comparator = function (model) {

@@ -46,7 +46,7 @@ StackOverflowClone.Models.Question = Backbone.Model.extend({
       delete resp.comments;
     }
     if (resp.created_at) {
-      this.created_at = new Date(resp.created_at);
+      this.set('created_at', new Date(resp.created_at));
       delete resp.created_at;
     }
     return resp;
